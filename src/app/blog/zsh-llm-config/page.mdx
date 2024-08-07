@@ -1,0 +1,58 @@
+import imageNoelThomas from '@/images/team/noel-thomas.png'
+
+export const article = {
+  date: '2024-08-06',
+  title: 'zsh + llm config',
+  description:
+    'LLMs to suggest commands for zsh. No external dependencies. Fully local.',
+  author: {
+    name: 'Noel Thomas',
+    role: 'Founder',
+    image: { src: imageNoelThomas },
+  },
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+[GitHub](https://github.com/noelfranthomas/zsh-config/)
+
+This config allows for command completion if an LLM is turned on.
+
+## Usage
+
+1. Save your current config if needed.
+
+2. Move `.zshrc`, `.functions`, and `.llm-functions` to the appropriate directory. Typically, this is the root directory.
+
+3. Start a new terminal, or run `source <path>/.zshrc` (typically `source ~/.zshrc`) on a running terminal.
+
+4. To enable LLM features, run a llamafile server. See [llamafile](https://github.com/Mozilla-Ocho/llamafile) for more information.
+
+## Features
+
+Click below to see the features video.
+
+[See the features video](https://github.com/noelfranthomas/zsh-config/)
+
+Here's a list of some other functions included in `.function`.
+
+Function Name | Description
+--- | --- 
+checksite | check if a website is up 
+portpid | find process name and PID by port 
+genpass | generate a random password 
+dockerclean | remove all stopped containers 
+dockerimageclean | remove all dangling images 
+dockerkillall | stop and remove all containers 
+lsf | list all functions and descriptions defined in ~/.functions 
+up | go up multiple directories 
+gogit | go to the GitHub dir 
+gs | git status shortcut 
+gp | git pull shortcut 
+gacp | git add, commit, and push 
+mkvenv | create venv with python 3.11 
+mkcd | make directory and switch in 
+alpined | start fsh in an alpine container 
