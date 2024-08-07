@@ -1,0 +1,47 @@
+import imageNoelThomas from '@/images/team/noel-thomas.png'
+
+export const article = {
+  date: '2024-08-06',
+  title: 'gRPC and LibTorch with Bazel',
+  description:
+    'Two dependencies that require unconventional methods for adding them.',
+  author: {
+    name: 'Noel Thomas',
+    role: 'Founder',
+    image: { src: imageNoelThomas },
+  },
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+Recently, I encountered two dependencies for my project that required unconventional methods for adding them.
+## Motivation
+
+Bazel, developed by Google, is a widely-used build and dependency management system. It offers significant convenience for managing complex builds and dependencies, particularly for large-scale projects. However, integrating new dependencies can sometimes be challenging and may require additional configuration and understanding of its syntax and rules.
+
+In particular, I found it oddly difficult to add gRPC and libtorch as dependencies to my project. We got it done however, with some elbow grease (and patience).
+## Examples
+
+Check out the [code examples](https://github.com/GroupLabs/examples/tree/main/gRPC-and-libtorch-with-Bazel) that illustrate how to set up both gRPC and torch with Bazel.
+## gRPC
+
+Our project specifications required both gRPC and protobuf to be used in tandem. This means that we need to
+1. parse the `.proto` files,
+2. generate code with the protocol buffers compiler, and
+3. use the appropriate headers for our gRPC implemenation.
+
+In the `WORKSPACE` file, the protobuf dependency was added from a tar archive from the protobufs GitHub repository. Additionally, a gRPC dependency was added with a specific commit hash from the gRPC GitHub repository. Finally, the recommended dependencies were loaded. See the online [support guide](https://grpc.github.io/grpc/core/md_doc_bazel_support.html) and [quickstart](https://grpc.io/docs/languages/cpp/quickstart/) for more.
+
+Then a proto_library was defined for the `messaging.proto` file, and compiled with the cc_proto_library and cc_grpc_library rules. Now gRPC and the appropriate `.proto` files are available to use as dependencies.
+
+> gRPC does not support bzlmod. Disable it during build with the `--enable_bzlmod=false` flag.
+## LibTorch
+
+The [PyTorch documentation](https://pytorch.org/cppdocs/installing.html) only described how to add libtorch as a C++ dependency with CMake. However, Bazel did not support the same functionalities as CMake, such as `find_package()`, which also populated the `TORCH_CXX_FLAGS` and `CMAKE_CXX_FLAGS` variables. Consequently, there was no straightforward way to achieve this with Bazel. To resolve this, CMake flags were printed and added to the Bazel build file manually.
+
+Next, Python errors cropped up related to the `_PyBaseObject_Type` symbol from a dynamic library. This looked like a part of Python's C API, which suggested that Python might be required. However, since Python was not necessary for the CMake build, it was inferred that an unnecessary header was being included. Through educated guessing, the culprit was identified as `libtorch/lib/libtorch_python.dylib`. Excluding this dynamic library from the build resolved the issue.
+
+This approach successfully exposed enough of the C++ frontend to create simple tensors and perform basic tensor operations.

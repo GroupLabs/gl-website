@@ -1,0 +1,61 @@
+import logo from '@/images/clients/hbi/hbi-secondary-black-icon.png'
+import imageHero from './hero.jpg'
+import imageDebraFiscal from './debra-fiscal.jpg'
+
+export const caseStudy = {
+  client: 'Hotchkiss Brain Institute',
+  title: 'Presymptomatic Alzheimer’s Disease Detection',
+  description:
+    'Classifying hyperspectral images of blood samples from patients with Alzheimer’s disease.',
+  summary: [
+    'The project aimed to detect Alzheimer’s disease using hyperspectral imaging on blood samples. Techniques include MiniRocket algorithm, feature extraction, Gaussian smoothing, and MinMax scaling. The resulting architectures achieved over 98% accuracy.',
+  ],
+  logo,
+  image: { src: imageHero },
+  date: '2024-03',
+  service: 'RNNs, LSTMs, XGBoost',
+  testimonial: {
+    author: { name: 'Dr. Peter Stys', role: 'Professor of Neurology, Hotchkiss Brain Institute' },
+    content:
+      'Working with GroupLabs has been a positive experience. We plan to expand in the ML direction, and it will play a crucial role. We value their expertise and look forward to future collaboration as our needs grow.',
+  },
+}
+
+export const metadata = {
+  title: `${caseStudy.client} Case Study`,
+  description: caseStudy.description,
+}
+
+## Overview
+
+The project aimed to detect Alzheimer's disease using hyperspectral imaging on blood samples. Various techniques were employed, including the MiniRocket algorithm for time series analysis, feature extraction to identify relevant data points, Gaussian smoothing to reduce noise, and MinMax scaling to normalize the data. 
+
+Several challenges were encountered, such as preventing data leakage to ensure the validity of the model and identifying outliers that could skew the results. 
+
+A range of deep learning models, including Gated Recurrent Units (GRU), Recurrent Neural Networks (RNN), Long Short-Term Memory networks (LSTM), and the HIVE-COTE 2.0, were tested. In addition, ensemble methods like XGBoost, LightGBM, and Random Forest were evaluated for their performance.
+
+Among these methods, the Random Forest model showed particularly promising results, achieving an accuracy of over 98%.
+
+## What we did
+
+<TagList>
+  <TagListItem>Gaussian smoothing</TagListItem>
+  <TagListItem>GRU</TagListItem>
+  <TagListItem>RNN</TagListItem>
+  <TagListItem>LSTM</TagListItem>
+  <TagListItem>HIVE-COTE 2.0</TagListItem>
+  <TagListItem>XGBoost</TagListItem>
+  <TagListItem>LightGBM</TagListItem>
+  <TagListItem>Random Forest</TagListItem>
+</TagList>
+
+<Blockquote
+  author={{ name: 'Dr. Peter Stys', role: 'Professor of Neurology, Hotchkiss Brain Institute' }}
+>
+  Working with GroupLabs has been a positive experience. We plan to expand in the ML direction, and it will play a crucial role. We value their expertise and look forward to future collaboration as our needs grow.
+</Blockquote>
+
+<StatList>
+  <StatListItem value="98%" label="Accuracy" />
+  <StatListItem value="3 Months" label="Duration" />
+</StatList>
