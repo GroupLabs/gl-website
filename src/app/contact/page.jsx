@@ -46,66 +46,49 @@ function RadioInput({ label, ...props }) {
 
 function ContactForm() {
   return (
-    <form 
-      className="max-w-lg" 
-      name="contact" 
-      method="POST" 
-      data-netlify="true" 
-      netlify-honeypot="bot-field"
-      action="/thank-you"
-    >
-      <input type="hidden" name="form-name" value="contact" />
-      <p className="hidden">
-        <label>
-          Don’t fill this out if you are human: <input name="bot-field" />
-        </label>
-      </p>
-      <h2 className="font-display text-sm font-semibold tracking-wider text-neutral-950">
-        Contact Us
-      </h2>
-      <p className="mt-4 text-sm text-neutral-700 pr-3">
-        Feel free to reach out with any inquiries or questions.
-      </p>
-      <div className="relative mt-6">
-        <input
-          type="text"
-          name="name"
-          placeholder="Your name"
-          aria-label="Your name"
-          className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
-          required
-        />
-      </div>
-      <div className="relative mt-6">
-        <input
-          type="email"
-          name="email"
-          placeholder="Your email address"
-          autoComplete="email"
-          aria-label="Your email address"
-          className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
-          required
-        />
-      </div>
-      <div className="relative mt-6">
-        <textarea
-          name="message"
-          placeholder="Your message"
-          aria-label="Your message"
-          className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
-          rows="4"
-          required
-        />
-      </div>
-      <div className="relative mt-6">
-        <button
-          type="submit"
-          className="w-full rounded-xl bg-neutral-950 text-white py-4 transition hover:bg-neutral-800"
-        >
-          Send Message
-        </button>
-      </div>
-    </form>
+    <FadeIn className="lg:order-last">
+      <form
+        className="max-w-lg" 
+        name="contact" 
+        method="POST" 
+        data-netlify="true"
+        action="/thank-you"
+      >
+        <h2 className="font-display text-base font-semibold text-neutral-950">
+          Work inquiries
+        </h2>
+        <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
+          <TextInput label="Name" name="name" autoComplete="name" />
+          <TextInput
+            label="Email"
+            type="email"
+            name="email"
+            autoComplete="email"
+          />
+          <TextInput
+            label="Company"
+            name="company"
+            autoComplete="organization"
+          />
+          <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
+          <TextInput label="Message" name="message" />
+          <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
+            <fieldset>
+              <legend className="text-base/6 text-neutral-500">Budget</legend>
+              <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
+                <RadioInput label="$5K – $10K" name="budget" value="25" />
+                <RadioInput label="$10K – $50K" name="budget" value="50" />
+                <RadioInput label="$50K – $100K" name="budget" value="100" />
+                <RadioInput label="More than $100K" name="budget" value="150" />
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <Button type="submit" className="mt-10">
+          Let&apos;s work together
+        </Button>
+      </form>
+    </FadeIn>
   )
 }
 
