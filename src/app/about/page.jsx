@@ -9,8 +9,8 @@ import { PageIntro } from '@/components/PageIntro'
 import { PageLinks } from '@/components/PageLinks'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StatList, StatListItem } from '@/components/StatList'
-import imageLeslieAlexander from '@/images/team/leslie-alexander.jpg'
-import imageMichaelFoster from '@/images/team/michael-foster.jpg'
+import imageEugenePaulia from '@/images/team/eugene-paulia.jpg'
+import imageNoelThomas from '@/images/team/noel-thomas.png'
 import { loadArticles } from '@/lib/mdx'
 
 function Culture() {
@@ -49,12 +49,12 @@ const team = [
       {
         name: 'Eugene Paulia',
         role: 'Founder',
-        image: { src: imageMichaelFoster },
+        image: { src: imageEugenePaulia },
       },
       {
         name: 'Noel Thomas',
         role: 'Founder',
-        image: { src: imageLeslieAlexander },
+        image: { src: imageNoelThomas },
       },
     ],
   },

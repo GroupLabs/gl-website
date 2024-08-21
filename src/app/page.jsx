@@ -13,7 +13,6 @@ import logoSuncor from '@/images/clients/suncor-energy/suncor.png'
 import logoHBI from '@/images/clients/hbi/hbi.png'
 import logoCenovus from '@/images/clients/cenovus/cenovus.png'
 import logoUcalgary from '@/images/clients/ucalgary/ucalgary.png'
-import imageLaptop from '@/images/laptop.jpg'
 import { loadCaseStudies } from '@/lib/mdx'
 
 const clients = [
