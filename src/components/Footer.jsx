@@ -80,7 +80,7 @@ function NewsletterForm() {
   return (
     <form 
       className="max-w-sm" 
-      name="newsletter" 
+      name="newsletter form" 
       method="POST" 
       data-netlify="true" 
       netlify-honeypot="bot-field"
