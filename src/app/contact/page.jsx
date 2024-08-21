@@ -52,8 +52,17 @@ function ContactForm() {
         name="contact" 
         method="POST" 
         data-netlify="true"
+        netlify-honeypot="bot-field"
         action="/thank-you"
       >
+        <input type="hidden" name="form-name" value="contact" />
+
+        <p className="hidden">
+          <label>
+            Don&apos;t fill this out if you are human: <input name="bot-field" />
+          </label>
+        </p>
+
         <h2 className="font-display text-base font-semibold text-neutral-950">
           Work inquiries
         </h2>
@@ -64,6 +73,7 @@ function ContactForm() {
             type="email"
             name="email"
             autoComplete="email"
+            required
           />
           <TextInput
             label="Company"
@@ -72,6 +82,7 @@ function ContactForm() {
           />
           <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
           <TextInput label="Message" name="message" />
+
           <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Budget</legend>
