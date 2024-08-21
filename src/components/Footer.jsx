@@ -84,6 +84,7 @@ function NewsletterForm() {
       method="POST" 
       data-netlify="true" 
       netlify-honeypot="bot-field"
+      action="/thank-you"
     >
       <input type="hidden" name="form-name" value="newsletter" />
       <p className="hidden">
