@@ -1,0 +1,105 @@
+import iamgeFiraollumar from '@/images/team/firaoll-umar.png'
+
+export const article = {
+  date: '2024-08-15',
+  title: "The Revolution in Voice-Based Diagnosis",
+  description:
+    'Breakthroughs in articial intelligence allow special models to hear disease',
+  author: {
+    name: 'Firaoll Umar',
+    role: 'Scientist',
+    image: { src: iamgeFiraollumar },
+  },
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+# How AI is Learning to Hear Disease: The Revolution in Voice-Based Diagnosis
+
+*Imagine a future where your voice is all it takes to detect disease. Thanks to artificial intelligence, that future is closer than you think.*
+
+## The Hidden Language of Disease
+
+Picture this: you're talking into your phone, maybe telling a story or describing your day. But what if, while you speak, AI is listening closely—not just to what you're saying but to the way you say it? Subtle shifts in the rhythm, speed, and flow of your speech can reveal early signs of neurological conditions, long before any outward symptoms show up.
+
+## The Quiet Signals of Change
+
+Recent studies, like the Framingham Heart Study, have uncovered a fascinating truth: our voices carry hidden clues about our health. It turns out that when diseases like dementia or multiple sclerosis start to affect the brain, they also change the way we talk. These changes can be so subtle we don’t notice, but AI can pick up on them. Think about it like this:
+
+- **Slower speech tempo and processing speed**
+- **Increased pauses and hesitation**
+- **Altered articulation of sounds**
+- **Simplified language complexity**
+- **Reduced fluency**
+
+## Breaking Through: The Science Behind It
+
+So, how well does this really work? AI-driven speech analysis is showing impressive results. For example, AI has been able to:
+
+- Distinguish people with dementia from healthy individuals with **83.2% accuracy**.
+- Show **94% reliability** in tracking multiple sclerosis over time.
+- Align its findings with traditional medical assessments, proving it's more than just a tech gimmick.
+
+## How AI Does It: Listening on Multiple Levels
+
+The technology doesn’t just focus on one aspect of speech—it dives deep into several layers:
+
+1. **Timing is everything**: AI looks at how fast you talk, how often you pause, and how long you hesitate.
+2. **It listens to the music**: AI captures the tone, pitch, and rhythm of your voice, picking up on shifts that could signal trouble.
+3. **It reads between the lines**: The words you use and how you structure sentences are analyzed. AI can detect when language starts to lose complexity and coherence.
+
+## Real-World Applications
+
+AI voice analysis is already being used in several exciting ways:
+
+### Detecting Cognitive Decline
+- Identifying early signs of cognitive impairment, like mild dementia, before it becomes more serious.
+- Monitoring how conditions progress over time.
+- Checking if treatments are working by tracking speech patterns.
+
+### Managing Multiple Sclerosis
+- Tracking changes in cognitive function that might not be immediately obvious.
+- Assessing how well treatments are helping, by measuring how fast patients process information.
+
+## The Future of Voice-Based Diagnosis
+
+We’re just scratching the surface of what this technology can do. In the near future, we might see:
+
+- AI-powered tools integrated into healthcare systems, working hand-in-hand with doctors.
+- Remote monitoring, where patients can be assessed without leaving their homes.
+- Automated screening tools, catching diseases earlier than ever before.
+
+Ongoing research is expanding this technology’s reach to cover more diseases and refine its accuracy. The ultimate goal? A comprehensive diagnostic system that combines voice analysis with other tools for an even clearer picture of a patient’s health.
+
+## Why It Matters
+
+This approach brings a few key advantages:
+
+1. **Catching it early**: By spotting the first signs of change, AI can help doctors act faster, leading to better outcomes for patients.
+2. **Access for all**: This kind of non-invasive, cost-effective testing could make high-quality healthcare more accessible, especially for those who might not be able to visit a clinic regularly.
+3. **Consistency you can trust**: Since AI is doing the heavy lifting, the results are objective and standardized, ensuring every patient gets the same level of care.
+
+## Looking Ahead
+
+While AI voice analysis is a powerful tool, it’s important to remember that it works best when combined with traditional healthcare practices. The future of medicine will likely involve AI working alongside doctors, enhancing—not replacing—human expertise.
+
+## Recent Findings
+
+Research from the **Artificial Intelligence-Enabled End-To-End Detection and Assessment of Alzheimer’s Disease Using Voice** study shows how a multimodal deep learning model like **data2vec** is being used to detect Alzheimer’s directly from raw voice recordings. The model achieved an **AUC of 0.846** when tested on held-out data, demonstrating a strong potential for early AD detection and progression assessment (Agbavor et al., 2023). This model does not just capture acoustic features but also semantic ...
+
+Key Findings:
+- **AUC of 0.846** for detecting Alzheimer's disease from voice recordings.
+- **Reliable prediction of cognitive scores** from speech.
+- Use of self-supervised learning models for voice, text, and vision applications (data2vec).
+
+## References
+
+1. Karjadi, C., et al. (2023). Fusion of Low-Level Descriptors of Digital Voice Recordings for Dementia Assessment. Journal of Alzheimer's Disease, 96, 507-514.
+2. Khaligh-Razavi, S.M., et al. (2020). A self-administered, artificial intelligence (AI) platform for cognitive assessment in multiple sclerosis (MS). BMC Neurology, 20:193.
+3. Tóth, L., et al. (2018). A Speech Recognition-based Solution for the Automatic Detection of Mild Cognitive Impairment from Spontaneous Speech. Current Alzheimer Research, 15(2), 130-138.
+4. Forbes, K.E., Venneri, A. (2005). Detecting subtle spontaneous language decline in early Alzheimer's disease with a picture description task. Neurological Sciences, 26, 243-254.
+5. Hoffmann I., et al. (2010). Temporal features of spontaneous speech in Alzheimer's disease. International Journal of Speech-Language Pathology, 12(1), 29-34.
+6. Agbavor, F., Liang, H. (2023). Artificial Intelligence-Enabled End-To-End Detection and Assessment of Alzheimer’s Disease Using Voice. Brain Sci, 13(28), https://doi.org/10.3390/brainsci13010028.
