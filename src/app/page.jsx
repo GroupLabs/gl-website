@@ -234,10 +234,10 @@ export default async function Home() {
       <Container className="mt-24 sm:mt-32 md:mt-56">
         <FadeIn className="max-w-3xl">
           <h1 className="font-display font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-5xl">
-            Machine Learning Studio
+            Clients Keep Coming Back
           </h1>
           <p className="mt-6 text-xl text-neutral-600">
-            We are a team of scientists and engineers that build practical solutions grounded in experience and foundational research.
+            Every client we&apos;ve worked with has returned for more. Discover why leading organizations trust our scientists and engineers to build practical, research-driven machine learning solutions.
           </p>
         </FadeIn>
       </Container>
