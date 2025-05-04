@@ -1,0 +1,60 @@
+import logo from '@/images/clients/smart/smart-logo.png'
+import imageHero from './hero.jpg'
+
+export const caseStudy = {
+  client: 'SMART Technologies',
+  title: 'Boosting Classroom Engagement with Generative AI',
+  description:
+    'A web‑based tool that turns plain‑language prompts into interactive, curriculum‑aligned learning activities in seconds.',
+  summary: [
+    'Using large language models, a Rust backend and a React/Next.js frontend, Elevate generates editable HTML/CSS/JS teaching resources on‑demand. Piloted in 5 schools across North America, the system produced 30+ activities and engaged more than 150 students while slashing teachers’ prep time.',
+  ],
+  logo,
+  image: { src: imageHero },
+  date: '2025-05',
+  service: 'Scalable GenAI for Classrooms',
+}
+
+export const metadata = {
+  title: `${caseStudy.client} Case Study`,
+  description: caseStudy.description,
+}
+
+## Overview
+
+Teachers crave interactive lessons but have little time to create them. Our solution solves this by converting a teacher’s natural‑language request (e.g. “Make a counting game for kindergarten”) into a polished, ready‑to‑use activity.
+
+The pipeline:
+
+1. **Input** – Teacher enters topic and requirements.
+2. **LLM Reasoning** – Claude 3 Sonnet decomposes the request and drafts code.
+3. **Backend Cleanup** – A Rust Actix‑Web service moderates, spell‑checks and sanitises the output.
+4. **Realtime Frontend** – Next.js streams the activity to the browser for live preview and edits.
+
+By embedding activities in SMART Boards and LMSs, Elevate fits seamlessly into existing classrooms.
+
+### Key Technical Challenges
+
+- **Content Safety & Moderation** – Automated filters and human‑in‑the‑loop review.
+- **Latency** – Parallel streaming of LLM tokens and incremental DOM updates.
+- **Scalability** – Provider‑agnostic model layer with fallbacks to OpenAI, Anthropic, Meta and xAI.
+
+## What we did
+
+<TagList>
+  <TagListItem>Rust Actix‑Web</TagListItem>
+  <TagListItem>Claude 3 Sonnet</TagListItem>
+  <TagListItem>Next.js & React</TagListItem>
+  <TagListItem>Prometheus + Grafana</TagListItem>
+</TagList>
+
+<StatList>
+  <StatListItem value="5 Schools" label="Across North America" />
+  <StatListItem value="150+" label="Students Engaged" />
+  <StatListItem value="300+" label="Activities Generated" />
+  <StatListItem value="8 Months" label="Project Duration" />
+</StatList>
+
+---
+
+> “This is by far the most AMAZING activity yet – my students understood exactly what they were working on.” — *Candace T., Lubbock ISD*
