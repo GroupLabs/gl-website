@@ -3,17 +3,6 @@
   font-size: theme(fontSize.xl);
   line-height: theme(fontSize.xl[1].lineHeight);
 
-  --shiki-color-text: theme(colors.white);
-  --shiki-color-background: theme(colors.neutral.950);
-  --shiki-token-constant: theme(colors.neutral.300);
-  --shiki-token-string: theme(colors.neutral.400);
-  --shiki-token-comment: theme(colors.neutral.500);
-  --shiki-token-keyword: theme(colors.neutral.400);
-  --shiki-token-parameter: theme(colors.neutral.400);
-  --shiki-token-function: theme(colors.neutral.300);
-  --shiki-token-string-expression: theme(colors.neutral.300);
-  --shiki-token-punctuation: theme(colors.neutral.400);
-
   :where(.typography > *) {
     margin-top: theme(spacing.6);
     margin-bottom: theme(spacing.6);
@@ -104,30 +93,27 @@
 
   /* Code blocks */
   :where(pre) {
-    display: flex;
-    background-color: theme(colors.neutral.950);
-    border-radius: theme(borderRadius.4xl);
+    display: block;
+    background-color: theme(colors.neutral.50);
+    border: 1px solid theme(colors.neutral.200);
+    border-radius: theme(borderRadius.lg);
     overflow-x: auto;
     margin-top: theme(spacing.10);
     margin-bottom: theme(spacing.10);
-    margin-left: calc(-1 * theme(spacing.6));
-    margin-right: calc(-1 * theme(spacing.6));
-
-    @screen sm {
-      margin-left: auto;
-      margin-right: auto;
-    }
   }
 
   :where(pre code) {
-    flex: none;
-    padding: theme(padding.8) theme(padding.6);
-    font-size: theme(fontSize.base);
-    line-height: theme(lineHeight.8);
-    color: theme(colors.white);
+    display: block;
+    min-width: max-content;
+    background-color: theme(colors.neutral.50);
+    padding: theme(padding.6);
+    font-size: theme(fontSize.sm);
+    line-height: theme(lineHeight.6);
+    color: theme(colors.neutral.900);
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
 
     @screen sm {
-      padding: theme(spacing.10);
+      padding: theme(spacing.8);
     }
   }
 
@@ -152,12 +138,17 @@
   }
 
   :where(code:not(pre code)) {
-    font-size: calc(18 / 20 * 1em);
-    font-weight: theme(fontWeight.semibold);
+    font-size: calc(16 / 20 * 1em);
+    font-weight: theme(fontWeight.medium);
+    background-color: theme(colors.neutral.100);
+    color: theme(colors.neutral.900);
+    padding: theme(spacing.1) theme(spacing.2);
+    border-radius: theme(borderRadius.md);
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
 
     &::before,
     &::after {
-      content: '`';
+      content: '';
     }
   }
 
@@ -169,6 +160,30 @@
   :where(figure) {
     margin-top: theme(spacing.32);
     margin-bottom: theme(spacing.32);
+  }
+
+  /* Math */
+  :where(.katex-display) {
+    display: block;
+    width: 100%;
+    margin: theme(spacing.8) 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    text-align: center;
+  }
+
+  :where(.katex-display > .katex) {
+    display: inline-block;
+    text-align: left;
+  }
+
+  :where(.katex) {
+    font-size: 1.1em;
+    color: theme(colors.blue.600);
+  }
+
+  :where(.katex-display .katex) {
+    font-size: 1.2em;
   }
 
   /* Spacing overrides */

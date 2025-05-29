@@ -1,6 +1,7 @@
 import { RootLayout } from '@/components/RootLayout'
 
 import '@/styles/tailwind.css'
+import 'katex/dist/katex.min.css'
 
 export const metadata = {
   title: {

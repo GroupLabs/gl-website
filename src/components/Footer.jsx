@@ -9,7 +9,11 @@ const navigation = [
   {
     title: 'Work',
     links: [
-      { title: 'Hotchkiss Brain Institute', href: '/work/hotchkiss-brain-institute' },
+      {
+        title: 'Hotchkiss Brain Institute',
+        href: '/work/hotchkiss-brain-institute',
+      },
+      { title: 'SMART Technologies', href: '/work/smart-technologies' },
       {
         title: (
           <>
@@ -78,11 +82,11 @@ function ArrowIcon(props) {
 
 function NewsletterForm() {
   return (
-    <form 
-      className="max-w-sm" 
-      name="newsletter form" 
-      method="POST" 
-      data-netlify="true" 
+    <form
+      className="max-w-sm"
+      name="newsletter form"
+      method="POST"
+      data-netlify="true"
       netlify-honeypot="bot-field"
       action="/thank-you"
     >
@@ -95,7 +99,7 @@ function NewsletterForm() {
       <h2 className="font-display text-sm font-semibold tracking-wider text-neutral-950">
         Sign up for our newsletter
       </h2>
-      <p className="mt-4 text-sm text-neutral-700 pr-3">
+      <p className="mt-4 pr-3 text-sm text-neutral-700">
         Subscribe to get the latest news, blogs, and resources.
       </p>
       <div className="relative mt-6">

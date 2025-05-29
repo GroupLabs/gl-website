@@ -48,9 +48,9 @@ function ContactForm() {
   return (
     <FadeIn className="lg:order-last">
       <form
-        className="max-w-lg" 
-        name="contact" 
-        method="POST" 
+        className="max-w-lg"
+        name="contact"
+        method="POST"
         data-netlify="true"
         netlify-honeypot="bot-field"
         action="/thank-you"
@@ -59,7 +59,8 @@ function ContactForm() {
 
         <p className="hidden">
           <label>
-            Don&apos;t fill this out if you are human: <input name="bot-field" />
+            Don&apos;t fill this out if you are human:{' '}
+            <input name="bot-field" />
           </label>
         </p>
 
@@ -75,25 +76,7 @@ function ContactForm() {
             autoComplete="email"
             required
           />
-          <TextInput
-            label="Company"
-            name="company"
-            autoComplete="organization"
-          />
-          <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
-          <TextInput label="Message" name="message" />
-
-          <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
-            <fieldset>
-              <legend className="text-base/6 text-neutral-500">Budget</legend>
-              <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <RadioInput label="$5K – $10K" name="budget" value="25" />
-                <RadioInput label="$10K – $50K" name="budget" value="50" />
-                <RadioInput label="$50K – $100K" name="budget" value="100" />
-                <RadioInput label="More than $100K" name="budget" value="150" />
-              </div>
-            </fieldset>
-          </div>
+          <TextInput label="Message (optional)" name="message" />
         </div>
         <Button type="submit" className="mt-10">
           Let&apos;s work together

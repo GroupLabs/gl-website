@@ -6,6 +6,8 @@ import escapeStringRegexp from 'escape-string-regexp'
 import * as path from 'path'
 import { recmaImportImages } from 'recma-import-images'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 import { remarkRehypeWrap } from 'remark-rehype-wrap'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import shiki from 'shiki'
@@ -43,7 +45,8 @@ function remarkMDXLayout(source, metaName) {
 
 export default async function config() {
   let highlighter = await shiki.getHighlighter({
-    theme: 'css-variables',
+    theme: 'github-light',
+    langs: ['javascript', 'typescript', 'python', 'css', 'html', 'jsx', 'tsx', 'bash', 'json', 'markdown', 'yaml', 'rust', 'go', 'java', 'cpp', 'c', 'sql'],
   })
 
   let withMDX = nextMDX({
@@ -52,6 +55,7 @@ export default async function config() {
       recmaPlugins: [recmaImportImages],
       rehypePlugins: [
         [rehypeShiki, { highlighter }],
+        rehypeKatex,
         [
           remarkRehypeWrap,
           {
@@ -63,6 +67,7 @@ export default async function config() {
       ],
       remarkPlugins: [
         remarkGfm,
+        remarkMath,
         remarkUnwrapImages,
         [
           unifiedConditional,

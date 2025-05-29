@@ -68,10 +68,47 @@ export const MDXComponents = {
       <div
         className={clsx(
           '[&>*]:mx-auto [&>*]:max-w-3xl [&>:first-child]:!mt-0 [&>:last-child]:!mb-0',
+          '[&>.katex-display]:!max-w-none',
           className,
         )}
         {...props}
       />
     )
+  },
+  blockquote({ className, author, image, ...props }) {
+    if (author) {
+      return <Blockquote className={clsx('my-32', className)} author={author} image={image} {...props} />
+    }
+    
+    return (
+      <Border position="left" className={clsx('my-10 pl-8', className)}>
+        <blockquote 
+          className="text-xl/7 text-neutral-600 [&>*]:relative"
+          {...props}
+        />
+      </Border>
+    )
+  },
+  pre({ className, ...props }) {
+    return (
+      <pre 
+        className={clsx('w-full overflow-x-auto', className)} 
+        {...props}
+      />
+    )
+  },
+  code({ className, ...props }) {
+    const isInline = !className || !className.includes('language-')
+    
+    if (isInline) {
+      return (
+        <code 
+          className="rounded-md bg-neutral-100 px-2 py-1 text-sm font-medium text-neutral-900 before:content-[''] after:content-['']"
+          {...props}
+        />
+      )
+    }
+    
+    return <code className={className} {...props} />
   },
 }

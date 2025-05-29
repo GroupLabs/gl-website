@@ -1,0 +1,209 @@
+import imageNoelThomas from '@/images/team/noel-thomas.png'
+
+export const article = {
+  date: '2025-05-30',
+  title: 'Transformers [WIP]',
+  description:
+    'The architecture that changed the world.',
+  author: {
+    name: 'Noel Thomas',
+    role: 'Founder',
+    image: { src: imageNoelThomas },
+  },
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+
+> Under development! This is just grafted together, needs to be rewritten.
+# Motivation
+If you made it to this article, it is safe to assume that you are aware of the capabilities of transformers. This is an architecture that has been slowly taking over various subfields in ML from NLP to CV. We will discuss why this is near the end.
+
+As far as I can tell, there are more than a million articles, blogs, videos, and jupyter notebooks attempting to explain what a transformer is. I can report that upon careful inspection of many of these over weeks, none could manage to piece together a satisfying explanation for a truly simple man such as myself. In the following attempt, I hope to build up transformers from first principles, and deliver a somewhat rigorous understanding.
+
+# Introduction
+
+## The "Attention is All You Need" Transformer
+
+Vaswani et al. published the paper on the original transformer (for translation tasks) in June 2017. Several influential models followed:
+
+- GPT (decoder): The first large pretrained model.
+- BERT (encoder): Designed for summarization.
+- DistilBERT (encoder): A fast and lightweight version of BERT.
+- BART/T5 (encoder-decoder): The first pretrained models with the same architecture as the original.
+
+There are some gross oversimplifications of transformers out there. Some would consider transformers as compression algorithms, or even infinite (or multi-state) RNNs. Both are  somewhat true. However, what is definitely true is that transformers excel at modelling sequential data.
+
+One of the most important objectives of the transformer is to reduce sequential computation. Previous models (ConvS2S, ByteNet) struggled to relate signals as the distance between input and/or output positions grew. This is counteracted with multi-head attention (MHA). According to Harvard SEAS, "the transformer is the first transduction model to rely solely on self-attention to compute representations of its input and output without using sequence aligned RNNs or convolution"[^1].
+
+[^1]: (https://nlp.seas.harvard.edu/annotated-transformer/)
+
+# Embedding
+
+To process language, strings need to be converted to some numerical form that is easy for computers to compare and manipulate.
+
+...
+
+Let&apos;s define some notation for the pseudocode algorithms [^2].
+
+[^2]: (https://arxiv.org/pdf/2207.09238.pdf)
+
+Let *V* denote a finite set, called *vocabulary*, identified with
+
+$$ [N_V] := \{1, ..., N_V\} $$
+
+This could be words, or letters, but are typically subwords called tokens.
+
+Let $\textbf{x}$,
+$$ \textbf{x} \equiv x[1:l] \equiv x[1]x[2]...x[l] \in V^* $$
+be a sequence of tokens such as a sentence or paragraph or document. Unlike typical programming languages, arrays begin with 1, and $x[1:l]$ includes $x[l]$.
+
+## Chunking
+
+The predominant paradigm in machine learning is to learn from independent and identically distributed (i.i.d.) data. There are certain cases where the input is greater than the context length ($l_{max}$); the input is broken into shorter chunks ($\leq l_{max}$).
+
+## Tokenization
+
+This refers to how a string is divided into elements of the vocabulary. Given the example string "The sun set over hills.", here are some possible choices for tokenization:
+
+- Character-level: We can allow *V* to be the English alphabet (+ punctuation). There would be a sequence length of 23. Since each character would be an element, this kind of tokenization typically yields very long sequences.
+- Word-level: In this one, we allow *V* to be the set of all English words (+ punctuation). Here our sequence length would be 6. This tends to require large vocabularies and struggles with new words at test time.
+- Subword tokenizers: Current state-of-the-art approaches use subword tokenizers (Tiktoken (BPE), etc.) that define *V* as a set of commonly occurring word segments such as &apos;pre&apos;, &apos;post&apos;, &apos;ing,&apos; and so forth. Common words like &apos;is&apos; are often a separate token. To ensure all words are expressible, *V* also includes single characters.
+
+Each vocabulary element is assigned a unique index. There are also a number of special tokens. For example, there is the `mask_token`, `bos_token`, and `eos_token`.
+
+---
+## Token Embedding Algorithm
+
+**Input:**
+$$ v \in V \cong [N_V] \text{, a token ID} $$
+
+**Output:**
+$$e \in \mathbb{R}^{d_e} \text{, vector representation of the token} $$
+
+**Parameters:**
+$$W_e \in \mathbb{R}^{d_e \times N_V} \text{, token embedding matrix} $$
+
+The matrix has $d_e$ rows (one for each dimension in the embedding space) and $N_V$ columns (one for each element in the vocabulary).
+
+**Return:**
+$$ e = W_e[:, v] $$
+
+All rows in column &apos;v&apos;; effectively selecting column v from the matrix.
+
+---
+
+The embeddings can be fixed, or learned along with the other parameters during training. A sequence is a generic representation; many modalities can be &apos;tokenized&apos;. This allows for multimodal tasks without needing to build bespoke architectures.
+
+## Positional Encoding
+
+The sequences "there is a man on the moon" and "there is a moon on the man" have two very different meanings. Therefore, it is critical to inform the transformer of the token positions. This is done with positional encoding. In the absence of this, the representation would be permutation invariant and the sequences will be processed as "bags of tokens".
+
+All of this is to say that the transformer sees data as a set (order does not matter); if you reorder the tokens in the input sequence, the representations throughout the network will be reordered the same way.
+
+These can be fixed, or learned. Fixed embeddings (Vaswani et al., 2017), that use some hard-coded mapping, have no theoretical limit. Learned embeddings (Devlin et al., 2019), however, require that the maximum input length is a fixed number $l_{max}$ because the size of the learned positional embedding matrix must be finite and fixed in advance of training. There are also approaches to include relative distance information between pairs of tokens by modifying the self-attention mechanism (Wu et al., 2021) which connects to equivariant transformers.
+
+For example,
+$$ W_p[2i - 1, t] = \sin(\frac{t}{l_{max}^{2i/d_e}}) $$
+$$ W_p[2i, t] = \cos(\frac{t}{l_{max}^{2i/d_e}}) $$
+for $1 \leq i \leq d_e/2$
+
+There are several ways to include this information to the transformers input. For example, we can add the position and token embeddings. For the t-th token of a sequence $\textbf{x}$, the embedding is:
+$$ e = W_e[:, x[t]] + W_p[:, t] $$
+
+---
+#### Positional Embedding Algorithm
+
+
+The transformer blocks are applied iteratively. The block itself is comprised of two components; one operates across the sequence, and one across the features.
+
+The first stage refines each feature independently according to relationships between tokens across the sequence e.g. how much a word in a sequence at position n depends on previous words at position n′, or how much two different patches from an image are related to one another. This stage acts horizontally across rows.
+
+The second stage refines the features representing each token. This stage acts vertically across a column.
+
+By repeatedly applying the transformer block the representation at token n and feature d can be shaped by information at token n′ and feature d′. The idea of interleaving processing across the sequence and across features is a common motif of many machine learning architectures including graph neural networks (interleaves processing across nodes and across features), Fourier neural operators (interleaves processing across space and across features), and bottleneck blocks in ResNets (interleaves processing across pixels and across features).
+
+## Stage 1: Attention
+
+We call the first stage of the transformer block 'attention'. This stage helps the transformer understand how relevant tokens are to one another.
+
+The simplest approach to this probably is to naively take the dot product of the input vectors (each one being a token).
+
+$$A_{n,n'} = \frac{exp(x_n^\top x_{n'})}{\sum_{n''=1}^N exp(x_{n''}^\top x_{n'})}$$
+
+
+Take the example where $x_n \models \text{caulking}$ and $x_{n'} \models \text{iron}$ from the sentence $X \models \text{I need to buy a caulking iron}$. Of course, this also includes the positional encoding.
+
+This approach to attention might struggle to relate the words 'caulking' and 'iron' depending on the embedding, as they have vastly different meanings, and thus may produce a low attention score. However, we know that it is important to recognize that they are both part of the name of a tool called 'caulking iron'.
+
+We can improve this approach by applying a linear transformation $U$ to the input vectors. For the sake of efficiency, $U$ typically projects to a lower dimensional space ($U$ is $K \times D$ dimensional, and $K < D$).
+
+$$A_{n,n'} = \frac{exp(x_n^\top U^\top U x_{n'})}{\sum_{n''=1}^N exp(x_{n''}^\top U^\top U x_{n'})}$$
+
+> Please note that we are absorbing the term $\frac{1}{\sqrt{D}}$ into $U$ for readability. This term is often included to improve numerical stability.
+
+There is one more consideration. This is still symmetric. Words should not necessarily be associated in both ways with the same strength. For example, the word animal should be strongly associated to the word quokka (as it is a type of animal), but quokka should be weakly associated with animal (since most people rarely encounter it).
+
+There is a simple way to generalize the attention mechanism to be asymmetric. Simply apply two independent linear transformations $U_k$ and $U_q$.
+
+$$A_{n,n'} = \frac{exp(x_n^\top U_k^\top U_q x_{n'})}{\sum_{n''=1}^N exp(x_{n''}^\top U_k^\top U_q x_{n'})}$$
+Now it can pay attention to each token.
+
+Typically, $U_q x_n$ and $U_k x_{n}$ are known as the queries (Q) and keys (K) respectively. Having two subspaces allows us to apply different attention scores depending on which token is the $x_n$ and which is the $x_{n'}$.
+
+By multiplying the attention scores with the elements of the input vectors (V), we define the **self-attention mechanism**. Here's a simpler form:
+
+$$ Attention(Q, K, V) = softmax(\frac{Q \cdot K^T}{\sqrt{d_k}})V$$
+```python
+def attention(query, key, value, mask=None, dropout=None):
+	"Compute 'Scaled Dot Product Attention'"
+	d_k = query.size(-1) # get dimensions
+	scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k)
+
+	if mask is not None:
+		scores = scores.masked_fill(mask == 0, -1e9)
+
+	p_attn = scores.softmax(dim=-1)
+	if dropout is not None:
+		p_attn = dropout(p_attn)
+
+	return torch.matmul(p_attn, value), p_attn
+```
+
+Queries and keys are typically learnable parameters that can also be identified as weight matrices.
+### Stage 1.1: Multi-Head Self-Attention (MHSA)
+
+Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this.
+
+$$ MHSA(Q,K,V) = concat(head_1, head_2, ..., head_h) W^0 $$
+
+We are employing parallel heads, that operate on the entire input sequence, but the dimensions are split.
+
+> To preserve the auto-regressive property, the decoder allows each position in the decoder to attend to all positions in the decoder up to and including that position. We need to prevent leftward information flow in the decoder to preserve the auto-regressive property. We implement this inside of scaled dot-product attention by masking out (setting to $-\infty$ all values in the input of the softmax which correspond to illegal connections. This ensures that prediction of the next token only relies on previously generated tokens. See bidirectional / unmasked attention and unidirectional / masked attention.
+
+## Stage 2: Feed Forward Network
+
+The second stage of processing in the transformer block operates across features, refining the representation using a non-linear transform. To do this, we simply apply a multi-layer perceptron (MLP) to the vector of features at each location n in the sequence.
+
+This is also where world-knowledge is stored, and thus the largest component of the transformer block.
+
+# Putting it together
+
+Instead of stacking the two stages directly, we use residual connections and normalizations as layers between them. This helps to stabilize the model.
+
+## Residual Connections
+
+The idea is to parametrize the a function in terms of an identity mapping (carries the output forward as is) and a residual term. This applies a mild non-linear transformation to each representation, but over many layers, these compose to form a large non-linear transformation.
+
+$$ x^{(m)} = x^{(m-1)} + res_\theta(x^{(m-1)}) $$
+
+You can also look at this as modelling the differences in representation.
+
+$$ x^{(m)} - x^{(m-1)} = res_\theta(x^{(m-1)}) $$
+
+## Token Normalization
+
+This transform stops feature representations blowing up in magnitude as non- linearities are repeatedly applied through neural networks.17 In transformers, LayerNorm is usually applied in the residual terms of both the MHSA and MLP stages.
