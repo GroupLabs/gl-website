@@ -93,8 +93,9 @@ function ContactDetails() {
         Our offices
       </h2>
       <p className="mt-6 text-base text-neutral-600">
-        Prefer doing things in person? We don’t but we have to list our
-        addresses here for legal reasons.
+        We would love to support your project, even if it just means a
+        whiteboarding session. Get a hold of us either by email, or with the
+        contact form.
       </p>
 
       <Offices className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />

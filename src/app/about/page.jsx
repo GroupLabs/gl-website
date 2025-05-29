@@ -11,6 +11,7 @@ import { SectionIntro } from '@/components/SectionIntro'
 import { StatList, StatListItem } from '@/components/StatList'
 import imageEugenePaulia from '@/images/team/eugene-paulia.jpg'
 import imageNoelThomas from '@/images/team/noel-thomas.png'
+import imageSamMoses from '@/images/team/sam-moses.png'
 import { loadArticles } from '@/lib/mdx'
 
 function Culture() {
@@ -21,20 +22,21 @@ function Culture() {
         title="Life is about doing what you love."
         invert
       >
-        <p>
-          Our team all share the same core tenets.
-        </p>
+        <p>Our team all share the same core tenets.</p>
       </SectionIntro>
       <Container className="mt-16">
         <GridList>
           <GridListItem title="Trust" invert>
-            We establish strong relationships by consistently delivering high-quality work and meeting our commitments.
+            We establish strong relationships by consistently delivering
+            high-quality work and meeting our commitments.
           </GridListItem>
           <GridListItem title="Hard work" invert>
-            Our team’s dedication and loyalty are reflected in their continuous commitment and remarkable achievements.
+            Our team’s dedication and loyalty are reflected in their continuous
+            commitment and remarkable achievements.
           </GridListItem>
           <GridListItem title="Perseverance" invert>
-            We support our team through every challenge, ensuring a compassionate and understanding work environment.
+            We support our team through every challenge, ensuring a
+            compassionate and understanding work environment.
           </GridListItem>
         </GridList>
       </Container>
@@ -55,6 +57,11 @@ const team = [
         name: 'Noel Thomas',
         role: 'Founder',
         image: { src: imageNoelThomas },
+      },
+      {
+        name: 'Sam Moses',
+        role: 'Intern',
+        image: { src: imageSamMoses },
       },
     ],
   },
@@ -118,21 +125,25 @@ export const metadata = {
 export default async function About() {
   let blogArticles = (await loadArticles()).slice(0, 2)
 
-  const today = new Date();
-  const startOfYear = new Date(today.getFullYear(), 0, 1);
-  const daysSinceStartOfYear = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24));
+  const today = new Date()
+  const startOfYear = new Date(today.getFullYear(), 0, 1)
+  const daysSinceStartOfYear = Math.floor(
+    (today - startOfYear) / (1000 * 60 * 60 * 24),
+  )
 
   return (
     <>
       <PageIntro eyebrow="About us" title="We build practical solutions">
         <p>
-          We put our clients and their goals at the center of everything we do. We&apos;re a team of doers, and get-doners.
+          We put our clients and their goals at the center of everything we do.
+          We&apos;re a team of doers, and get-doners.
         </p>
         <div className="mt-10 max-w-2xl space-y-6 text-base">
           <p>
-            Studio was started by two friends who noticed that machine learning is still not accessible to everyone. 
-            Since the beginning, we have been committed to doing things differently by building tools, and expert 
-            networks to support the community.
+            Studio was started by two friends who noticed that machine learning
+            is still not accessible to everyone. Since the beginning, we have
+            been committed to doing things differently by building tools, and
+            expert networks to support the community.
           </p>
         </div>
       </PageIntro>
@@ -140,7 +151,10 @@ export default async function About() {
         <StatList>
           <StatListItem value="12+" label="Industry experts" />
           <StatListItem value="30%" label="Cost savings (on average)" />
-          <StatListItem value={daysSinceStartOfYear} label="Days of customer satisfaction this year" />
+          <StatListItem
+            value={daysSinceStartOfYear}
+            label="Days of customer satisfaction this year"
+          />
         </StatList>
       </Container>
 
