@@ -3,6 +3,13 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 
+export const metadata = {
+  title: 'Page Not Found',
+  description: 'The page you are looking for does not exist.',
+  robots: { index: false, follow: false },
+  alternates: { canonical: '/404' },
+}
+
 export default function NotFound() {
   return (
     <Container className="flex h-full items-center pt-24 sm:pt-32 lg:pt-40">

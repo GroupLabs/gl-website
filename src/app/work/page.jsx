@@ -29,7 +29,7 @@ function CaseStudies({ caseStudies }) {
                   <div className="sm:flex sm:items-center sm:gap-x-6 lg:block">
                     <Image
                       src={caseStudy.logo}
-                      alt=""
+                      alt={caseStudy.client}
                       className="h-16 w-16 flex-none object-contain"
                       unoptimized
                     />
@@ -117,7 +117,8 @@ function Clients() {
 export const metadata = {
   title: 'Our Work',
   description:
-    'Our goal is to simplify the application of computational research to tangible issues around the globe.',
+    'Explore how our Calgary-based team applies machine learning and data science to solve real-world problems.',
+  alternates: { canonical: '/work' },
 }
 
 export default async function Work() {

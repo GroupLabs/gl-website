@@ -248,8 +248,10 @@ function Services() {
 }
 
 export const metadata = {
+  title: 'Machine Learning Consulting in Calgary',
   description:
-    'We are a team of scientists and engineers that build practical solutions grounded in experience and foundational research.',
+    'GroupLabs provides Calgary businesses with machine learning and data science consulting services grounded in research and real-world experience.',
+  alternates: { canonical: '/' },
 }
 
 export default async function Home() {

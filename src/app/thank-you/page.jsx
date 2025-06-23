@@ -3,6 +3,13 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
 
+export const metadata = {
+  title: 'Thank You',
+  description: 'Thanks for contacting GroupLabs. We will respond shortly.',
+  robots: { index: false },
+  alternates: { canonical: '/thank-you' },
+}
+
 export default function ThankYou() {
   return (
     <Container className="mt-24 w-full sm:mt-32 lg:mt-40 text-center">

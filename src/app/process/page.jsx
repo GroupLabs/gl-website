@@ -169,7 +169,8 @@ function Values() {
 export const metadata = {
   title: 'Our Process',
   description:
-    'We believe in delivering practical solutions that clients can use to address real-world, impactful issues.',
+    'Discover our proven approach to delivering machine learning solutions for businesses in Calgary and beyond.',
+  alternates: { canonical: '/process' },
 }
 
 export default function Process() {

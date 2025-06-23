@@ -136,7 +136,9 @@ function ContactDetails() {
 
 export const metadata = {
   title: 'Contact Us',
-  description: 'Let’s work together. We can’t wait to hear from you.',
+  description:
+    'Contact our Calgary machine learning consultants to discuss how we can help with your data and AI projects.',
+  alternates: { canonical: '/contact' },
 }
 
 export default function Contact() {
