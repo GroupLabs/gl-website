@@ -5,6 +5,10 @@ import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
 import { socialMediaProfiles } from '@/components/SocialMedia'
 
+const COMMIT_SHA =
+  process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ??
+  process.env.NEXT_PUBLIC_GIT_COMMIT_SHA
+
 const navigation = [
   {
     title: 'Work',
@@ -142,6 +146,7 @@ export function Footer() {
           </Link>
           <p className="text-sm text-neutral-700">
             © GroupLabs Inc. {new Date().getFullYear()}
+            {COMMIT_SHA ? ` | ${COMMIT_SHA.slice(0, 7)}` : ''}
           </p>
         </div>
       </FadeIn>
