@@ -13,7 +13,8 @@ import { loadArticles } from '@/lib/mdx'
 export const metadata = {
   title: 'Blog',
   description:
-    'Stay up-to-date with our latest insights in computational research.',
+    'Stay up-to-date with machine learning, data science, and AI insights from our Calgary experts.',
+  alternates: { canonical: '/blog' },
 }
 
 export default async function Blog() {
@@ -49,7 +50,7 @@ export default async function Blog() {
                         <dd className="mt-6 flex gap-x-4">
                           <div className="flex-none overflow-hidden rounded-xl bg-neutral-100">
                             <Image
-                              alt=""
+                              alt={article.author.name}
                               {...article.author.image}
                               className="h-12 w-12 object-cover grayscale"
                             />

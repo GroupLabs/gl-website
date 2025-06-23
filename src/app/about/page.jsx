@@ -90,7 +90,7 @@ function Team() {
                       <FadeIn>
                         <div className="group relative overflow-hidden rounded-3xl bg-neutral-100">
                           <Image
-                            alt=""
+                            alt={person.name}
                             {...person.image}
                             className="h-96 w-full object-cover grayscale transition duration-500 motion-safe:group-hover:scale-105"
                           />
@@ -119,7 +119,8 @@ function Team() {
 export const metadata = {
   title: 'About Us',
   description:
-    "We put our clients and their goals at the center of everything we do. We're a team of doers, and get-doners.",
+    'Learn about GroupLabs, a Calgary-based team of machine learning and data science consultants dedicated to client success.',
+  alternates: { canonical: '/about' },
 }
 
 export default async function About() {

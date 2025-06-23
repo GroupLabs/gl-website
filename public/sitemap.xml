@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://grouplabs.ca/</loc></url>
+  <url><loc>https://grouplabs.ca/about</loc></url>
+  <url><loc>https://grouplabs.ca/blog</loc></url>
+  <url><loc>https://grouplabs.ca/contact</loc></url>
+  <url><loc>https://grouplabs.ca/process</loc></url>
+  <url><loc>https://grouplabs.ca/work</loc></url>
+  <url><loc>https://grouplabs.ca/thank-you</loc></url>
+  <url><loc>https://grouplabs.ca/work/hotchkiss-brain-institute</loc></url>
+  <url><loc>https://grouplabs.ca/work/smart-technologies</loc></url>
+  <url><loc>https://grouplabs.ca/blog/AIs-impact-on-MRI-brain-lesion-detection</loc></url>
+  <url><loc>https://grouplabs.ca/blog/Diagnosing-diseases-with-voice</loc></url>
+  <url><loc>https://grouplabs.ca/blog/Pytorch-Internals</loc></url>
+  <url><loc>https://grouplabs.ca/blog/Transformers</loc></url>
+  <url><loc>https://grouplabs.ca/blog/Vector-Search-with-Embeddings</loc></url>
+  <url><loc>https://grouplabs.ca/blog/gRPC-and-libtorch-with-Bazel</loc></url>
+  <url><loc>https://grouplabs.ca/blog/zsh-llm-config</loc></url>
+</urlset>
