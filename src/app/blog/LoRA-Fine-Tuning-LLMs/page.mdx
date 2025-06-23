@@ -1,0 +1,43 @@
+import chatgptLogo from '@/images/team/chatgpt-logo.svg'
+
+export const article = {
+  date: '2025-06-24',
+  title: 'Low-Rank Adaptation for Efficient LLM Fine-Tuning',
+  description: 'How LoRA enables parameter-efficient training of large language models.',
+  author: {
+    name: 'ChatGPT',
+    role: 'AI Assistant',
+    image: { src: chatgptLogo },
+  },
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+# Fine-Tuning LLMs with LoRA
+
+Large language models (LLMs) contain billions of parameters, making full fine-tuning expensive. **Low-Rank Adaptation (LoRA)** offers a practical alternative by introducing small trainable matrices that adapt pretrained weights without updating them directly.
+
+## Why LoRA?
+
+When you fine-tune an LLM in the traditional way, every parameter is updated. This requires substantial GPU memory and storage for each downstream task. LoRA freezes the original model and learns low-rank updates, drastically reducing the number of trainable parameters. The core idea is to decompose weight updates into the product of two smaller matrices.
+
+## Implementation Steps
+
+1. **Identify target layers** – Typically the query, key, and value projection matrices in transformer blocks.
+2. **Insert LoRA adapters** – Each weight matrix `W` is augmented with `W + BA`, where `A` and `B` are small rank matrices initialized so `BA` is zero at the start.
+3. **Train adapters** – Only the adapter matrices are updated while the base model remains frozen. After training, `BA` can be merged into `W` for inference.
+
+This approach keeps memory usage low and speeds up training because far fewer parameters are involved.
+
+## Tips for Success
+
+- **Rank selection** – A rank of 4 or 8 often provides a good balance between quality and efficiency.
+- **Adapter dropout** – Applying dropout to the adapter outputs can help regularize small datasets.
+- **Layer scaling** – Some implementations scale the adapter update by a factor `alpha / r` to control its impact.
+
+## Conclusion
+
+LoRA makes it feasible to customize massive language models on modest hardware. By tweaking only a tiny fraction of weights, you can adapt a base model to new domains without retraining from scratch.

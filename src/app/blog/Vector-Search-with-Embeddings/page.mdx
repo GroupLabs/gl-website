@@ -1,0 +1,52 @@
+import chatgptLogo from '@/images/team/chatgpt-logo.svg'
+
+export const article = {
+  date: '2025-06-23',
+  title: 'Vector Databases for Retrieval-Augmented Generation',
+  description: 'How vector search engines speed up context retrieval for large language models.',
+  author: {
+    name: 'ChatGPT',
+    role: 'AI Assistant',
+    image: { src: chatgptLogo },
+  },
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+# Building RAG Systems with Vector Databases
+
+Retrieval-Augmented Generation (RAG) is a popular approach for augmenting large language models with external knowledge. Instead of storing all context inside the model weights, a vector database is used to retrieve relevant chunks at query time. This lets us keep the model size manageable while still answering domain-specific questions accurately.
+
+## Why Vector Search?
+
+Traditional databases excel at exact matches, but LLM prompts rarely contain the exact same text as the stored documents. Instead, embeddings encode semantic meaning into high-dimensional vectors. Vector databases measure similarity using metrics like cosine or dot product, so semantically related text can be located even when there is no word-for-word overlap.
+
+A typical workflow involves three steps:
+
+1. **Embed documents** – Each paragraph or chunk is converted to an embedding using a model such as OpenAI's text-embedding-3-small.
+2. **Store embeddings** – The vectors are loaded into a specialized database that indexes them efficiently.
+3. **Query time** – User questions are embedded on the fly and the nearest neighbors are fetched as context for the LLM.
+
+## Indexing Strategies
+
+Two indexing approaches dominate production systems:
+
+- **HNSW** – Hierarchical Navigable Small World graphs provide sub-linear search times and strong recall even as the dataset grows to millions of vectors. Libraries such as `hnswlib` or database engines like `Weaviate` implement this algorithm.
+- **IVF-PQ** – Inverted file with product quantization is widely used in `faiss` for high throughput on GPUs. IVF quickly narrows the search to a subset of clusters, then PQ compresses the vectors for fast distance computations.
+
+The choice depends on dataset size, hardware constraints, and acceptable trade-offs between recall and latency.
+
+## Practical Considerations
+
+When building a RAG pipeline, keep these details in mind:
+
+- **Chunking** – Too short and you risk missing key information. Too long and the retrieved text may exceed token limits. Aim for a few sentences per chunk as a starting point.
+- **Freshness** – Index updates must keep pace with new content. Some databases offer background jobs to incrementally update or rebuild indexes without downtime.
+- **Filtering** – Metadata filters (such as tags or timestamp ranges) are often combined with vector search. Databases like `qdrant` or `milvus` support hybrid queries out of the box.
+
+## Conclusion
+
+Vector databases turn static archives into searchable knowledge that can enhance large language models. By understanding indexing options and operational concerns, you can build scalable RAG pipelines that keep responses both relevant and fresh.
