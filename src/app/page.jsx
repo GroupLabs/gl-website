@@ -60,22 +60,24 @@ function Products() {
             role="list"
             className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3"
           >
-            <FadeIn>
-              <div className="text-left">
-                <div className="flex items-center">
-                  <span className="block font-mono text-lg font-bold tracking-wider text-white">
-                    Bridge
-                  </span>
-                  <a
-                    href="https://bridgeproductpage.netlify.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ml-1 text-neutral-400 hover:text-neutral-200"
-                  >
-                    <svg
-                      width="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
+            <li>
+              <FadeIn>
+                <div className="text-left">
+                  <div className="flex items-center">
+                    <span className="block font-mono text-lg font-bold tracking-wider text-white">
+                      Bridge
+                    </span>
+                    <a
+                      href="https://bridgeproductpage.netlify.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-1 text-neutral-400 hover:text-neutral-200"
+                      aria-label="Bridge product page (opens in new tab)"
+                    >
+                      <svg
+                        width="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -98,15 +100,17 @@ function Products() {
                   state-of-the-art retrievers in popular benchmarks.
                 </p>
               </div>
-            </FadeIn>
+              </FadeIn>
+            </li>
 
-            <FadeIn>
-              <div className="text-left">
-                <div className="flex items-baseline">
-                  <span className="block font-mono text-lg font-bold tracking-wider text-white">
-                    Mesh [WIP]
-                  </span>
-                  <span
+            <li>
+              <FadeIn>
+                <div className="text-left">
+                  <div className="flex items-baseline">
+                    <span className="block font-mono text-lg font-bold tracking-wider text-white">
+                      Mesh [WIP]
+                    </span>
+                    <span
                     className={`ml-2 inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-400/20`}
                   >
                     v0.2.71
@@ -118,15 +122,17 @@ function Products() {
                   frameworks like PyTorch, GGML, and TinyGrad.
                 </p>
               </div>
-            </FadeIn>
+              </FadeIn>
+            </li>
 
-            <FadeIn>
-              <div className="text-left">
-                <div className="flex items-baseline">
-                  <span className="block font-mono text-lg font-bold tracking-wider text-white">
-                    Tell [WIP]
-                  </span>
-                  <span
+            <li>
+              <FadeIn>
+                <div className="text-left">
+                  <div className="flex items-baseline">
+                    <span className="block font-mono text-lg font-bold tracking-wider text-white">
+                      Tell [WIP]
+                    </span>
+                    <span
                     className={`ml-2 inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-400/20`}
                   >
                     v0.3.14
@@ -138,7 +144,8 @@ function Products() {
                   optimization, adaptive model selection, and so forth.
                 </p>
               </div>
-            </FadeIn>
+              </FadeIn>
+            </li>
           </ul>
         </FadeInStagger>
       </div>
