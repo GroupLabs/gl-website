@@ -5,6 +5,7 @@ import { MDXComponents } from '@/components/MDXComponents'
 import { PageLinks } from '@/components/PageLinks'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
+import 'katex/dist/katex.min.css'
 
 export default async function BlogArticleWrapper({ article, children }) {
   let allArticles = await loadArticles()

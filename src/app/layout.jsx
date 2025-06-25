@@ -1,7 +1,7 @@
 import { RootLayout } from '@/components/RootLayout'
+import Script from 'next/script'
 
 import '@/styles/tailwind.css'
-import 'katex/dist/katex.min.css'
 
 export const metadata = {
   metadataBase: new URL('https://grouplabs.ca'),
@@ -45,8 +45,10 @@ export default function Layout({ children }) {
     <html lang="en" className="h-full bg-neutral-950 text-base antialiased">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <script
+        <Script
+          id="organization-schema"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
