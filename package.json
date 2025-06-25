@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "browserslist": "defaults, not ie <= 11",
+  "browserslist": [
+    "defaults and supports es6-module",
+    "not ie <= 11"
+  ],
   "dependencies": {
     "@leafac/rehype-shiki": "^2.2.1",
     "@mdx-js/loader": "^2.3.0",
