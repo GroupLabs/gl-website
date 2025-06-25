@@ -71,7 +71,10 @@ function Header({
           />
         </Link>
         <div className="flex items-center gap-x-8">
-          <Button href="/contact" className="bg-orange-600 hover:bg-orange-700">
+          <Button
+            href="/contact"
+            className="bg-orange-700 hover:bg-orange-800 text-white"
+          >
             Contact
           </Button>
           <button
