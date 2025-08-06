@@ -5,7 +5,7 @@ import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
-import { FadeIn } from '@/components/FadeIn'
+import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
@@ -19,6 +19,7 @@ export const metadata = {
 
 export default async function Blog() {
   let articles = await loadArticles()
+  let [featured, ...rest] = articles
 
   return (
     <>
@@ -29,57 +30,75 @@ export default async function Blog() {
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">
-        <div className="space-y-24 lg:space-y-32">
-          {articles.map((article) => (
-            <FadeIn key={article.href}>
-              <article>
-                <Border className="pt-16">
-                  <div className="relative lg:-mx-4 lg:flex lg:justify-end">
-                    <div className="pt-10 lg:w-2/3 lg:flex-none lg:px-4 lg:pt-0">
-                      <h2 className="font-display text-2xl font-semibold text-neutral-950">
+        <section>
+          <FadeIn key={featured.href}>
+            <article>
+              <Border className="pt-16">
+                <div className="relative">
+                  <Image
+                    alt={featured.title}
+                    {...featured.image}
+                    className="h-96 w-full rounded-3xl object-cover"
+                    priority
+                  />
+                  <div className="mt-10">
+                    <h2 className="font-display text-3xl font-semibold text-neutral-950">
+                      <Link href={featured.href}>{featured.title}</Link>
+                    </h2>
+                    <time
+                      dateTime={featured.date}
+                      className="mt-2 block text-sm text-neutral-950"
+                    >
+                      {formatDate(featured.date)}
+                    </time>
+                    <p className="mt-6 max-w-2xl text-base text-neutral-600">
+                      {featured.description}
+                    </p>
+                    <Button
+                      href={featured.href}
+                      aria-label={`Read more: ${featured.title}`}
+                      className="mt-8"
+                    >
+                      Read more
+                    </Button>
+                  </div>
+                </div>
+              </Border>
+            </article>
+          </FadeIn>
+        </section>
+
+        {rest.length > 0 && (
+          <section className="mt-24">
+            <FadeInStagger className="grid grid-cols-1 gap-x-8 gap-y-20 sm:grid-cols-2 lg:grid-cols-3">
+              {rest.map((article) => (
+                <FadeIn key={article.href}>
+                  <article>
+                    <Border className="pt-8">
+                      <Image
+                        alt={article.title}
+                        {...article.image}
+                        className="h-48 w-full rounded-2xl object-cover"
+                      />
+                      <h3 className="mt-6 text-base font-semibold text-neutral-950">
                         <Link href={article.href}>{article.title}</Link>
-                      </h2>
-                      <dl className="lg:absolute lg:left-0 lg:top-0 lg:w-1/3 lg:px-4">
-                        <dt className="sr-only">Published</dt>
-                        <dd className="absolute left-0 top-0 text-sm text-neutral-950 lg:static">
-                          <time dateTime={article.date}>
-                            {formatDate(article.date)}
-                          </time>
-                        </dd>
-                        <dt className="sr-only">Author</dt>
-                        <dd className="mt-6 flex gap-x-4">
-                          <div className="flex-none overflow-hidden rounded-xl bg-neutral-100">
-                            <Image
-                              alt={article.author.name}
-                              {...article.author.image}
-                              className="h-12 w-12 object-cover grayscale"
-                            />
-                          </div>
-                          <div className="text-sm text-neutral-950">
-                            <div className="font-semibold">
-                              {article.author.name}
-                            </div>
-                            <div>{article.author.role}</div>
-                          </div>
-                        </dd>
-                      </dl>
-                      <p className="mt-6 max-w-2xl text-base text-neutral-600">
+                      </h3>
+                      <time
+                        dateTime={article.date}
+                        className="order-first block text-sm text-neutral-600"
+                      >
+                        {formatDate(article.date)}
+                      </time>
+                      <p className="mt-2 text-sm text-neutral-600">
                         {article.description}
                       </p>
-                      <Button
-                        href={article.href}
-                        aria-label={`Read more: ${article.title}`}
-                        className="mt-8"
-                      >
-                        Read more
-                      </Button>
-                    </div>
-                  </div>
-                </Border>
-              </article>
-            </FadeIn>
-          ))}
-        </div>
+                    </Border>
+                  </article>
+                </FadeIn>
+              ))}
+            </FadeInStagger>
+          </section>
+        )}
       </Container>
 
       <ContactSection />
