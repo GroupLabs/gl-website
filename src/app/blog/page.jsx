@@ -11,8 +11,11 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { GridPattern } from '@/components/GridPattern'
 import { PageIntro } from '@/components/PageIntro'
+import { Badge } from '@/components/ui/badge'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
+
+const articles = await loadArticles()
 
 export const metadata = {
   title: 'Blog',
