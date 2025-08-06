@@ -14,57 +14,43 @@ import { PageIntro } from '@/components/PageIntro'
 import { formatDate } from '@/lib/formatDate'
 
 function Post({ article }) {
-  const isGradient = article.author.color?.startsWith('linear-gradient')
-  const imageStyle = isGradient
-    ? { background: article.author.color }
-    : { backgroundColor: article.author.color }
-  const textStyle = isGradient
-    ? {
-        background: article.author.color,
-        WebkitBackgroundClip: 'text',
-        color: 'transparent',
-      }
-    : { color: article.author.color }
-
   return (
     <article>
       <Border className="pt-16">
-        <div className="relative lg:-mx-4 lg:flex lg:justify-end">
-          <div className="pt-10 lg:w-2/3 lg:flex-none lg:px-4 lg:pt-0">
-            <h2 className="font-display text-2xl font-semibold text-neutral-950">
-              <Link href={article.href}>{article.title}</Link>
-            </h2>
-            <dl className="lg:absolute lg:left-0 lg:top-0 lg:w-1/3 lg:px-4">
-              <dt className="sr-only">Published</dt>
-              <dd className="absolute left-0 top-0 text-sm text-neutral-950 lg:static">
-                <time dateTime={article.date}>{formatDate(article.date)}</time>
-              </dd>
-              <dt className="sr-only">Author</dt>
-              <dd className="mt-6 flex gap-x-4">
-                <div className="flex-none rounded-xl p-0.5" style={imageStyle}>
-                  <Image
-                    alt={article.author.name}
-                    {...article.author.image}
-                    className="h-12 w-12 rounded-lg object-cover"
-                  />
-                </div>
-                <div className="text-sm" style={textStyle}>
-                  <div className="font-semibold">{article.author.name}</div>
-                  <div>{article.author.role}</div>
-                </div>
-              </dd>
-            </dl>
-            <p className="mt-6 max-w-2xl text-base text-neutral-600">
-              {article.description}
-            </p>
-            <Button
-              href={article.href}
-              aria-label={`Read more: ${article.title}`}
-              className="mt-8"
-            >
-              Read more
-            </Button>
-          </div>
+        <div className="pt-10">
+          <h2 className="font-display text-2xl font-semibold text-neutral-950">
+            <Link href={article.href}>{article.title}</Link>
+          </h2>
+          <dl>
+            <dt className="sr-only">Published</dt>
+            <dd className="text-sm text-neutral-950">
+              <time dateTime={article.date}>{formatDate(article.date)}</time>
+            </dd>
+            <dt className="sr-only">Author</dt>
+            <dd className="mt-6 flex gap-x-4">
+              <div className="flex-none">
+                <Image
+                  alt={article.author.name}
+                  {...article.author.image}
+                  className="h-12 w-12 rounded-lg object-cover"
+                />
+              </div>
+              <div className="text-sm">
+                <div className="font-semibold">{article.author.name}</div>
+                <div>{article.author.role}</div>
+              </div>
+            </dd>
+          </dl>
+          <p className="mt-6 max-w-2xl text-base text-neutral-600">
+            {article.description}
+          </p>
+          <Button
+            href={article.href}
+            aria-label={`Read more: ${article.title}`}
+            className="mt-8"
+          >
+            Read more
+          </Button>
         </div>
       </Border>
     </article>
@@ -95,6 +81,26 @@ export default function BlogClient({ articles }) {
         </p>
       </PageIntro>
 
+      <Container className="relative mt-24 sm:mt-32 lg:mt-40">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <input
+            type="text"
+            placeholder="Search posts"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full flex-1 rounded-md border border-neutral-300 px-3 py-2"
+          />
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="rounded-md border border-neutral-300 px-3 py-2"
+          >
+            <option value="desc">Newest</option>
+            <option value="asc">Oldest</option>
+          </select>
+        </div>
+      </Container>
+
       {latest && (
         <Container className="relative mt-24 sm:mt-32 lg:mt-40">
           <GridPattern
@@ -118,23 +124,6 @@ export default function BlogClient({ articles }) {
           }
           yOffset={-128}
         />
-        <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <input
-            type="text"
-            placeholder="Search posts"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full flex-1 rounded-md border border-neutral-300 px-3 py-2"
-          />
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="rounded-md border border-neutral-300 px-3 py-2"
-          >
-            <option value="desc">Newest</option>
-            <option value="asc">Oldest</option>
-          </select>
-        </div>
         <FadeInStagger className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
           {rest.map((article) => (
             <FadeIn key={article.href}>

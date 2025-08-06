@@ -2,7 +2,7 @@ export function formatDate(dateString) {
   let parts = dateString.split('-')
   let hasDay = parts.length > 2
 
-  return new Date(`${dateString}Z`).toLocaleDateString('en-US', {
+  return new Date(`${dateString}T00:00:00Z`).toLocaleDateString('en-US', {
     day: hasDay ? 'numeric' : undefined,
     month: 'long',
     year: 'numeric',
