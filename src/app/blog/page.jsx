@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -11,6 +14,8 @@ import { Badge } from '@/components/ui/badge'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
 
+const articles = await loadArticles()
+
 export const metadata = {
   title: 'Blog',
   description:
@@ -18,8 +23,19 @@ export const metadata = {
   alternates: { canonical: '/blog' },
 }
 
-export default async function Blog() {
-  let articles = await loadArticles()
+export default function Blog() {
+  const [search, setSearch] = useState('')
+  const [sortOrder, setSortOrder] = useState('desc')
+
+  let filteredArticles = [...articles]
+    .filter((article) =>
+      article.title.toLowerCase().includes(search.toLowerCase()),
+    )
+    .sort((a, b) =>
+      sortOrder === 'asc'
+        ? a.date.localeCompare(b.date)
+        : b.date.localeCompare(a.date),
+    )
 
   return (
     <>
@@ -30,8 +46,25 @@ export default async function Blog() {
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">
+        <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <input
+            type="text"
+            placeholder="Search posts"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full flex-1 rounded-md border border-neutral-300 px-3 py-2"
+          />
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="rounded-md border border-neutral-300 px-3 py-2"
+          >
+            <option value="desc">Newest</option>
+            <option value="asc">Oldest</option>
+          </select>
+        </div>
         <div className="space-y-24 lg:space-y-32">
-          {articles.map((article) => (
+          {filteredArticles.map((article) => (
             <FadeIn key={article.href}>
               <article>
                 <Border className="pt-16">
