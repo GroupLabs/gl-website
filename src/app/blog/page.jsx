@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -19,6 +22,18 @@ export const metadata = {
 }
 
 function Post({ article }) {
+  const isGradient = article.author.color?.startsWith('linear-gradient')
+  const imageStyle = isGradient
+    ? { background: article.author.color }
+    : { backgroundColor: article.author.color }
+  const textStyle = isGradient
+    ? {
+        background: article.author.color,
+        WebkitBackgroundClip: 'text',
+        color: 'transparent',
+      }
+    : { color: article.author.color }
+
   return (
     <article>
       <Border className="pt-16">
@@ -34,14 +49,14 @@ function Post({ article }) {
               </dd>
               <dt className="sr-only">Author</dt>
               <dd className="mt-6 flex gap-x-4">
-                <div className="flex-none overflow-hidden rounded-xl bg-neutral-100">
+                <div className="flex-none rounded-xl p-0.5" style={imageStyle}>
                   <Image
                     alt={article.author.name}
                     {...article.author.image}
-                    className="h-12 w-12 object-cover grayscale"
+                    className="h-12 w-12 rounded-lg object-cover"
                   />
                 </div>
-                <div className="text-sm text-neutral-950">
+                <div className="text-sm" style={textStyle}>
                   <div className="font-semibold">{article.author.name}</div>
                   <div>{article.author.role}</div>
                 </div>
@@ -64,9 +79,23 @@ function Post({ article }) {
   )
 }
 
-export default async function Blog() {
-  let articles = await loadArticles()
-  let [latest, ...rest] = articles
+const articles = await loadArticles()
+
+export default function Blog() {
+  const [search, setSearch] = useState('')
+  const [sortOrder, setSortOrder] = useState('desc')
+
+  let filteredArticles = [...articles]
+    .filter((article) =>
+      article.title.toLowerCase().includes(search.toLowerCase()),
+    )
+    .sort((a, b) =>
+      sortOrder === 'asc'
+        ? a.date.localeCompare(b.date)
+        : b.date.localeCompare(a.date),
+    )
+
+  let [latest, ...rest] = filteredArticles
 
   return (
     <>
@@ -76,21 +105,46 @@ export default async function Blog() {
         </p>
       </PageIntro>
 
-      <Container className="relative mt-24 sm:mt-32 lg:mt-40">
-        <GridPattern
-          className="absolute inset-x-0 top-0 -z-10 h-full w-full fill-neutral-100 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white,transparent)] sm:top-8"
-          yOffset={-96}
-        />
-        <FadeIn>
-          <Post article={latest} />
-        </FadeIn>
-      </Container>
+      {latest && (
+        <Container className="relative mt-24 sm:mt-32 lg:mt-40">
+          <GridPattern
+            className={
+              "absolute inset-x-0 top-0 -z-10 h-full w-full fill-neutral-100 stroke-neutral-950/5 " +
+              "[mask-image:linear-gradient(to_bottom_left,white,transparent)] sm:top-8"
+            }
+            yOffset={-96}
+          />
+          <FadeIn>
+            <Post article={latest} />
+          </FadeIn>
+        </Container>
+      )}
 
       <Container className="relative mt-24 sm:mt-32 lg:mt-40">
         <GridPattern
-          className="absolute inset-0 -z-10 h-full w-full fill-neutral-100 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white_50%,transparent_70%)] sm:top-16"
+          className={
+            "absolute inset-0 -z-10 h-full w-full fill-neutral-100 stroke-neutral-950/5 " +
+            "[mask-image:linear-gradient(to_bottom_left,white_50%,transparent_70%)] sm:top-16"
+          }
           yOffset={-128}
         />
+        <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <input
+            type="text"
+            placeholder="Search posts"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full flex-1 rounded-md border border-neutral-300 px-3 py-2"
+          />
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="rounded-md border border-neutral-300 px-3 py-2"
+          >
+            <option value="desc">Newest</option>
+            <option value="asc">Oldest</option>
+          </select>
+        </div>
         <FadeInStagger className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
           {rest.map((article) => (
             <FadeIn key={article.href}>
@@ -104,3 +158,4 @@ export default async function Blog() {
     </>
   )
 }
+
