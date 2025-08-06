@@ -7,6 +7,7 @@ import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
+import { Badge } from '@/components/ui/badge'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
 
@@ -66,6 +67,13 @@ export default async function Blog() {
                       <p className="mt-6 max-w-2xl text-base text-neutral-600">
                         {article.description}
                       </p>
+                      {article.tags?.length > 0 && (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {article.tags.map((tag) => (
+                            <Badge key={tag}>{tag}</Badge>
+                          ))}
+                        </div>
+                      )}
                       <Button
                         href={article.href}
                         aria-label={`Read more: ${article.title}`}

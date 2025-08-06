@@ -19,8 +19,9 @@ async function loadEntries(directory, metaName) {
   ).sort((a, b) => b.date.localeCompare(a.date))
 }
 
-export function loadArticles() {
-  return loadEntries('blog', 'article')
+export async function loadArticles() {
+  let articles = await loadEntries('blog', 'article')
+  return articles.map((article) => ({ ...article, tags: article.tags || [] }))
 }
 
 export function loadCaseStudies() {
