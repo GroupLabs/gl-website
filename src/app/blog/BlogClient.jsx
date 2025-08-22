@@ -61,9 +61,13 @@ export default function BlogClient({ articles }) {
   const [search, setSearch] = useState('')
   const [sortOrder, setSortOrder] = useState('desc')
 
+  const normalizedSearch = search.trim().toLowerCase()
+
   let filteredArticles = [...articles]
     .filter((article) =>
-      article.title.toLowerCase().includes(search.toLowerCase()),
+      normalizedSearch
+        ? article.title.toLowerCase().includes(normalizedSearch)
+        : true,
     )
     .sort((a, b) =>
       sortOrder === 'asc'
@@ -84,7 +88,7 @@ export default function BlogClient({ articles }) {
       <Container className="relative mt-24 sm:mt-32 lg:mt-40">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <input
-            type="text"
+            type="search"
             placeholder="Search posts"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
