@@ -15,7 +15,7 @@ export default async function BlogArticleWrapper({ article, children }) {
 
   return (
     <>
-      <Container as="article" className="mt-24 sm:mt-32 lg:mt-40">
+      <Container as="article" className="mt-12 sm:mt-16 lg:mt-20">
         <FadeIn>
           <header className="mx-auto flex max-w-5xl flex-col text-center">
             <h1 className="mt-6 font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl">
@@ -34,7 +34,7 @@ export default async function BlogArticleWrapper({ article, children }) {
         </FadeIn>
 
         <FadeIn>
-          <MDXComponents.wrapper className="mt-24 sm:mt-32 lg:mt-40">
+          <MDXComponents.wrapper className="mt-12 sm:mt-16 lg:mt-20">
             {children}
           </MDXComponents.wrapper>
         </FadeIn>
