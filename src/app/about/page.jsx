@@ -141,10 +141,10 @@ export default async function About() {
         </p>
         <div className="mt-10 max-w-2xl space-y-6 text-base">
           <p>
-            Studio was started by two friends who noticed that machine learning
-            is still not accessible to everyone. Since the beginning, we have
-            been committed to doing things differently by building tools, and
-            expert networks to support the community.
+            GroupLabs was started by two friends who noticed that machine
+            learning is still not accessible to everyone. Since the beginning,
+            we have been committed to doing things differently by building
+            tools, and expert networks to support the community.
           </p>
         </div>
       </PageIntro>
