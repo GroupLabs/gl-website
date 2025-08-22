@@ -79,13 +79,13 @@ export default function BlogClient({ articles }) {
 
   return (
     <>
-      <PageIntro eyebrow="Blog" title="What we're learning">
+      <PageIntro eyebrow="Blog" title="What we're learning" compact>
         <p>
           Stay up-to-date with our latest insights in computational research.
         </p>
       </PageIntro>
 
-      <Container className="relative mt-24 sm:mt-32 lg:mt-40">
+      <Container className="relative mt-8 sm:mt-12 lg:mt-16">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <input
             type="search"

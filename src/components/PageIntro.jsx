@@ -3,10 +3,19 @@ import clsx from 'clsx'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 
-export function PageIntro({ eyebrow, title, children, centered = false }) {
+export function PageIntro({
+  eyebrow,
+  title,
+  children,
+  centered = false,
+  compact = false,
+}) {
   return (
     <Container
-      className={clsx('mt-24 sm:mt-32 lg:mt-40', centered && 'text-center')}
+      className={clsx(
+        compact ? 'mt-12 sm:mt-16 lg:mt-20' : 'mt-24 sm:mt-32 lg:mt-40',
+        centered && 'text-center',
+      )}
     >
       <FadeIn>
         <h1>
