@@ -97,7 +97,7 @@ export default function BlogClient({ articles }) {
   const [search, setSearch] = useState('')
   const [sortOrder, setSortOrder] = useState('desc')
   const [tagOpen, setTagOpen] = useState(false)
-  const [selectedTag, setSelectedTag] = useState('')
+  const [selectedTags, setSelectedTags] = useState([])
 
   const tags = Array.from(new Set(articles.flatMap((a) => a.tags ?? [])))
 
@@ -110,7 +110,9 @@ export default function BlogClient({ articles }) {
         : true,
     )
     .filter((article) =>
-      selectedTag ? article.tags?.includes(selectedTag) : true,
+      selectedTags.length > 0
+        ? selectedTags.some((tag) => article.tags?.includes(tag))
+        : true,
     )
     .sort((a, b) =>
       sortOrder === 'asc'
@@ -135,7 +137,7 @@ export default function BlogClient({ articles }) {
             placeholder="Search posts"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full flex-1 rounded-md border border-neutral-300 px-3 py-2"
+            className="w-full flex-1 rounded-md border border-neutral-300 px-3 py-2 sm:min-w-[300px]"
           />
           {tags.length > 0 && (
             <Popover open={tagOpen} onOpenChange={setTagOpen}>
@@ -144,13 +146,15 @@ export default function BlogClient({ articles }) {
                   variant="outline"
                   role="combobox"
                   aria-expanded={tagOpen}
-                  className="w-[200px] justify-between"
+                  className="w-40 justify-between"
                 >
-                  {selectedTag || 'Filter by tag'}
+                  {selectedTags.length > 0
+                    ? selectedTags.join(', ')
+                    : 'Filter by tag'}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </UiButton>
               </PopoverTrigger>
-              <PopoverContent className="w-[200px] p-0">
+              <PopoverContent className="w-40 p-0">
                 <Command>
                   <CommandInput placeholder="Search tag..." />
                   <CommandList>
@@ -161,16 +165,17 @@ export default function BlogClient({ articles }) {
                           key={tag}
                           value={tag}
                           onSelect={(currentValue) => {
-                            setSelectedTag(
-                              currentValue === selectedTag ? '' : currentValue,
+                            setSelectedTags((prev) =>
+                              prev.includes(currentValue)
+                                ? prev.filter((t) => t !== currentValue)
+                                : [...prev, currentValue],
                             )
-                            setTagOpen(false)
                           }}
                         >
                           <Check
                             className={clsx(
                               'mr-2 h-4 w-4',
-                              selectedTag === tag
+                              selectedTags.includes(tag)
                                 ? 'opacity-100'
                                 : 'opacity-0',
                             )}
@@ -185,7 +190,7 @@ export default function BlogClient({ articles }) {
             </Popover>
           )}
           <Select value={sortOrder} onValueChange={setSortOrder}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-32">
               <SelectValue placeholder="Sort" />
             </SelectTrigger>
             <SelectContent>
