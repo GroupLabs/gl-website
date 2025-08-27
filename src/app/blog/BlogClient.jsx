@@ -12,6 +12,7 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { GridPattern } from '@/components/GridPattern'
 import { PageIntro } from '@/components/PageIntro'
 import { formatDate } from '@/lib/formatDate'
+import { Badge } from '@/components/ui/badge'
 
 function Post({ article }) {
   return (
@@ -40,6 +41,22 @@ function Post({ article }) {
                 <div>{article.author.role}</div>
               </div>
             </dd>
+            {article.tags.length > 0 && (
+              <>
+                <dt className="sr-only">Tags</dt>
+                <dd className="mt-4 flex flex-wrap gap-2">
+                  {article.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="secondary"
+                      className="text-neutral-600"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </dd>
+              </>
+            )}
           </dl>
           <p className="mt-6 max-w-2xl text-base text-neutral-600">
             {article.description}

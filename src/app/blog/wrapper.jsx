@@ -6,6 +6,7 @@ import { PageLinks } from '@/components/PageLinks'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
 import 'katex/dist/katex.min.css'
+import { Badge } from '@/components/ui/badge'
 
 export default async function BlogArticleWrapper({ article, children }) {
   let allArticles = await loadArticles()
@@ -30,6 +31,19 @@ export default async function BlogArticleWrapper({ article, children }) {
             <p className="mt-6 text-sm font-semibold text-neutral-950">
               by {article.author.name}, {article.author.role}
             </p>
+            {article.tags.length > 0 && (
+              <div className="mt-4 flex flex-wrap justify-center gap-2">
+                {article.tags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="secondary"
+                    className="text-neutral-600"
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            )}
           </header>
         </FadeIn>
 
