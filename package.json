@@ -36,13 +36,13 @@
     "remark-unwrap-images": "^3.0.1",
     "shiki": "^0.11.1",
     "tailwindcss": "^3.3.2",
-    "unified-conditional": "0.0.2"
+    "unified-conditional": "0.0.2",
+    "sharp": "^0.32.0"
   },
   "devDependencies": {
     "eslint": "8.26.0",
     "eslint-config-next": "13.4.16",
     "prettier": "^3.0.1",
-    "prettier-plugin-tailwindcss": "^0.5.2",
-    "sharp": "^0.32.0"
+    "prettier-plugin-tailwindcss": "^0.5.2"
   }
 }
