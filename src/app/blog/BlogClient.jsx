@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'
@@ -13,6 +14,24 @@ import { GridPattern } from '@/components/GridPattern'
 import { PageIntro } from '@/components/PageIntro'
 import { formatDate } from '@/lib/formatDate'
 import { Badge } from '@/components/ui/badge'
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select'
+import { Button as UiButton } from '@/components/ui/button'
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from '@/components/ui/command'
+import { Check, ChevronsUpDown } from 'lucide-react'
 
 function Post({ article }) {
   return (
@@ -77,6 +96,10 @@ function Post({ article }) {
 export default function BlogClient({ articles }) {
   const [search, setSearch] = useState('')
   const [sortOrder, setSortOrder] = useState('desc')
+  const [tagOpen, setTagOpen] = useState(false)
+  const [selectedTag, setSelectedTag] = useState('')
+
+  const tags = Array.from(new Set(articles.flatMap((a) => a.tags ?? [])))
 
   const normalizedSearch = search.trim().toLowerCase()
 
@@ -85,6 +108,9 @@ export default function BlogClient({ articles }) {
       normalizedSearch
         ? article.title.toLowerCase().includes(normalizedSearch)
         : true,
+    )
+    .filter((article) =>
+      selectedTag ? article.tags?.includes(selectedTag) : true,
     )
     .sort((a, b) =>
       sortOrder === 'asc'
@@ -111,14 +137,62 @@ export default function BlogClient({ articles }) {
             onChange={(e) => setSearch(e.target.value)}
             className="w-full flex-1 rounded-md border border-neutral-300 px-3 py-2"
           />
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="rounded-md border border-neutral-300 px-3 py-2"
-          >
-            <option value="desc">Newest</option>
-            <option value="asc">Oldest</option>
-          </select>
+          {tags.length > 0 && (
+            <Popover open={tagOpen} onOpenChange={setTagOpen}>
+              <PopoverTrigger asChild>
+                <UiButton
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={tagOpen}
+                  className="w-[200px] justify-between"
+                >
+                  {selectedTag || 'Filter by tag'}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </UiButton>
+              </PopoverTrigger>
+              <PopoverContent className="w-[200px] p-0">
+                <Command>
+                  <CommandInput placeholder="Search tag..." />
+                  <CommandList>
+                    <CommandEmpty>No tag found.</CommandEmpty>
+                    <CommandGroup>
+                      {tags.map((tag) => (
+                        <CommandItem
+                          key={tag}
+                          value={tag}
+                          onSelect={(currentValue) => {
+                            setSelectedTag(
+                              currentValue === selectedTag ? '' : currentValue,
+                            )
+                            setTagOpen(false)
+                          }}
+                        >
+                          <Check
+                            className={clsx(
+                              'mr-2 h-4 w-4',
+                              selectedTag === tag
+                                ? 'opacity-100'
+                                : 'opacity-0',
+                            )}
+                          />
+                          {tag}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+          )}
+          <Select value={sortOrder} onValueChange={setSortOrder}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Sort" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="desc">Newest</SelectItem>
+              <SelectItem value="asc">Oldest</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </Container>
 
