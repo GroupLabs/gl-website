@@ -31,7 +31,7 @@ export default async function BlogArticleWrapper({ article, children }) {
             <p className="mt-6 text-sm font-semibold text-neutral-950">
               by {article.author.name}, {article.author.role}
             </p>
-            {article.tags.length > 0 && (
+            {article.tags?.length > 0 && (
               <div className="mt-4 flex flex-wrap justify-center gap-2">
                 {article.tags.map((tag) => (
                   <Badge
