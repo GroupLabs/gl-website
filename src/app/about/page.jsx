@@ -10,7 +10,7 @@ import { PageLinks } from '@/components/PageLinks'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StatList, StatListItem } from '@/components/StatList'
 import imageEugenePaulia from '@/images/team/eugene-paulia.jpg'
-import imageNoelThomas from '@/images/team/noel-thomas.png'
+import imageNoelThomas from '@/images/team/noel-thomas.jpg'
 import imageSamMoses from '@/images/team/sam-moses.png'
 import { loadArticles } from '@/lib/mdx'
 
