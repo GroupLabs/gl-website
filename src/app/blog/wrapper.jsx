@@ -33,7 +33,7 @@ export default async function BlogArticleWrapper({ article, children }) {
             </p>
             {article.tags?.length > 0 && (
               <div className="mt-4 flex flex-wrap justify-center gap-2">
-                {article.tags.map((tag) => (
+                {article.tags?.map((tag) => (
                   <Badge
                     key={tag}
                     variant="secondary"

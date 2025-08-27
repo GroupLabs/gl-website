@@ -41,11 +41,11 @@ function Post({ article }) {
                 <div>{article.author.role}</div>
               </div>
             </dd>
-            {article.tags.length > 0 && (
+            {article.tags?.length > 0 && (
               <>
                 <dt className="sr-only">Tags</dt>
                 <dd className="mt-4 flex flex-wrap gap-2">
-                  {article.tags.map((tag) => (
+                  {article.tags?.map((tag) => (
                     <Badge
                       key={tag}
                       variant="secondary"
