@@ -51,17 +51,17 @@ const team = [
       {
         name: 'Eugene Paulia',
         role: 'Founder',
-        image: { src: imageEugenePaulia },
+        image: imageEugenePaulia,
       },
       {
         name: 'Noel Thomas',
         role: 'Founder',
-        image: { src: imageNoelThomas },
+        image: imageNoelThomas,
       },
       {
         name: 'Sam Moses',
         role: 'Intern',
-        image: { src: imageSamMoses },
+        image: imageSamMoses,
       },
     ],
   },
