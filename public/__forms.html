@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Netlify Forms</title>
+  </head>
+  <body>
+    <!-- This file is required for Netlify Forms to work with Next.js -->
+    <!-- It will not be visible to users -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="message" />
+    </form>
+  </body>
+</html>

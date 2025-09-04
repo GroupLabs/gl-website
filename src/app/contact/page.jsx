@@ -1,3 +1,5 @@
+'use client'
+
 import { useId } from 'react'
 import Link from 'next/link'
 
@@ -45,15 +47,31 @@ function RadioInput({ label, ...props }) {
 }
 
 function ContactForm() {
+  const handleFormSubmit = async (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    
+    try {
+      await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      })
+      
+      // Redirect to thank you page on success
+      window.location.href = "/thank-you"
+    } catch (error) {
+      console.error("Form submission error:", error)
+      alert("There was an error submitting the form. Please try again.")
+    }
+  }
+
   return (
     <FadeIn className="lg:order-last">
       <form
         className="max-w-lg"
         name="contact"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        action="/thank-you"
+        onSubmit={handleFormSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
 
