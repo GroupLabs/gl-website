@@ -9,9 +9,6 @@ import { PageIntro } from '@/components/PageIntro'
 import { PageLinks } from '@/components/PageLinks'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StatList, StatListItem } from '@/components/StatList'
-import imageEugenePaulia from '@/images/team/eugene-paulia.jpg'
-import imageNoelThomas from '@/images/team/noel-thomas.jpg'
-import imageSamMoses from '@/images/team/sam-moses.png'
 import { loadArticles } from '@/lib/mdx'
 
 function Culture() {
@@ -51,17 +48,17 @@ const team = [
       {
         name: 'Eugene Paulia',
         role: 'Founder',
-        image: imageEugenePaulia,
+        image: '/images/team/eugene-paulia.jpg',
       },
       {
         name: 'Noel Thomas',
         role: 'Founder',
-        image: imageNoelThomas,
+        image: '/images/team/noel-thomas.jpg',
       },
       {
         name: 'Sam Moses',
         role: 'Intern',
-        image: imageSamMoses,
+        image: '/images/team/sam-moses.png',
       },
     ],
   },
@@ -88,11 +85,13 @@ function Team() {
                   {group.people.map((person) => (
                     <li key={person.name}>
                       <FadeIn>
-                        <div className="group relative overflow-hidden rounded-3xl bg-neutral-100">
+                        <div className="group relative h-96 overflow-hidden rounded-3xl bg-neutral-100">
                           <Image
                             alt={person.name}
-                            {...person.image}
-                            className="h-96 w-full object-cover grayscale transition duration-500 motion-safe:group-hover:scale-105"
+                            src={person.image}
+                            fill
+                            sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 100vw"
+                            className="object-cover grayscale transition duration-500 motion-safe:group-hover:scale-105"
                           />
                           <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black to-black/0 to-40% p-6">
                             <p className="font-display text-base/6 font-semibold tracking-wide text-white">
