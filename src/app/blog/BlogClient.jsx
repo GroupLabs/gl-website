@@ -51,7 +51,9 @@ function Post({ article }) {
               <div className="flex-none">
                 <Image
                   alt={article.author.name}
-                  {...article.author.image}
+                  src={article.author.image}
+                  width={48}
+                  height={48}
                   className="h-12 w-12 rounded-lg object-cover"
                 />
               </div>
