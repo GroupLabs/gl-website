@@ -22,16 +22,6 @@ import {
   SelectItem,
 } from '@/components/ui/select'
 import { Button as UiButton } from '@/components/ui/button'
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
-import {
-  Command,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-} from '@/components/ui/command'
-import { Check, ChevronsUpDown } from 'lucide-react'
 
 function Post({ article }) {
   return (
@@ -98,10 +88,6 @@ function Post({ article }) {
 export default function BlogClient({ articles }) {
   const [search, setSearch] = useState('')
   const [sortOrder, setSortOrder] = useState('desc')
-  const [tagOpen, setTagOpen] = useState(false)
-  const [selectedTags, setSelectedTags] = useState([])
-
-  const tags = Array.from(new Set(articles.flatMap((a) => a.tags ?? [])))
 
   const normalizedSearch = search.trim().toLowerCase()
 
@@ -109,11 +95,6 @@ export default function BlogClient({ articles }) {
     .filter((article) =>
       normalizedSearch
         ? article.title.toLowerCase().includes(normalizedSearch)
-        : true,
-    )
-    .filter((article) =>
-      selectedTags.length > 0
-        ? selectedTags.some((tag) => article.tags?.includes(tag))
         : true,
     )
     .sort((a, b) =>
@@ -134,72 +115,39 @@ export default function BlogClient({ articles }) {
 
       <Container className="relative mt-8 sm:mt-12 lg:mt-16">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          {/* Search Bar - grows to fill available space */}
           <input
             type="search"
-            placeholder="Search posts"
+            placeholder="Search articles..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full flex-1 rounded-md border border-neutral-300 px-3 py-2 sm:min-w-[300px]"
+            className="flex-1 rounded-lg border border-neutral-300 bg-white px-4 py-2.5 text-sm placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-1 focus:ring-neutral-950"
           />
-          {tags.length > 0 && (
-            <Popover open={tagOpen} onOpenChange={setTagOpen}>
-              <PopoverTrigger asChild>
-                <UiButton
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={tagOpen}
-                  className="w-40 justify-between"
-                >
-                  {selectedTags.length > 0
-                    ? selectedTags.join(', ')
-                    : 'Filter by tag'}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </UiButton>
-              </PopoverTrigger>
-              <PopoverContent className="w-40 p-0">
-                <Command>
-                  <CommandInput placeholder="Search tag..." />
-                  <CommandList>
-                    <CommandEmpty>No tag found.</CommandEmpty>
-                    <CommandGroup>
-                      {tags.map((tag) => (
-                        <CommandItem
-                          key={tag}
-                          value={tag}
-                          onSelect={(currentValue) => {
-                            setSelectedTags((prev) =>
-                              prev.includes(currentValue)
-                                ? prev.filter((t) => t !== currentValue)
-                                : [...prev, currentValue],
-                            )
-                          }}
-                        >
-                          <Check
-                            className={clsx(
-                              'mr-2 h-4 w-4',
-                              selectedTags.includes(tag)
-                                ? 'opacity-100'
-                                : 'opacity-0',
-                            )}
-                          />
-                          {tag}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
+
+          {/* Sort Control */}
+          <div className="flex flex-shrink-0 items-center gap-3">
+            {/* Sort Dropdown */}
+            <Select value={sortOrder} onValueChange={setSortOrder}>
+              <SelectTrigger className="w-[140px] rounded-lg border-neutral-300 bg-white text-sm font-medium text-neutral-700 hover:bg-neutral-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent align="end">
+                <SelectItem value="desc">Newest first</SelectItem>
+                <SelectItem value="asc">Oldest first</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* Results Count */}
+        <div className="mt-4 text-sm text-neutral-600">
+          {filteredArticles.length === 0 ? (
+            <span>No articles found</span>
+          ) : (
+            <span>
+              Showing {filteredArticles.length} {filteredArticles.length === 1 ? 'article' : 'articles'}
+            </span>
           )}
-          <Select value={sortOrder} onValueChange={setSortOrder}>
-            <SelectTrigger className="w-32">
-              <SelectValue placeholder="Sort" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="desc">Newest</SelectItem>
-              <SelectItem value="asc">Oldest</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
       </Container>
 
