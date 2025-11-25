@@ -136,7 +136,7 @@ export default async function Work() {
       <CaseStudies caseStudies={caseStudies} />
 
       <Testimonial className="mt-24 sm:mt-32 lg:mt-40">
-        We approached GroupLabs because we loved their work. They delivered
+        We approached GroupLabs because we loved their work. They delivered in
         record time.
       </Testimonial>
 

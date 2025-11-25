@@ -1,0 +1,43 @@
+import logo from '@/images/clients/orthofoodie/orthofoodie-logo.png'
+import imageHero from './hero.png'
+
+export const caseStudy = {
+  client: 'OrthoFoodie',
+  title: 'Food Detection & Nutrition Prediction',
+  description:
+    'ML models for detecting foods and predicting calories and nutrients from images.',
+  summary: [
+    'We partnered with OrthoFoodie to build machine learning models that detect foods and predict nutritional content from single images.'
+  ],
+  logo,
+  image: { ...imageHero, alt: 'OrthoFoodie food detection' },
+  date: '2025-09',
+  service: 'Machine Learning',
+}
+
+export const metadata = {
+  title: `${caseStudy.client} Case Study`,
+  description: caseStudy.description,
+  alternates: { canonical: '/work/orthofoodie' },
+}
+
+## Overview
+
+We're helping [OrthoFoodie](https://orthofoodie.app/) build ML models that detect foods and predict calories, nutrients, and other nutritional information from single images.
+
+Our current model achieves **36% PMAE on nutrition5k** — a strong result for single image monocular estimation. On warm GPUs with just an A100-40GB, inference takes approximately **0.5 seconds**.
+
+More on how we're building this soon.
+
+## What we did
+
+<TagList>
+  <TagListItem>Computer Vision</TagListItem>
+  <TagListItem>Machine Learning</TagListItem>
+  <TagListItem>Nutrition Prediction</TagListItem>
+</TagList>
+
+<StatList>
+  <StatListItem value="36%" label="PMAE on nutrition5k" />
+  <StatListItem value="0.5s" label="Inference time (A100)" />
+</StatList>

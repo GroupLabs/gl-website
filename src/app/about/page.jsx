@@ -165,7 +165,7 @@ export default async function About() {
       <PageLinks
         className="mt-24 sm:mt-32 lg:mt-40"
         title="From the blog"
-        intro="Our team of loves to share what they learn. We want to do our part to make the world a better place."
+        intro="Our team loves to share what they learn. We want to do our part to make the world a better place."
         pages={blogArticles}
       />
 

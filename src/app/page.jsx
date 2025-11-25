@@ -65,6 +65,49 @@ function Products() {
                 <div className="text-left">
                   <div className="flex items-center">
                     <span className="block font-mono text-lg font-bold tracking-wider text-white">
+                      Norma
+                    </span>
+                    <a
+                      href="https://norma.grouplabs.ca"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-1 text-neutral-400 hover:text-neutral-200"
+                      aria-label="Norma product page (opens in new tab)"
+                    >
+                      <svg
+                        width="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M20 14a1 1 0 0 0-1 1v3.077c0 .459-.022.57-.082.684a.363.363 0 0 1-.157.157c-.113.06-.225.082-.684.082H5.923c-.459 0-.571-.022-.684-.082a.363.363 0 0 1-.157-.157c-.06-.113-.082-.225-.082-.684L4.999 5.5a.5.5 0 0 1 .5-.5l3.5.005a1 1 0 1 0 .002-2L5.501 3a2.5 2.5 0 0 0-2.502 2.5v12.577c0 .76.083 1.185.32 1.627.223.419.558.753.977.977.442.237.866.319 1.627.319h12.154c.76 0 1.185-.082 1.627-.319.419-.224.753-.558.977-.977.237-.442.319-.866.319-1.627V15a1 1 0 0 0-1-1zm-2-9.055v-.291l-.39.09A10 10 0 0 1 15.36 5H14a1 1 0 1 1 0-2l5.5.003a1.5 1.5 0 0 1 1.5 1.5V10a1 1 0 1 1-2 0V8.639c0-.757.086-1.511.256-2.249l.09-.39h-.295a10 10 0 0 1-1.411 1.775l-5.933 5.932a1 1 0 0 1-1.414-1.414l5.944-5.944A10 10 0 0 1 18 4.945z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </a>
+                    <span
+                      className={`ml-2 inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-green-400/20`}
+                    >
+                      v1.0
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm text-neutral-400">
+                    Turn raw warehouse tables into clean, leakage-safe datasets.
+                    No more manual feature engineering, unclear join paths, or
+                    guessing which tables matter.
+                  </p>
+                </div>
+              </FadeIn>
+            </li>
+
+            <li>
+              <FadeIn>
+                <div className="text-left">
+                  <div className="flex items-center">
+                    <span className="block font-mono text-lg font-bold tracking-wider text-white">
                       Bridge
                     </span>
                     <a
@@ -120,28 +163,6 @@ function Products() {
                   Integrate various compute backends for federated paradigms.
                   Designed especially for tensor operations and integrates into
                   frameworks like PyTorch, GGML, and TinyGrad.
-                </p>
-              </div>
-              </FadeIn>
-            </li>
-
-            <li>
-              <FadeIn>
-                <div className="text-left">
-                  <div className="flex items-baseline">
-                    <span className="block font-mono text-lg font-bold tracking-wider text-white">
-                      Tell [WIP]
-                    </span>
-                    <span
-                    className={`ml-2 inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-400/20`}
-                  >
-                    v0.3.14
-                  </span>
-                </div>
-                <p className="mt-2 text-sm text-neutral-400">
-                  Bring Large Language Models into production grade
-                  applications. Handles provider management, prompt
-                  optimization, adaptive model selection, and so forth.
                 </p>
               </div>
               </FadeIn>
@@ -243,7 +264,7 @@ function Services() {
               and clear visualizations.
             </ListItem>
             <ListItem title="Deployment">
-              At the end of the day, we&apos;re practictioners with experience
+              At the end of the day, we&apos;re practitioners with experience
               in deploying machine learning models into production, offering
               scalable and efficient solutions with various cloud platforms.
             </ListItem>
@@ -268,12 +289,19 @@ export default async function Home() {
     <>
       <Container className="mt-24 sm:mt-32 md:mt-56">
         <h1 className="font-display font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-5xl">
-          Clients Keep Coming Back
+          Every second counts.
         </h1>
         <p className="mt-6 text-xl text-neutral-600">
-          Every client we&apos;ve worked with has returned for more. Discover
-          why leading organizations trust our scientists and engineers to build
-          practical, research-driven machine learning solutions.
+          Fast and correct systems. Precise and verifiable results.
+        </p>
+        <p className="mt-8 text-sm text-neutral-500">
+          <span className="font-medium text-neutral-700">Microsoft for Startups</span>
+          {' • '}
+          <span className="font-medium text-neutral-700">OVH Startup Program</span>
+          {' • '}
+          <span className="font-medium text-neutral-700">McGill Dobson X-1</span>
+          {' • '}
+          <span className="font-medium text-neutral-700">IVADO Scientist in Residence</span>
         </p>
       </Container>
 

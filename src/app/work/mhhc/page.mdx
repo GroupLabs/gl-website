@@ -1,0 +1,36 @@
+import logo from '@/images/clients/mhhc/mhhc-logo.png'
+import imageHero from './hero.png'
+
+export const caseStudy = {
+  client: 'Migration Humanitarian Health Collective',
+  title: 'Low-Resource Language Translation',
+  description:
+    'Translation systems for low-resource languages with community-driven quality improvements.',
+  summary: [
+    'We partnered with MHHC to build translation tools for low-resource languages, with an online tuning system that empowers communities to improve quality over time.'
+  ],
+  logo,
+  image: { ...imageHero, alt: 'MHHC translation project' },
+  date: '2025-11',
+  service: 'Machine Learning',
+}
+
+export const metadata = {
+  title: `${caseStudy.client} Case Study`,
+  description: caseStudy.description,
+  alternates: { canonical: '/work/mhhc' },
+}
+
+## Overview
+
+We're working with the Migration Humanitarian Health Collective on translation systems for low-resource languages.
+
+The project includes an **online tuning system** that allows community members to make edits and corrections. This feedback loop improves translation quality for different groups over time, ensuring the system adapts to the specific needs of each community.
+
+## What we did
+
+<TagList>
+  <TagListItem>Natural Language Processing</TagListItem>
+  <TagListItem>Machine Translation</TagListItem>
+  <TagListItem>Community-Driven ML</TagListItem>
+</TagList>
