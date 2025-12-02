@@ -5,6 +5,7 @@ import { Button } from '@/components/Button'
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
+import { GridPattern } from '@/components/GridPattern'
 import { List, ListItem } from '@/components/List'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StylizedImage } from '@/components/StylizedImage'
@@ -27,7 +28,7 @@ function Clients() {
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <div className="rounded-4xl bg-neutral-950 p-8 sm:py-12">
         <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-          Our engineers have made an impact on the world
+          Trusted by engineering teams at
         </h2>
         <div className="h-px flex-auto bg-neutral-800" />
         <ul
@@ -46,127 +47,127 @@ function Clients() {
 }
 
 function Products() {
+  const externalLinkIcon = (
+    <svg
+      width="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M20 14a1 1 0 0 0-1 1v3.077c0 .459-.022.57-.082.684a.363.363 0 0 1-.157.157c-.113.06-.225.082-.684.082H5.923c-.459 0-.571-.022-.684-.082a.363.363 0 0 1-.157-.157c-.06-.113-.082-.225-.082-.684L4.999 5.5a.5.5 0 0 1 .5-.5l3.5.005a1 1 0 1 0 .002-2L5.501 3a2.5 2.5 0 0 0-2.502 2.5v12.577c0 .76.083 1.185.32 1.627.223.419.558.753.977.977.442.237.866.319 1.627.319h12.154c.76 0 1.185-.082 1.627-.319.419-.224.753-.558.977-.977.237-.442.319-.866.319-1.627V15a1 1 0 0 0-1-1zm-2-9.055v-.291l-.39.09A10 10 0 0 1 15.36 5H14a1 1 0 1 1 0-2l5.5.003a1.5 1.5 0 0 1 1.5 1.5V10a1 1 0 1 1-2 0V8.639c0-.757.086-1.511.256-2.249l.09-.39h-.295a10 10 0 0 1-1.411 1.775l-5.933 5.932a1 1 0 0 1-1.414-1.414l5.944-5.944A10 10 0 0 1 18 4.945z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+
+  const tools = [
+    {
+      name: 'Tell',
+      description:
+        'High-throughput LLM gateway with caching, routing, and observability. Production-ready serving infrastructure.',
+      version: 'v1.0',
+      status: 'released',
+    },
+    {
+      name: 'Atmos',
+      description:
+        'Multi-cloud orchestration for ML workloads. Seamlessly burst between on-prem and cloud GPU clusters.',
+      version: 'v0.9',
+      status: 'beta',
+    },
+    {
+      name: 'Tessera',
+      description:
+        'Secure, lightweight runtime for executing untrusted code in high-performance environments.',
+      version: 'v0.8',
+      status: 'beta',
+    },
+    {
+      name: 'Norma',
+      description:
+        'Automated feature engineering and data pipeline optimization for maximizing model performance.',
+      version: 'v1.0',
+      status: 'released',
+      link: 'https://norma.grouplabs.ca',
+    },
+    {
+      name: 'Bridge',
+      description:
+        'High-performance vector search. Sub-millisecond retrieval at scale with novel multi-modal algorithms.',
+      version: 'v1.4.14',
+      status: 'released',
+      link: 'https://bridgeproductpage.netlify.app/',
+    },
+    {
+      name: 'Mesh',
+      description:
+        'Distributed compute orchestration. Unified backend for PyTorch, GGML, and TinyGrad across heterogeneous hardware.',
+      version: 'v0.2.71',
+      status: 'wip',
+    },
+  ]
+
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <div className="rounded-4xl bg-neutral-950 p-8 sm:py-12">
-        <FadeIn className="flex items-center gap-x-8">
+        <FadeIn className="flex flex-col gap-y-4">
           <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-            We built a set of world class tools along the way
+            Internal tools born from production engineering
           </h2>
           <div className="h-px flex-auto bg-neutral-800" />
+          <p className="text-sm text-neutral-400">
+            These tools are born from real-world ML infrastructure challenges.
+            They reflect our depth in performance engineering, distributed
+            systems, and production ML.
+          </p>
         </FadeIn>
         <FadeInStagger faster>
           <ul
             role="list"
-            className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3"
+            className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"
           >
-            <li>
-              <FadeIn>
-                <div className="text-left">
-                  <div className="flex items-center">
-                    <span className="block font-mono text-lg font-bold tracking-wider text-white">
-                      Norma
-                    </span>
-                    <a
-                      href="https://norma.grouplabs.ca"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="ml-1 text-neutral-400 hover:text-neutral-200"
-                      aria-label="Norma product page (opens in new tab)"
-                    >
-                      <svg
-                        width="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+            {tools.map((tool) => (
+              <li key={tool.name}>
+                <FadeIn>
+                  <div className="text-left">
+                    <div className="flex items-center">
+                      <span className="block font-mono text-lg font-bold tracking-wider text-white">
+                        {tool.name}
+                        {tool.status === 'wip' ? ' [WIP]' : ''}
+                      </span>
+                      {tool.link && (
+                        <a
+                          href={tool.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-1 text-neutral-400 hover:text-neutral-200"
+                          aria-label={`${tool.name} product page (opens in new tab)`}
+                        >
+                          {externalLinkIcon}
+                        </a>
+                      )}
+                      <span
+                        className={`ml-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
+                          tool.status === 'released'
+                            ? 'bg-green-400/10 text-green-400 ring-green-400/20'
+                            : tool.status === 'beta'
+                            ? 'bg-blue-400/10 text-blue-400 ring-blue-400/20'
+                            : 'bg-yellow-400/10 text-yellow-400 ring-yellow-400/20'
+                        }`}
                       >
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M20 14a1 1 0 0 0-1 1v3.077c0 .459-.022.57-.082.684a.363.363 0 0 1-.157.157c-.113.06-.225.082-.684.082H5.923c-.459 0-.571-.022-.684-.082a.363.363 0 0 1-.157-.157c-.06-.113-.082-.225-.082-.684L4.999 5.5a.5.5 0 0 1 .5-.5l3.5.005a1 1 0 1 0 .002-2L5.501 3a2.5 2.5 0 0 0-2.502 2.5v12.577c0 .76.083 1.185.32 1.627.223.419.558.753.977.977.442.237.866.319 1.627.319h12.154c.76 0 1.185-.082 1.627-.319.419-.224.753-.558.977-.977.237-.442.319-.866.319-1.627V15a1 1 0 0 0-1-1zm-2-9.055v-.291l-.39.09A10 10 0 0 1 15.36 5H14a1 1 0 1 1 0-2l5.5.003a1.5 1.5 0 0 1 1.5 1.5V10a1 1 0 1 1-2 0V8.639c0-.757.086-1.511.256-2.249l.09-.39h-.295a10 10 0 0 1-1.411 1.775l-5.933 5.932a1 1 0 0 1-1.414-1.414l5.944-5.944A10 10 0 0 1 18 4.945z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    </a>
-                    <span
-                      className={`ml-2 inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-green-400/20`}
-                    >
-                      v1.0
-                    </span>
+                        {tool.version}
+                      </span>
+                    </div>
+                    <p className="mt-2 text-sm text-neutral-400">
+                      {tool.description}
+                    </p>
                   </div>
-                  <p className="mt-2 text-sm text-neutral-400">
-                    Turn raw warehouse tables into clean, leakage-safe datasets.
-                    No more manual feature engineering, unclear join paths, or
-                    guessing which tables matter.
-                  </p>
-                </div>
-              </FadeIn>
-            </li>
-
-            <li>
-              <FadeIn>
-                <div className="text-left">
-                  <div className="flex items-center">
-                    <span className="block font-mono text-lg font-bold tracking-wider text-white">
-                      Bridge
-                    </span>
-                    <a
-                      href="https://bridgeproductpage.netlify.app/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="ml-1 text-neutral-400 hover:text-neutral-200"
-                      aria-label="Bridge product page (opens in new tab)"
-                    >
-                      <svg
-                        width="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M20 14a1 1 0 0 0-1 1v3.077c0 .459-.022.57-.082.684a.363.363 0 0 1-.157.157c-.113.06-.225.082-.684.082H5.923c-.459 0-.571-.022-.684-.082a.363.363 0 0 1-.157-.157c-.06-.113-.082-.225-.082-.684L4.999 5.5a.5.5 0 0 1 .5-.5l3.5.005a1 1 0 1 0 .002-2L5.501 3a2.5 2.5 0 0 0-2.502 2.5v12.577c0 .76.083 1.185.32 1.627.223.419.558.753.977.977.442.237.866.319 1.627.319h12.154c.76 0 1.185-.082 1.627-.319.419-.224.753-.558.977-.977.237-.442.319-.866.319-1.627V15a1 1 0 0 0-1-1zm-2-9.055v-.291l-.39.09A10 10 0 0 1 15.36 5H14a1 1 0 1 1 0-2l5.5.003a1.5 1.5 0 0 1 1.5 1.5V10a1 1 0 1 1-2 0V8.639c0-.757.086-1.511.256-2.249l.09-.39h-.295a10 10 0 0 1-1.411 1.775l-5.933 5.932a1 1 0 0 1-1.414-1.414l5.944-5.944A10 10 0 0 1 18 4.945z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </a>
-                  <span
-                    className={`ml-2 inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-green-400/20`}
-                  >
-                    v1.4.14
-                  </span>
-                </div>
-                <p className="mt-2 text-sm text-neutral-400">
-                  Find what you need before you even know it. Combines multiple
-                  modalities, novel search algorithms, and outperforms single
-                  state-of-the-art retrievers in popular benchmarks.
-                </p>
-              </div>
-              </FadeIn>
-            </li>
-
-            <li>
-              <FadeIn>
-                <div className="text-left">
-                  <div className="flex items-baseline">
-                    <span className="block font-mono text-lg font-bold tracking-wider text-white">
-                      Mesh [WIP]
-                    </span>
-                    <span
-                    className={`ml-2 inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-400/20`}
-                  >
-                    v0.2.71
-                  </span>
-                </div>
-                <p className="mt-2 text-sm text-neutral-400">
-                  Integrate various compute backends for federated paradigms.
-                  Designed especially for tensor operations and integrates into
-                  frameworks like PyTorch, GGML, and TinyGrad.
-                </p>
-              </div>
-              </FadeIn>
-            </li>
+                </FadeIn>
+              </li>
+            ))}
           </ul>
         </FadeInStagger>
       </div>
@@ -178,10 +179,12 @@ function CaseStudies({ caseStudies }) {
   return (
     <>
       <SectionIntro
-        title="Here's a little bit about us"
+        title="Real-world engineering outcomes"
         className="mt-24 sm:mt-32 lg:mt-40"
       >
-        <p>A few humble brags never hurt anyone, right?</p>
+        <p>
+          We don’t just build models; we engineer systems that perform under load.
+        </p>
       </SectionIntro>
       <Container className="mt-16">
         <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -194,7 +197,7 @@ function CaseStudies({ caseStudies }) {
                     <Image
                       src={caseStudy.logo}
                       alt={caseStudy.client}
-                      className="h-16 w-16"
+                      className="h-16 w-16 object-contain"
                       unoptimized
                     />
                   </Link>
@@ -226,6 +229,67 @@ function CaseStudies({ caseStudies }) {
   )
 }
 
+function WhoWeHelp() {
+  const personas = [
+    {
+      title: 'ML-First SaaS Companies',
+      description:
+        'Inference costs eating into margins. Need 2–10× speedups without rewriting models.',
+    },
+    {
+      title: 'AI/LLM Startups',
+      description:
+        'Latency-sensitive large model deployment. Reduce GPU footprint and improve serving reliability.',
+    },
+    {
+      title: 'Computer Vision Companies',
+      description:
+        'Real-time inference optimization. Lower GPU load for production deployment.',
+    },
+    {
+      title: 'Technical Founders & ML Teams',
+      description:
+        'ML systems that need performance tuning and scaling without breaking cost ceilings.',
+    },
+  ]
+
+  return (
+    <Container className="mt-24 sm:mt-32 lg:mt-40">
+      <SectionIntro
+        eyebrow="Who We Help"
+        title="Built for teams shipping ML to production"
+      >
+        <p>
+          If inference cost, latency, or scaling is blocking your roadmap, we
+          should talk.
+        </p>
+      </SectionIntro>
+      <FadeInStagger className="mt-16">
+        <ul
+          role="list"
+          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {personas.map((persona) => (
+            <FadeIn key={persona.title} as="li" className="flex">
+              <div className="flex h-full flex-col rounded-2xl border border-neutral-200 p-8 transition hover:bg-neutral-50">
+                <h3 className="font-display text-lg font-semibold text-neutral-950">
+                  {persona.title}
+                </h3>
+                <p className="mt-4 text-sm text-neutral-600">
+                  {persona.description}
+                </p>
+              </div>
+            </FadeIn>
+          ))}
+        </ul>
+      </FadeInStagger>
+      <FadeIn className="mt-12 text-center">
+        <Button href="/contact">Speak With an Engineer</Button>
+      </FadeIn>
+    </Container>
+  )
+}
+
 function Services() {
   return (
     <>
@@ -235,38 +299,32 @@ function Services() {
             <FadeIn>
               <SectionIntro
                 eyebrow="Services"
-                title="We're here to help"
+                title="ML Infrastructure & Inference Acceleration"
                 className="text-white"
                 invert
               >
                 <p>
-                  We offer a range of services designed to elevate your
-                  business. Here&apos;s a sneak peek of how we can help you
-                  achieve your goals.
+                  Accelerate ML/LLM inference by 2–10×. Reduce GPU/cloud spend
+                  by 20–70%. We build high-performance serving infrastructure
+                  using Triton, TensorRT, ONNX, Ray, and Kubernetes.
                 </p>
               </SectionIntro>
             </FadeIn>
           </div>
           <List className="mt-16 lg:mt-0 lg:min-w-[33rem] lg:px-16">
-            <ListItem title="Custom AI Solutions">
-              We understand the unique needs of each client. We create tailored
-              AI solutions, including NLP, computer vision, and predictive
-              analytics, to meet your specific business challenges.
+            <ListItem title="Model Optimization">
+              Quantization, pruning, distillation, and custom kernel
+              optimization for smaller, faster, more efficient models — without
+              significant accuracy loss.
             </ListItem>
-            <ListItem title="Model Development">
-              Our team of expert data scientists and machine learning engineers
-              specialize in developing state-of-the-art models using frameworks
-              like TensorFlow, PyTorch, and Scikit-learn.
+            <ListItem title="Production ML Systems">
+              End-to-end ML systems built for reliability and throughput. Model
+              registries, feature stores, RAG pipelines, observability, and
+              autoscaling.
             </ListItem>
-            <ListItem title="Data Preparation and Visualization">
-              We clean, normalize, and transform raw data into meaningful and
-              usable formats, to ensure high-quality datasets for model training
-              and clear visualizations.
-            </ListItem>
-            <ListItem title="Deployment">
-              At the end of the day, we&apos;re practitioners with experience
-              in deploying machine learning models into production, offering
-              scalable and efficient solutions with various cloud platforms.
+            <ListItem title="Custom Model Development">
+              When off-the-shelf doesn’t cut it, we build tailored models using
+              PyTorch, JAX, and modern frameworks.
             </ListItem>
           </List>
         </div>
@@ -276,9 +334,9 @@ function Services() {
 }
 
 export const metadata = {
-  title: 'Machine Learning Consulting in Calgary',
+  title: 'ML Infrastructure & Model Acceleration',
   description:
-    'GroupLabs provides Calgary businesses with machine learning and data science consulting services grounded in research and real-world experience.',
+    'GroupLabs builds scalable ML infrastructure and accelerates model inference. 2–10× faster, 30–70% lower costs. Production-ready ML systems.',
   alternates: { canonical: '/' },
 }
 
@@ -287,40 +345,43 @@ export default async function Home() {
 
   return (
     <>
-      <Container className="mt-24 sm:mt-32 md:mt-56">
-        <h1 className="font-display font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-5xl">
-          Every second counts.
-        </h1>
-        <p className="mt-6 text-xl text-neutral-600">
-          Fast and correct systems. Precise and verifiable results.
-        </p>
-        <p className="mt-8 text-sm text-neutral-500">
-          <span className="font-medium text-neutral-700">Microsoft for Startups</span>
-          {' • '}
-          <span className="font-medium text-neutral-700">OVH Startup Program</span>
-          {' • '}
-          <span className="font-medium text-neutral-700">McGill Dobson X-1</span>
-          {' • '}
-          <span className="font-medium text-neutral-700">IVADO Scientist in Residence</span>
-        </p>
-      </Container>
+      <div className="relative">
+        <GridPattern
+          className="absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full fill-neutral-50 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
+          yOffset={-96}
+          interactive
+        />
+        <Container className="mt-24 sm:mt-32 md:mt-56">
+          <FadeIn>
+            <h1 className="font-display text-4xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-5xl">
+              We Fix Slow ML Systems.
+            </h1>
+            <p className="mt-6 text-xl text-neutral-700">
+              High-throughput, low-latency ML infrastructure engineered for
+              teams that need their models to perform in production.
+            </p>
+            <p className="mt-4 text-sm font-medium text-neutral-500">
+              Faster models → better UX, lower cost, more scale.
+            </p>
+            <div className="mt-10 flex gap-x-6">
+              <Button href="/contact">Speak With an Engineer</Button>
+              <Button href="/work" variant="outline">
+                Explore Our Work
+              </Button>
+            </div>
+          </FadeIn>
+        </Container>
+      </div>
 
       <Clients />
+
+      <WhoWeHelp />
+
+      <Services />
 
       <CaseStudies caseStudies={caseStudies} />
 
       <Products />
-
-      {/* <Testimonial
-        className="mt-24 sm:mt-32 lg:mt-40"
-        client={{ name: 'Phobia', logo: logoPhobiaDark }}
-      >
-        The team at Studio went above and beyond with our onboarding, even
-        finding a way to access the user’s microphone without triggering one of
-        those annoying permission dialogs.
-      </Testimonial> */}
-
-      <Services />
 
       <ContactSection />
     </>

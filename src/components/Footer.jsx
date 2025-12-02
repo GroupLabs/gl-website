@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
@@ -84,6 +85,17 @@ export function Footer() {
   return (
     <Container as="footer" className="mt-24 w-full sm:mt-32 lg:mt-40">
       <FadeIn>
+        <div className="mb-16 rounded-2xl bg-neutral-50 p-8">
+          <p className="font-display text-sm font-semibold text-neutral-950">
+            Struggling with slow inference or scaling issues?
+          </p>
+          <p className="mt-2 text-sm text-neutral-600">
+            Talk to our team about your ML infrastructure challenges.
+          </p>
+          <Button href="/contact" className="mt-4">
+            Speak With an Engineer
+          </Button>
+        </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
           <Navigation />
           <div className="flex lg:justify-end">

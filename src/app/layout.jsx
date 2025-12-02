@@ -7,21 +7,24 @@ export const metadata = {
   metadataBase: new URL('https://grouplabs.ca'),
   title: {
     template: '%s - GroupLabs',
-    default: 'Machine Learning Consulting in Calgary',
+    default: 'ML Infrastructure & Model Acceleration',
   },
   description:
-    'GroupLabs is a Calgary-based machine learning and data science consulting firm delivering practical solutions.',
+    'GroupLabs builds scalable ML infrastructure and accelerates model inference. 2–10× faster, 30–70% lower costs. Production-ready ML systems.',
   keywords: [
-    'machine learning consulting',
-    'data science consulting',
-    'AI consulting',
-    'Calgary machine learning',
+    'ML infrastructure',
+    'model acceleration',
+    'inference optimization',
+    'MLOps',
+    'GPU optimization',
+    'LLM serving',
+    'model deployment',
     'GroupLabs',
   ],
   openGraph: {
-    title: 'Machine Learning Consulting in Calgary - GroupLabs',
+    title: 'ML Infrastructure & Model Acceleration - GroupLabs',
     description:
-      'GroupLabs is a Calgary-based machine learning and data science consulting firm delivering practical solutions.',
+      'GroupLabs builds scalable ML infrastructure and accelerates model inference. 2–10× faster, 30–70% lower costs.',
     url: 'https://grouplabs.ca',
     siteName: 'GroupLabs',
     locale: 'en_CA',
@@ -30,9 +33,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Machine Learning Consulting in Calgary - GroupLabs',
+    title: 'ML Infrastructure & Model Acceleration - GroupLabs',
     description:
-      'GroupLabs is a Calgary-based machine learning and data science consulting firm delivering practical solutions.',
+      'GroupLabs builds scalable ML infrastructure and accelerates model inference. 2–10× faster, 30–70% lower costs.',
     images: 'https://placehold.co/1200x630/png?text=GroupLabs',
   },
   alternates: {
