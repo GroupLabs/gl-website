@@ -182,9 +182,7 @@ function CaseStudies({ caseStudies }) {
         title="Real-world engineering outcomes"
         className="mt-24 sm:mt-32 lg:mt-40"
       >
-        <p>
-          We don’t just build models; we engineer systems that perform under load.
-        </p>
+        <p>A track record of accelerating and scaling ML in production.</p>
       </SectionIntro>
       <Container className="mt-16">
         <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -232,24 +230,24 @@ function CaseStudies({ caseStudies }) {
 function WhoWeHelp() {
   const personas = [
     {
-      title: 'ML-First SaaS Companies',
+      title: 'Real-Time Robotics',
       description:
-        'Inference costs eating into margins. Need 2–10× speedups without rewriting models.',
+        'Enabling faster, more reliable ML perception and autonomy on constrained hardware.',
     },
     {
-      title: 'AI/LLM Startups',
+      title: 'High-Volume Inference',
       description:
-        'Latency-sensitive large model deployment. Reduce GPU footprint and improve serving reliability.',
+        'Reducing latency, increasing throughput, and cutting GPU spend for production ML workloads.',
     },
     {
-      title: 'Computer Vision Companies',
+      title: 'ML Products at Scale',
       description:
-        'Real-time inference optimization. Lower GPU load for production deployment.',
+        'Building the serving infrastructure needed to deploy and operate models with predictable performance.',
     },
     {
-      title: 'Technical Founders & ML Teams',
+      title: 'Industrial & Edge Vision',
       description:
-        'ML systems that need performance tuning and scaling without breaking cost ceilings.',
+        'Optimizing CV and sensor pipelines on edge devices for greater speed, stability, and efficiency.',
     },
   ]
 
@@ -295,36 +293,44 @@ function Services() {
     <>
       <Container className="mt-24 sm:mt-32 lg:mt-40">
         <div className="mt-16 lg:flex lg:flex-row">
-          <div className="rounded-4xl bg-black p-16 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:pl-4">
+          <div className="rounded-4xl bg-black p-8 sm:p-12 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:p-16 lg:pl-4">
             <FadeIn>
               <SectionIntro
                 eyebrow="Services"
                 title="ML Infrastructure & Inference Acceleration"
                 className="text-white"
                 invert
+                smaller
               >
-                <p>
-                  Accelerate ML/LLM inference by 2–10×. Reduce GPU/cloud spend
-                  by 20–70%. We build high-performance serving infrastructure
-                  using Triton, TensorRT, ONNX, Ray, and Kubernetes.
+                <p className="hidden sm:block">
+                  High-performance serving stacks with faster cold starts on
+                  serverless GPUs, optimal runtimes, intelligent batching and
+                  routing layers, and low-level CUDA or kernel tuning when
+                  compilers can't keep up.
                 </p>
               </SectionIntro>
             </FadeIn>
           </div>
           <List className="mt-16 lg:mt-0 lg:min-w-[33rem] lg:px-16">
             <ListItem title="Model Optimization">
-              Quantization, pruning, distillation, and custom kernel
-              optimization for smaller, faster, more efficient models — without
-              significant accuracy loss.
+              We make models smaller, faster, and cheaper through quantization,
+              distillation, pruning, and custom kernel or CUDA work when
+              compilers fall short. Every improvement is backed by
+              interpretable, GPU-level performance tests that clearly show the
+              gains.
             </ListItem>
             <ListItem title="Production ML Systems">
-              End-to-end ML systems built for reliability and throughput. Model
-              registries, feature stores, RAG pipelines, observability, and
-              autoscaling.
+              We build reliable, high-throughput ML systems including
+              registries, feature stores, serving pipelines, observability, and
+              autoscaling. Each system is validated with transparent performance
+              metrics and bottleneck analyses so behavior is predictable in
+              production.
             </ListItem>
             <ListItem title="Custom Model Development">
-              When off-the-shelf doesn’t cut it, we build tailored models using
-              PyTorch, JAX, and modern frameworks.
+              We design and train tailored models when off-the-shelf options
+              don’t fit, using PyTorch, JAX, and modern tooling. All results are
+              supported by clear, reproducible benchmarks that show measurable
+              improvements in speed, accuracy, or efficiency.
             </ListItem>
           </List>
         </div>
@@ -364,7 +370,9 @@ export default async function Home() {
               Faster models → better UX, lower cost, more scale.
             </p>
             <div className="mt-10 flex gap-x-6">
-              <Button href="/contact">Speak With an Engineer</Button>
+              <Button href="/contact" className="hidden sm:inline-flex">
+                Speak With an Engineer
+              </Button>
               <Button href="/work" variant="outline">
                 Explore Our Work
               </Button>

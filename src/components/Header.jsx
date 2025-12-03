@@ -15,7 +15,6 @@ import { motion, MotionConfig, useReducedMotion } from 'framer-motion'
 
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
-import { Footer } from '@/components/Footer'
 import { GridPattern } from '@/components/GridPattern'
 import { Logo, Logomark } from '@/components/Logo'
 import { Offices } from '@/components/Offices'
@@ -40,7 +39,7 @@ function MenuIcon(props) {
   )
 }
 
-function Header({
+function HeaderComponent({
   panelId,
   icon: Icon,
   expanded,
@@ -59,11 +58,6 @@ function Header({
           onMouseEnter={() => setLogoHovered(true)}
           onMouseLeave={() => setLogoHovered(false)}
         >
-          {/* <Logomark
-            className="h-8 sm:hidden"
-            invert={invert}
-            filled={logoHovered}
-          /> */}
           <Logo
             className="hidden h-8 sm:block"
             invert={invert}
@@ -75,8 +69,7 @@ function Header({
             href="/contact"
             className="bg-orange-600 text-white hover:bg-orange-800"
           >
-            <span className="sm:hidden">Contact</span>
-            <span className="hidden sm:inline">Speak With an Engineer</span>
+            Speak With an Engineer
           </Button>
           <button
             ref={toggleRef}
@@ -142,13 +135,14 @@ function Navigation() {
   )
 }
 
-function RootLayoutInner({ children }) {
+export function Header() {
   let panelId = useId()
   let [expanded, setExpanded] = useState(false)
   let openRef = useRef(null)
   let closeRef = useRef(null)
   let navRef = useRef(null)
   let shouldReduceMotion = useReducedMotion()
+  let [logoHovered, setLogoHovered] = useState(false)
 
   useEffect(() => {
     function onClick(event) {
@@ -168,14 +162,14 @@ function RootLayoutInner({ children }) {
   }, [])
 
   return (
-    <MotionConfig transition={shouldReduceMotion ? { duration: 0 } : undefined}>
+    <RootLayoutContext.Provider value={{ logoHovered, setLogoHovered }}>
       <header>
         <div
           className="absolute left-0 right-0 top-2 z-40 pt-14"
           aria-hidden={expanded ? 'true' : undefined}
           inert={expanded ? '' : undefined}
         >
-          <Header
+          <HeaderComponent
             panelId={panelId}
             icon={MenuIcon}
             toggleRef={openRef}
@@ -199,7 +193,7 @@ function RootLayoutInner({ children }) {
         >
           <motion.div layout className="bg-neutral-800">
             <div ref={navRef} className="bg-neutral-950 pb-16 pt-14">
-              <Header
+              <HeaderComponent
                 invert
                 panelId={panelId}
                 icon={XIcon}
@@ -238,38 +232,6 @@ function RootLayoutInner({ children }) {
           </motion.div>
         </motion.div>
       </header>
-
-      <motion.div
-        layout
-        style={{ borderTopLeftRadius: 40, borderTopRightRadius: 40 }}
-        className="relative flex flex-auto overflow-hidden bg-white pt-14"
-      >
-        <motion.div
-          layout
-          className="relative isolate flex w-full flex-col pt-9"
-        >
-          <GridPattern
-            className="absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full fill-neutral-50 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
-            yOffset={-96}
-            interactive
-          />
-
-          <main className="w-full flex-auto">{children}</main>
-
-          <Footer />
-        </motion.div>
-      </motion.div>
-    </MotionConfig>
-  )
-}
-
-export function RootLayout({ children }) {
-  let pathname = usePathname()
-  let [logoHovered, setLogoHovered] = useState(false)
-
-  return (
-    <RootLayoutContext.Provider value={{ logoHovered, setLogoHovered }}>
-      <RootLayoutInner key={pathname}>{children}</RootLayoutInner>
     </RootLayoutContext.Provider>
   )
 }

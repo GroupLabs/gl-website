@@ -80,10 +80,9 @@ function Navigation() {
   )
 }
 
-
 export function Footer() {
   return (
-    <Container as="footer" className="mt-24 w-full sm:mt-32 lg:mt-40">
+    <Container as="footer" className="mt-12 w-full sm:mt-20 lg:mt-28">
       <FadeIn>
         <div className="mb-16 rounded-2xl bg-neutral-50 p-8">
           <p className="font-display text-sm font-semibold text-neutral-950">

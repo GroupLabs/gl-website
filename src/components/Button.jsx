@@ -1,12 +1,14 @@
 import Link from 'next/link'
 import clsx from 'clsx'
 
-export function Button({ invert = false, className, children, ...props }) {
+export function Button({ invert = false, variant = 'solid', className, children, ...props }) {
   className = clsx(
     'inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition',
-    invert
-      ? 'bg-white text-neutral-950 hover:bg-neutral-200'
-      : 'bg-neutral-950 text-white hover:bg-neutral-800',
+    variant === 'outline'
+      ? 'bg-transparent text-neutral-950 ring-1 ring-neutral-950 hover:bg-neutral-950 hover:text-white'
+      : invert
+        ? 'bg-white text-neutral-950 hover:bg-neutral-200'
+        : 'bg-neutral-950 text-white hover:bg-neutral-800',
     className,
   )
 
