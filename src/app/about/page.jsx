@@ -118,7 +118,7 @@ function Team() {
 export const metadata = {
   title: 'About Us',
   description:
-    'Learn about GroupLabs, a Calgary-based team of machine learning and data science consultants dedicated to client success.',
+    'GroupLabs is a Calgary-based engineering studio. We lead with BuildLess for pre-build product validation, and run deeper engagements in ML infrastructure and custom model development.',
   alternates: { canonical: '/about' },
 }
 
@@ -133,17 +133,23 @@ export default async function About() {
 
   return (
     <>
-      <PageIntro eyebrow="About us" title="We build practical solutions">
+      <PageIntro eyebrow="About us" title="A multi-practice engineering studio">
         <p>
-          We put our clients and their goals at the center of everything we do.
-          We&apos;re a team of doers, and get-doners.
+          We put our clients and their goals at the center of everything we
+          do. We&apos;re a team of doers, and get-doners.
         </p>
         <div className="mt-10 max-w-2xl space-y-6 text-base">
           <p>
-            GroupLabs was started by two friends who noticed that machine
-            learning is still not accessible to everyone. Since the beginning,
-            we have been committed to doing things differently by building
-            tools, and expert networks to support the community.
+            GroupLabs is a Calgary-based engineering studio. Today we lead
+            with BuildLess — pre-build product validation that turns ideas
+            into live tests in days. We also run deeper engagements in ML
+            infrastructure, production systems, and custom model
+            development for teams who already know what they need to ship.
+          </p>
+          <p>
+            We started GroupLabs because we kept seeing teams overbuild —
+            too much engineering committed to ideas that hadn&apos;t earned
+            it yet. BuildLess is our answer.
           </p>
         </div>
       </PageIntro>

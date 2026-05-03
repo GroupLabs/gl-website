@@ -1,17 +1,10 @@
 import Link from 'next/link'
 
-import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
 import { socialMediaProfiles } from '@/components/SocialMedia'
-import { NewsletterForm } from '@/components/NewsletterForm'
 
-// Support multiple hosting providers by checking a series of common
-// environment variables for the git commit SHA. Netlify exposes
-// `COMMIT_REF` while Vercel uses `VERCEL_GIT_COMMIT_SHA`. The variables
-// prefixed with `NEXT_PUBLIC_` ensure the value is bundled at build time
-// and can be accessed in the browser.
 const COMMIT_SHA =
   process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ??
   process.env.NEXT_PUBLIC_COMMIT_REF ??
@@ -20,34 +13,24 @@ const COMMIT_SHA =
 
 const navigation = [
   {
-    title: 'Work',
+    title: 'Practices',
     links: [
-      {
-        title: 'Hotchkiss Brain Institute',
-        href: '/work/hotchkiss-brain-institute',
-      },
-      { title: 'SMART Technologies', href: '/work/smart-technologies' },
-      {
-        title: (
-          <>
-            See all <span aria-hidden="true">&rarr;</span>
-          </>
-        ),
-        href: '/work',
-      },
+      { title: 'Production ML', href: '/work' },
+      { title: 'Custom models', href: '/process' },
+      { title: 'BuildLess', href: '/buildless' },
     ],
   },
   {
-    title: 'Company',
+    title: 'Studio',
     links: [
       { title: 'About', href: '/about' },
       { title: 'Process', href: '/process' },
+      { title: 'Work', href: '/work' },
       { title: 'Blog', href: '/blog' },
-      { title: 'Contact us', href: '/contact' },
     ],
   },
   {
-    title: 'Connect',
+    title: 'Elsewhere',
     links: socialMediaProfiles,
   },
 ]
@@ -55,18 +38,16 @@ const navigation = [
 function Navigation() {
   return (
     <nav>
-      <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-        {navigation.map((section, sectionIndex) => (
-          <li key={sectionIndex}>
-            <div className="font-display text-sm font-semibold tracking-wider text-neutral-950">
-              {section.title}
-            </div>
-            <ul role="list" className="mt-4 text-sm text-neutral-700">
-              {section.links.map((link, linkIndex) => (
-                <li key={linkIndex} className="mt-4">
+      <ul role="list" className="grid grid-cols-3 gap-x-8">
+        {navigation.map((section) => (
+          <li key={section.title}>
+            <p className="eyebrow text-neutral-500 wdth-narrow">{section.title}</p>
+            <ul role="list" className="mt-5 space-y-3">
+              {section.links.map((link, i) => (
+                <li key={i}>
                   <Link
                     href={link.href}
-                    className="transition hover:text-neutral-950"
+                    className="text-sm text-neutral-700 transition hover:text-orange-600"
                   >
                     {link.title}
                   </Link>
@@ -82,35 +63,41 @@ function Navigation() {
 
 export function Footer() {
   return (
-    <Container as="footer" className="mt-12 w-full sm:mt-20 lg:mt-28">
-      <FadeIn>
-        <div className="mb-16 rounded-2xl bg-neutral-50 p-8">
-          <p className="font-display text-sm font-semibold text-neutral-950">
-            Struggling with slow inference or scaling issues?
-          </p>
-          <p className="mt-2 text-sm text-neutral-600">
-            Talk to our team about your ML infrastructure challenges.
-          </p>
-          <Button href="/contact" className="mt-4">
-            Speak With an Engineer
-          </Button>
-        </div>
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
-          <Navigation />
-          <div className="flex lg:justify-end">
-            <NewsletterForm />
+    <footer className="mt-24 border-t border-neutral-950/15 bg-white sm:mt-32">
+      <Container className="pb-10 pt-12 sm:pb-12 sm:pt-16">
+        <FadeIn>
+          <div className="grid grid-cols-1 gap-y-10 lg:grid-cols-12 lg:gap-x-16">
+            <div className="lg:col-span-5">
+              <Link href="/" aria-label="Home" className="inline-flex items-center">
+                <Logo className="h-7" fillOnHover />
+              </Link>
+              <p className="mt-6 max-w-sm font-mono text-xs leading-relaxed text-neutral-500">
+                A small engineering studio in Calgary &amp; Montreal.
+                <br />
+                Production ML, custom models, pre-build product validation.
+              </p>
+            </div>
+            <div className="lg:col-span-7">
+              <Navigation />
+            </div>
           </div>
-        </div>
-        <div className="mb-20 mt-24 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
-          <Link href="/" aria-label="Home">
-            <Logo className="h-8" fillOnHover />
-          </Link>
-          <p className="text-sm text-neutral-700">
-            © GroupLabs Inc. {new Date().getFullYear()}
-            {COMMIT_SHA ? ` | ${COMMIT_SHA.slice(0, 7)}` : ''}
-          </p>
-        </div>
-      </FadeIn>
-    </Container>
+        </FadeIn>
+
+        <FadeIn>
+          <div className="mt-12 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-t border-neutral-950/10 pt-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500">
+              © GroupLabs Inc. {new Date().getFullYear()}
+              {COMMIT_SHA ? ` · ${COMMIT_SHA.slice(0, 7)}` : ''}
+            </p>
+            <a
+              href="mailto:noel@grouplabs.ca"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500 hover:text-orange-600"
+            >
+              noel@grouplabs.ca
+            </a>
+          </div>
+        </FadeIn>
+      </Container>
+    </footer>
   )
 }

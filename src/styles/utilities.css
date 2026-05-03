@@ -1,1 +1,167 @@
 @tailwind utilities;
+
+@layer utilities {
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  @keyframes ink-rule {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes blink-caret {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  @keyframes ticker-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Two-scale static blueprint grid (light + invert variants). */
+  .grid-minor {
+    background-image:
+      linear-gradient(to right, rgba(10,10,10,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10,10,10,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .grid-major {
+    background-image:
+      linear-gradient(to right, rgba(10,10,10,0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10,10,10,0.10) 1px, transparent 1px);
+    background-size: 128px 128px;
+  }
+  .grid-minor-invert {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .grid-major-invert {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.10) 1px, transparent 1px);
+    background-size: 128px 128px;
+  }
+
+  /* gentle breath on the redline accent — kicks in after entrance settles */
+  @keyframes redline-breath {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.78; transform: scale(0.94); }
+  }
+  .animate-redline-breath {
+    animation: redline-breath 5s ease-in-out infinite;
+    animation-delay: 1.9s;
+    transform-origin: center;
+  }
+
+  /* hero frame draw — used with pathLength="1" + stroke-dasharray="1 1"
+     on the SVG rect. */
+  @keyframes hero-frame-draw {
+    from { stroke-dashoffset: 1; }
+    to   { stroke-dashoffset: 0; }
+  }
+  .animate-frame-draw {
+    stroke-dashoffset: 1;
+    animation: hero-frame-draw var(--draw-duration, 2s) var(--draw-delay, 0.4s) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-redline-breath,
+    .animate-frame-draw {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .animate-pulse-dot {
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  .animate-ink-rule {
+    transform-origin: left;
+    animation: ink-rule 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-blink-caret {
+    animation: blink-caret 1.1s steps(2, end) infinite;
+  }
+
+  /* tabular figures for spec/number cells */
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* engineering-org spec-sheet eyebrow */
+  .eyebrow {
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* Mona Sans variable-width presets */
+  .wdth-narrow {
+    font-variation-settings: 'wdth' 78;
+  }
+  .wdth-default {
+    font-variation-settings: 'wdth' 100;
+  }
+  .wdth-wide {
+    font-variation-settings: 'wdth' 125;
+  }
+
+  /* Engineering-grade hairline grid background (used sparingly) */
+  .grid-paper {
+    background-image:
+      linear-gradient(to right, rgba(10,10,10,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10,10,10,0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .grid-paper-dark {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* "spec dot" used in Live Ops + tool status */
+  .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background-color: currentColor;
+    flex-shrink: 0;
+  }
+
+  /* Selected-work hover-reveal spec — row reveals tech stack on hover */
+  .reveal-spec {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.35s ease 0.05s,
+      margin-top 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .group:hover .reveal-spec,
+  .group:focus-visible .reveal-spec {
+    max-height: 80px;
+    opacity: 1;
+    margin-top: 0.5rem;
+  }
+
+  /* Hover lift — subtle elevation cue for cards */
+  .lift {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.3s ease;
+  }
+  .lift:hover {
+    transform: translateY(-2px);
+  }
+}

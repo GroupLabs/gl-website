@@ -8,3 +8,12 @@
   font-stretch: 75% 125%;
   src: url('../fonts/Mona-Sans.var.woff2') format('woff2');
 }
+
+::selection {
+  background-color: #ea580c;
+  color: white;
+}
+
+html {
+  scrollbar-gutter: stable;
+}

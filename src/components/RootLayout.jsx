@@ -13,10 +13,8 @@ import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { motion, MotionConfig, useReducedMotion } from 'framer-motion'
 
-import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Footer } from '@/components/Footer'
-import { GridPattern } from '@/components/GridPattern'
 import { Logo, Logomark } from '@/components/Logo'
 import { Offices } from '@/components/Offices'
 import { SocialMedia } from '@/components/SocialMedia'
@@ -70,14 +68,16 @@ function Header({
             filled={logoHovered}
           />
         </Link>
-        <div className="flex items-center gap-x-8">
-          <Button
-            href="/contact"
-            className="bg-orange-600 text-white hover:bg-orange-800"
+        <div className="flex items-center gap-x-5 sm:gap-x-8">
+          <a
+            href="mailto:noel@grouplabs.ca"
+            className={clsx(
+              'hidden font-mono text-xs tracking-tight transition-colors sm:inline',
+              invert ? 'text-white/70 hover:text-white' : 'text-neutral-500 hover:text-neutral-950',
+            )}
           >
-            <span className="sm:hidden">Contact</span>
-            <span className="hidden sm:inline">Speak With an Engineer</span>
-          </Button>
+            noel@grouplabs.ca
+          </a>
           <button
             ref={toggleRef}
             type="button"
@@ -131,12 +131,16 @@ function Navigation() {
   return (
     <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
+        <NavigationItem href="/buildless">BuildLess</NavigationItem>
         <NavigationItem href="/work">Our Work</NavigationItem>
-        <NavigationItem href="/about">About Us</NavigationItem>
       </NavigationRow>
       <NavigationRow>
+        <NavigationItem href="/about">About Us</NavigationItem>
         <NavigationItem href="/process">Our Process</NavigationItem>
+      </NavigationRow>
+      <NavigationRow>
         <NavigationItem href="/blog">Blog</NavigationItem>
+        <NavigationItem href="/contact">Contact</NavigationItem>
       </NavigationRow>
     </nav>
   )
@@ -248,12 +252,6 @@ function RootLayoutInner({ children }) {
           layout
           className="relative isolate flex w-full flex-col pt-9"
         >
-          <GridPattern
-            className="absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full fill-neutral-50 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
-            yOffset={-96}
-            interactive
-          />
-
           <main className="w-full flex-auto">{children}</main>
 
           <Footer />

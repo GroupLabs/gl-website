@@ -33,17 +33,41 @@ export function Logomark({ invert = false, filled = false, ...props }) {
   )
 }
 
+/**
+ * Logo — displays "GL" by default, expanding to "GroupLabs" on hover via a
+ * smooth max-width transition on the hidden middle letters.
+ *
+ * Sizing: pass via className (e.g. text-2xl, text-3xl). Default is text-2xl.
+ */
 export function Logo({
   className,
   invert = false,
-  filled = false,
-  fillOnHover = false,
+  // legacy props from old SVG version — accepted but unused
+  filled: _filled,
+  fillOnHover: _fillOnHover,
   ...props
 }) {
-  
+  const hidden =
+    'inline-flex items-baseline max-w-0 overflow-hidden whitespace-nowrap transition-[max-width] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/logo:max-w-[3em]'
+
   return (
-    <div className={`text-4xl font-bold ${invert ? 'text-white' : ''}`}>
-      GL
-    </div>
+    <span
+      className={clsx(
+        'group/logo inline-flex items-baseline whitespace-nowrap font-display text-2xl font-semibold leading-[1.2] tracking-tight wdth-wide',
+        invert ? 'text-white' : 'text-neutral-950',
+        className,
+      )}
+      {...props}
+    >
+      <span>G</span>
+      <span className={hidden} aria-hidden="true">
+        roup
+      </span>
+      <span>L</span>
+      <span className={hidden} aria-hidden="true">
+        abs
+      </span>
+      <span className="sr-only">GroupLabs</span>
+    </span>
   )
 }

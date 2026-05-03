@@ -1,30 +1,39 @@
 import { RootLayout } from '@/components/RootLayout'
 import Script from 'next/script'
+import { JetBrains_Mono } from 'next/font/google'
 
 import '@/styles/tailwind.css'
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+})
 
 export const metadata = {
   metadataBase: new URL('https://grouplabs.ca'),
   title: {
     template: '%s - GroupLabs',
-    default: 'ML Infrastructure & Model Acceleration',
+    default: 'GroupLabs — A Calgary engineering studio',
   },
   description:
-    'GroupLabs builds scalable ML infrastructure and accelerates model inference. 2–10× faster, 30–70% lower costs. Production-ready ML systems.',
+    'GroupLabs is a Calgary engineering studio. Production ML systems, custom model development, and pre-build product validation for serious teams in energy, healthcare, robotics, and education.',
   keywords: [
     'ML infrastructure',
-    'model acceleration',
-    'inference optimization',
     'MLOps',
-    'GPU optimization',
-    'LLM serving',
-    'model deployment',
+    'production ML',
+    'custom model development',
+    'engineering consultancy',
     'GroupLabs',
+    'Calgary',
+    'BuildLess',
+    'product validation',
   ],
   openGraph: {
-    title: 'ML Infrastructure & Model Acceleration - GroupLabs',
+    title: 'GroupLabs — A Calgary engineering studio',
     description:
-      'GroupLabs builds scalable ML infrastructure and accelerates model inference. 2–10× faster, 30–70% lower costs.',
+      'Production ML systems, custom model development, and pre-build product validation for serious teams.',
     url: 'https://grouplabs.ca',
     siteName: 'GroupLabs',
     locale: 'en_CA',
@@ -33,9 +42,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ML Infrastructure & Model Acceleration - GroupLabs',
+    title: 'GroupLabs — A Calgary engineering studio',
     description:
-      'GroupLabs builds scalable ML infrastructure and accelerates model inference. 2–10× faster, 30–70% lower costs.',
+      'Production ML systems, custom model development, and pre-build product validation for serious teams.',
     images: 'https://placehold.co/1200x630/png?text=GroupLabs',
   },
   alternates: {
@@ -45,7 +54,10 @@ export const metadata = {
 
 export default function Layout({ children }) {
   return (
-    <html lang="en" className="h-full bg-neutral-950 text-base antialiased">
+    <html
+      lang="en"
+      className={`${jetbrainsMono.variable} h-full bg-neutral-950 text-base antialiased`}
+    >
       <head>
         <link rel="icon" href="/favicon.ico" />
         <Script

@@ -16,6 +16,9 @@ module.exports = {
       '5xl': ['2.5rem', { lineHeight: '3rem' }],
       '6xl': ['3rem', { lineHeight: '3.5rem' }],
       '7xl': ['4rem', { lineHeight: '4.5rem' }],
+      '8xl': ['5rem', { lineHeight: '1' }],
+      '9xl': ['6.75rem', { lineHeight: '0.95' }],
+      '10xl': ['9rem', { lineHeight: '0.92' }],
     },
     extend: {
       borderRadius: {
@@ -27,6 +30,7 @@ module.exports = {
           ['Mona Sans', ...defaultTheme.fontFamily.sans],
           { fontVariationSettings: '"wdth" 125' },
         ],
+        mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
       },
     },
   },

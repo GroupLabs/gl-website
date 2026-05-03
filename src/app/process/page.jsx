@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { Blockquote } from '@/components/Blockquote'
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
@@ -169,7 +171,7 @@ function Values() {
 export const metadata = {
   title: 'Our Process',
   description:
-    'Discover our proven approach to delivering machine learning solutions for businesses in Calgary and beyond.',
+    'How GroupLabs delivers software, ML, and product validation engagements — from discovery through build to delivery.',
   alternates: { canonical: '/process' },
 }
 
@@ -179,6 +181,16 @@ export default function Process() {
       <PageIntro eyebrow="Our process" title="How we work">
         <p>
           We believe in delivering practical solutions that clients can use to address real-world, impactful issues.
+        </p>
+        <p className="mt-4 text-base text-neutral-500">
+          For pre-build validation sprints, see{' '}
+          <Link
+            href="/buildless"
+            className="underline hover:text-neutral-700"
+          >
+            how BuildLess works
+          </Link>
+          .
         </p>
       </PageIntro>
 
