@@ -2,35 +2,56 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
+import { ContactCTA } from '@/components/ContactCTA'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { HeroSection } from '@/components/HeroSection'
-import { HeroSnapshot } from '@/components/HeroSnapshot'
 import { ImagePlaceholder } from '@/components/ImagePlaceholder'
-import { PracticeDiagram } from '@/components/PracticeDiagram'
+import { MugModel } from '@/components/MugModel'
+import { productIcons } from '@/components/ProductIcons'
+import { ScrollableRow } from '@/components/ScrollableRow'
 import { SectionHead } from '@/components/SectionHead'
-import { SparkLine } from '@/components/SparkLine'
-import { StudioMark } from '@/components/StudioMark'
-import logoSuncor from '@/images/clients/suncor-energy/suncor.png'
-import logoHBI from '@/images/clients/hbi/hbi.png'
 import logoCenovus from '@/images/clients/cenovus/cenovus.png'
-import logoUcalgary from '@/images/clients/ucalgary/ucalgary.png'
-import workBowRiver from '@/images/work/bow-river.png'
-import workCenovus from '@/images/work/cenovus.png'
-import workHotchkiss from '@/images/work/hotchkiss.png'
-import workSmart from '@/images/work/smart.png'
+import logoHBI from '@/images/clients/hbi/hbi.png'
+import logoObrien from '@/images/clients/obrien/obrien.png'
+import logoSmart from '@/images/clients/smart/smart-logo.png'
+import logoIvado from '@/images/programs/ivado.png'
+import logoMcGillDobson from '@/images/programs/mcgill-dobson.png'
+import logoMicrosoftStartups from '@/images/programs/microsoft-for-startups.png'
+import logoOvh from '@/images/programs/ovh.png'
+import workBowRiver from '@/images/work/bow-river.jpg'
+import workCenovus from '@/images/work/cenovus.jpg'
+import workHotchkiss from '@/images/work/hotchkiss.jpg'
+import workSmart from '@/images/work/smart.jpg'
 
 const clients = [
-  ['Suncor Energy', logoSuncor, 'energy', '2022'],
-  ['Hotchkiss Brain Institute', logoHBI, 'healthcare', '2024'],
-  ['Cenovus Energy', logoCenovus, 'energy', '2024'],
-  ['University of Calgary', logoUcalgary, 'education', '2023'],
+  ['Cenovus Energy', logoCenovus, 'energy', 40],
+  ['Hotchkiss Brain Institute', logoHBI, 'healthcare', 32],
+  ["O'Brien Institute for Public Health", logoObrien, 'public health', 60],
+  ['SMART', logoSmart, 'education', 104],
+]
+
+const programs = [
+  [
+    'Microsoft for Startups',
+    'https://www.microsoft.com/en-us/startups',
+    logoMicrosoftStartups,
+    144,
+  ],
+  ['OVH Startup Program', 'https://startup.ovhcloud.com', logoOvh, 80],
+  [
+    'McGill Dobson Centre',
+    'https://www.mcgill.ca/dobson/',
+    logoMcGillDobson,
+    128,
+  ],
+  ['IVADO Scientist in Residence', 'https://ivado.ca/', logoIvado, 52],
 ]
 
 function DeployedAt() {
   return (
     <Container className="mt-2 sm:mt-3 lg:mt-4">
       <FadeIn immediate delay={0.8}>
-        <figure className="relative isolate w-full overflow-hidden rounded-3xl border border-neutral-950/10">
+        <figure className="relative isolate w-full overflow-hidden rounded-3xl border border-neutral-950/10 lg:max-h-[90vh]">
           <Image
             src={workBowRiver}
             alt="Aerial top-down view of the Bow River cutting through downtown Calgary at golden hour, with bridges, the downtown grid, and parkland visible."
@@ -45,38 +66,75 @@ function DeployedAt() {
             aria-hidden="true"
             className="absolute inset-0 bg-neutral-950/75"
           />
-          <div className="relative px-6 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16">
-            <div className="flex items-center gap-4 border-b border-white/15 pb-3">
-              <p className="eyebrow wdth-narrow text-white/70">
-                In production at
-              </p>
-              <span aria-hidden="true" className="h-px flex-1 bg-white/15" />
-              <p className="eyebrow wdth-narrow text-white/70">
-                {clients.length} institutions · 4 sectors
-              </p>
-            </div>
+          <div className="relative flex flex-col px-6 pb-6 pt-12 sm:px-10 sm:pb-8 sm:pt-14 lg:px-14 lg:pb-10 lg:pt-12">
+            <p className="eyebrow wdth-narrow text-white/55 text-center">
+              §&nbsp;01 &nbsp;·&nbsp; In production
+            </p>
+            <h3 className="wdth-wide mx-auto mt-4 text-center font-display text-[clamp(1.375rem,2.6vw,2.25rem)] font-medium leading-[1.08] tracking-tight text-white">
+              Our work runs in the
+              <span className="text-white/85 block font-normal italic">
+                real world.
+              </span>
+            </h3>
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-6 block h-px w-16 bg-white/25"
+            />
             <ul
               role="list"
-              className="mt-10 grid grid-cols-2 items-stretch gap-x-0 gap-y-6 lg:grid-cols-4 lg:divide-x lg:divide-white/10"
+              className="mt-8 grid grid-cols-2 items-stretch gap-x-0 gap-y-12 lg:grid-cols-4 lg:gap-y-8 lg:divide-x lg:divide-white/25"
             >
-              {clients.map(([client, logo, sector, since]) => (
+              {clients.map(([client, logo, sector, h]) => (
                 <li
                   key={client}
-                  className="group flex flex-col items-center justify-between px-4 py-2 text-center lg:px-8"
+                  className="group flex flex-col items-center px-4 text-center lg:px-8"
                 >
-                  <div className="flex h-16 items-center justify-center opacity-80 brightness-0 invert transition duration-300 group-hover:opacity-100">
-                    <Image src={logo} height={48} alt={client} unoptimized />
+                  <div className="flex h-24 items-center justify-center opacity-80 brightness-0 invert transition duration-300 group-hover:opacity-100">
+                    <Image src={logo} height={h} alt={client} unoptimized />
                   </div>
-                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-white/50 transition-colors group-hover:text-white/80">
-                    {sector} · since {since}
+                  <p className="group-hover:text-white/85 mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/50 transition-colors">
+                    {sector}
                   </p>
                 </li>
               ))}
             </ul>
-            <figcaption className="mt-10 flex items-baseline justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/50">
+            <div className="mt-10 flex flex-col items-center">
+              <div className="flex w-full items-center gap-5">
+                <span
+                  aria-hidden="true"
+                  className="h-px w-10 flex-none bg-white/25"
+                />
+                <p className="eyebrow wdth-narrow text-white/75 lg:whitespace-nowrap">
+                  Selected for the following programs
+                </p>
+                <span aria-hidden="true" className="h-px flex-1 bg-white/25" />
+              </div>
+              <ul
+                role="list"
+                className="mt-8 grid w-full grid-cols-2 items-center gap-y-12 lg:mt-6 lg:grid-cols-4 lg:gap-y-8 lg:divide-x lg:divide-white/25"
+              >
+                {programs.map(([name, href, logo, h]) => (
+                  <li
+                    key={name}
+                    className="flex items-center justify-center px-4 lg:px-8"
+                  >
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={name}
+                      className="group flex h-36 items-center justify-center opacity-60 brightness-0 invert transition duration-500 hover:opacity-100"
+                    >
+                      <Image src={logo} height={h} alt={name} unoptimized />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="text-white/45 mt-8 flex items-baseline justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.18em]">
               <span>Calgary · Bow River, top-down</span>
-              <span className="opacity-60">IMG-01</span>
-            </figcaption>
+              <span className="tabular text-white/35">§&nbsp;01</span>
+            </div>
           </div>
         </figure>
       </FadeIn>
@@ -103,7 +161,8 @@ const FEATURED_WORK = [
       'Daily',
       'automated dashboards across facilities',
     ],
-    stack: 'Python · gradient-boosted trees · RNNs · containerised cloud deploy',
+    stack:
+      'Python · gradient-boosted trees · RNNs · containerised cloud deploy',
     href: '/work/cenovus-energy',
     image: {
       id: 'IMG-02',
@@ -153,7 +212,8 @@ const FEATURED_WORK = [
       '300+',
       'across 5 schools · 150+ students · 8 months',
     ],
-    stack: 'Rust Actix-Web · Claude 3 Sonnet · Next.js + React · Prometheus + Grafana',
+    stack:
+      'Rust Actix-Web · Claude 3 Sonnet · Next.js + React · Prometheus + Grafana',
     href: '/work/smart-technologies',
     image: {
       id: 'IMG-04',
@@ -166,12 +226,6 @@ const FEATURED_WORK = [
   },
 ]
 
-const EARLIER_WORK = [
-  { year: '2023', client: 'OrthoFoodie', tag: 'pre-build sprint' },
-  { year: '2022', client: 'MHHC', tag: 'habitat models' },
-  { year: '2022', client: 'Suncor Energy', tag: 'serving infra' },
-]
-
 function FeaturedWork() {
   return (
     <section id="work" className="mt-32 sm:mt-40 lg:mt-52">
@@ -180,7 +234,11 @@ function FeaturedWork() {
           kicker="Selected work"
           title="Three engagements, on the record."
           dek="Real production deployments. What the system did before, what it does now, and the stack that took it there."
-          rightMeta="Earlier work, below"
+          rightMeta={
+            <Link href="/work" className="hover:text-orange-600">
+              See all
+            </Link>
+          }
           size="lg"
         />
 
@@ -296,489 +354,243 @@ function FeaturedWork() {
             ))}
           </ol>
         </FadeInStagger>
-
-        {/* earlier work — quiet list */}
-        <FadeIn>
-          <div className="border-neutral-950/15 mt-20 border-t pt-6">
-            <p className="eyebrow wdth-narrow text-neutral-500">Earlier work</p>
-            <ul
-              role="list"
-              className="mt-6 divide-y divide-neutral-950/10 border-y border-neutral-950/10"
-            >
-              {EARLIER_WORK.map((e) => (
-                <li
-                  key={e.client}
-                  className="tabular grid grid-cols-12 items-baseline gap-x-6 py-4 font-mono text-sm text-neutral-700"
-                >
-                  <span className="col-span-2 text-xs text-neutral-500 sm:col-span-1">
-                    {e.year}
-                  </span>
-                  <span className="col-span-7 text-neutral-950 sm:col-span-5">
-                    {e.client}
-                  </span>
-                  <span className="col-span-3 text-xs uppercase tracking-[0.16em] text-neutral-500 sm:col-span-5">
-                    {e.tag}
-                  </span>
-                  <span className="col-span-12 text-right text-xs text-neutral-400 sm:col-span-1">
-                    archive
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-right font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500">
-              Full archive at{' '}
-              <Link
-                href="/work"
-                className="text-neutral-950 underline decoration-neutral-300 underline-offset-4 hover:decoration-orange-600"
-              >
-                /work
-              </Link>
-            </p>
-          </div>
-        </FadeIn>
       </Container>
     </section>
   )
 }
 
-function Practices() {
-  const practices = [
+function Products() {
+  const products = [
     {
       n: '01',
-      kind: 'serving',
-      title: 'Production ML systems',
-      body: 'Reliable, high-throughput serving stacks — registries, feature stores, observability, autoscaling. We build them to be operated by your team, not by us.',
-      spec: 'p50 < 12ms · 99.9% SLO · k8s-native',
+      name: 'BuildLess',
+      tagline: 'Pre-build product validation',
+      desc: 'A working idea taken to a live user test in under two weeks. Ends with a written build-or-kill recommendation, backed by behaviour data.',
+      href: '/buildless',
+      meta: 'Sprint · 1–2 wk',
     },
     {
       n: '02',
-      kind: 'model',
-      title: 'Custom model development',
-      body: 'Tailored models in PyTorch and JAX when off-the-shelf doesn’t fit, supported by reproducible benchmarks and rigorous evaluation. Every result, reconstructable.',
-      spec: 'PyTorch · JAX · CUDA · vendored evals',
+      name: 'Nudge',
+      tagline: 'In-app walkthrough overlay',
+      desc: 'End users ask Nudge how to do something, and it highlights the right elements on the page and walks them through, step by step.',
+      href: '#',
+      meta: 'In development',
     },
     {
       n: '03',
-      kind: 'tools',
-      title: 'Internal R&D',
-      body: 'Open and internal tools we build along the way: gateways, orchestration, vector search, feature engineering. Each one came out of a real engagement.',
-      spec: 'Tell · Atmos · Tessera · Norma · Bridge · Mesh',
+      name: 'Tell',
+      tagline: 'High-throughput LLM gateway',
+      desc: 'Caching, routing, and fallback for production-scale inference. Built for teams shipping LLM features at volume.',
+      href: '#',
+      meta: 'v1.0 · released',
+    },
+    {
+      n: '04',
+      name: 'Atmos',
+      tagline: 'Multi-cloud ML orchestration',
+      desc: 'Reproducible pipelines and model deployment across cloud providers.',
+      href: '#',
+      meta: 'v0.9 · beta',
+    },
+    {
+      n: '05',
+      name: 'Tessera',
+      tagline: 'Sandboxed code runtime',
+      desc: 'Safe execution environment for LLM-generated and user-submitted code.',
+      href: '#',
+      meta: 'v0.8 · beta',
+    },
+    {
+      n: '06',
+      name: 'Norma',
+      tagline: 'Automated feature engineering',
+      desc: 'Generate, evaluate, and select features for tabular ML at scale.',
+      href: 'https://norma.grouplabs.ca',
+      meta: 'v1.0 · released',
+    },
+    {
+      n: '07',
+      name: 'Bridge',
+      tagline: 'Sub-ms multi-modal vector search',
+      desc: 'Unified retrieval across text, image, and audio embeddings.',
+      href: 'https://bridgeproductpage.netlify.app/',
+      meta: 'v1.4 · released',
+    },
+    {
+      n: '08',
+      name: 'Mesh',
+      tagline: 'Distributed compute orchestration',
+      desc: 'Job scheduling and resource management for ML workloads at scale.',
+      href: '#',
+      meta: 'v0.2 · wip',
     },
   ]
 
   return (
-    <section className="mt-32 sm:mt-40 lg:mt-52">
+    <section id="products" className="mt-12 sm:mt-16 lg:mt-20">
       <Container>
-        <SectionHead
-          kicker="Practice"
-          title="Three lines of work."
-          dek="Production-grade engagements, scoped by phase and quoted by phase. We staff small and senior."
-          size="lg"
-        />
+        <FadeIn>
+          <div className="mb-6 flex items-center gap-4 border-b border-neutral-950/15 pb-3">
+            <p className="eyebrow wdth-narrow text-neutral-600">Solutions</p>
+            <span
+              aria-hidden="true"
+              className="h-px flex-1 bg-neutral-950/15"
+            />
+            <p className="eyebrow wdth-narrow text-neutral-400">
+              Scroll&nbsp;→
+            </p>
+          </div>
+          <ScrollableRow>
+            <ul className="flex gap-4">
+              {products.map((p) => {
+                const Icon = productIcons[p.name]
+                return (
+                <li key={p.name} className="flex-shrink-0">
+                  <Link
+                    href={p.href}
+                    className="group flex h-[24rem] w-[20rem] flex-col rounded-2xl border border-neutral-950/15 bg-neutral-50 p-8 transition-colors hover:border-neutral-950/30 hover:bg-white"
+                  >
+                    <div className="flex items-start justify-between">
+                      {Icon && <Icon className="h-20 w-auto text-neutral-800" />}
+                      <span className="tabular font-mono text-sm font-medium text-neutral-400">
+                        {p.n}
+                      </span>
+                    </div>
 
-        <FadeInStagger faster>
-          <ol className="mt-16 grid grid-cols-1 gap-y-12 lg:grid-cols-3 lg:gap-x-0 lg:divide-x lg:divide-neutral-950/10">
-            {practices.map((p) => (
-              <FadeIn
-                as="li"
-                key={p.n}
-                className="lift group lg:px-10 lg:first:pl-0 lg:last:pr-0"
-              >
-                <div className="border-neutral-950/15 flex items-baseline gap-3 border-b pb-3">
-                  <span className="tabular font-mono text-3xl font-medium tracking-tight text-neutral-950">
-                    {p.n}
-                  </span>
-                  <span className="eyebrow wdth-narrow text-neutral-500">
-                    Practice
-                  </span>
-                </div>
+                    <h3 className="mt-7 font-display text-3xl font-medium tracking-tight text-neutral-950">
+                      {p.name}
+                    </h3>
+                    <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500">
+                      {p.tagline}
+                    </p>
+                    <p className="mt-4 text-sm leading-relaxed text-neutral-700">
+                      {p.desc}
+                    </p>
 
-                <PracticeDiagram
-                  kind={p.kind}
-                  className="mt-6 h-20 w-full text-neutral-700 transition-colors duration-500 group-hover:text-orange-600"
-                />
-
-                <h3 className="mt-6 font-display text-2xl font-medium tracking-tight text-neutral-950 sm:text-3xl">
-                  {p.title}
-                </h3>
-                <p className="mt-3 text-base leading-relaxed text-neutral-700">
-                  {p.body}
-                </p>
-                <p className="mt-5 font-mono text-xs text-neutral-500">
-                  {p.spec}
-                </p>
-              </FadeIn>
-            ))}
-          </ol>
-        </FadeInStagger>
+                    <div className="mt-auto flex items-baseline justify-between gap-3 border-t border-neutral-950/10 pt-5">
+                      <span className="eyebrow wdth-narrow text-neutral-500">
+                        {p.meta}
+                      </span>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-orange-600 transition-transform group-hover:translate-x-0.5">
+                        Open →
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+                )
+              })}
+            </ul>
+          </ScrollableRow>
+        </FadeIn>
       </Container>
     </section>
   )
 }
 
-function BuildLessSection() {
+
+function WhatIsHappening() {
   return (
     <section className="relative isolate mt-32 overflow-hidden bg-neutral-950 sm:mt-40 lg:mt-52">
-      <div
-        aria-hidden="true"
-        className="grid-paper-dark pointer-events-none absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_at_top_right,white,transparent_70%)]"
-      />
-
       <Container className="py-24 sm:py-32 lg:py-40">
         <FadeIn>
           <div className="border-white/15 flex items-center gap-4 border-b pb-3">
-            <p className="eyebrow wdth-narrow text-orange-500">
-              <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-orange-500 align-middle" />
-              Practice 04 · BuildLess
+            <p className="eyebrow wdth-narrow text-white/65">
+              Working notes
             </p>
             <span aria-hidden="true" className="bg-white/15 h-px flex-1" />
-            <p className="eyebrow text-white/55 wdth-narrow">
-              Detail at{' '}
-              <Link
-                href="/buildless"
-                className="text-white underline decoration-white/30 underline-offset-4 hover:decoration-orange-500"
-              >
-                /buildless
-              </Link>
+            <p className="eyebrow wdth-narrow text-white/55">
+              §&nbsp;02
             </p>
           </div>
         </FadeIn>
 
-        <div className="mt-12 grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-12">
+        <div className="mt-12 grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-12 lg:items-start">
+          <FadeIn className="lg:col-span-5">
+            <figure className="group relative">
+              <div
+                className="relative w-full overflow-hidden"
+                style={{ aspectRatio: '4/5' }}
+              >
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    maskImage:
+                      'radial-gradient(ellipse 85% 75% at 50% 45%, black 25%, transparent 90%)',
+                    WebkitMaskImage:
+                      'radial-gradient(ellipse 85% 75% at 50% 45%, black 25%, transparent 90%)',
+                  }}
+                >
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(to right, rgba(255,255,255,0.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.10) 1px, transparent 1px)',
+                      backgroundSize: '20px 20px',
+                      backgroundPosition: '0 -2px',
+                    }}
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(to right, rgba(255,255,255,0.20) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.20) 1px, transparent 1px)',
+                      backgroundSize: '100px 100px',
+                      backgroundPosition: '0 -2px',
+                    }}
+                  />
+                </div>
+                <MugModel className="absolute inset-0" />
+              </div>
+              <figcaption className="pointer-events-none absolute bottom-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-md border border-white/10 bg-white/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-white/80 opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                Coffee mug · zero downtime since 2020
+              </figcaption>
+            </figure>
+          </FadeIn>
+
           <FadeIn className="lg:col-span-7">
-            <h2
-              className="wdth-wide font-display text-[clamp(2.5rem,7vw,5.25rem)] font-medium leading-[0.98] tracking-tight text-white
-                           [text-wrap:balance]"
-            >
-              Pre-build product validation.{' '}
-              <span className="text-white/55">In days, not months.</span>
+            <h2 className="wdth-wide font-display text-[clamp(2rem,5vw,3.75rem)] font-medium leading-[1.04] tracking-tight text-white [text-wrap:balance]">
+              What is happening at GroupLabs?
             </h2>
-            <div className="mt-10 max-w-xl space-y-5 text-lg leading-relaxed text-white/75">
+
+            <div className="mt-10 space-y-6 text-base leading-relaxed text-white/75 sm:text-lg">
               <p>
-                A working idea, taken to a live test in front of real users in
-                under two weeks, instrumented end-to-end. The sprint ends with a
-                written build-or-kill recommendation backed by behaviour data.
+                GroupLabs began as a small group of people with an academic
+                background, working on difficult technical problems. Over time,
+                more of these problems came to us, and it became clear that the
+                work needed structure. The company grew out of that.
               </p>
-              <p className="text-white/55">
-                For founders and product teams who would rather spend a week
-                finding out than a quarter committing.
+              <p>
+                From the beginning, we&rsquo;ve been interested in systems that
+                hold up outside the lab. That means designing for correctness,
+                measuring performance, and treating reliability as something
+                that must be demonstrated, not assumed.
+              </p>
+              <p>
+                We work directly with real systems. We build, test, and refine
+                them under the conditions they are meant to operate in.
+                Simplicity is preferred where possible. Complexity is introduced
+                only when necessary.
+              </p>
+              <p>
+                Much of what we do is shaped by repetition. Build something,
+                see how it behaves, improve it. The goal is not to produce
+                ideas, but to produce systems that work.
+              </p>
+              <p>
+                Over time, this has become a way of working. Careful,
+                deliberate, and grounded in practice. We try to leave every
+                system in a better state than we found it.
+              </p>
+              <p className="font-mono text-sm uppercase tracking-[0.18em] text-white">
+                That is the work.
               </p>
             </div>
-
-            <p className="text-white/65 mt-10 font-mono text-sm">
-              Sprint &nbsp;·&nbsp; 1–2 weeks &nbsp;·&nbsp; from{' '}
-              <span className="text-white">$8k–$15k</span> &nbsp;·&nbsp; larger
-              programs by phase
-            </p>
-          </FadeIn>
-
-          <FadeIn className="lg:col-span-5 lg:flex lg:items-start lg:justify-end lg:pt-2">
-            <HeroSnapshot invert />
           </FadeIn>
         </div>
       </Container>
-    </section>
-  )
-}
-
-function Tools() {
-  const tools = [
-    {
-      name: 'Tell',
-      tagline: 'High-throughput LLM gateway · caching · routing',
-      version: 'v1.0',
-      status: 'released',
-      spark: [3, 5, 4, 7, 6, 9, 11, 13, 12, 14],
-    },
-    {
-      name: 'Atmos',
-      tagline: 'Multi-cloud ML orchestration',
-      version: 'v0.9',
-      status: 'beta',
-      spark: [2, 3, 3, 5, 4, 6, 7, 8, 9, 11],
-    },
-    {
-      name: 'Tessera',
-      tagline: 'Sandboxed code runtime',
-      version: 'v0.8',
-      status: 'beta',
-      spark: [1, 2, 4, 3, 5, 6, 5, 7, 8, 9],
-    },
-    {
-      name: 'Norma',
-      tagline: 'Automated feature engineering',
-      version: 'v1.0',
-      status: 'released',
-      link: 'https://norma.grouplabs.ca',
-      spark: [4, 5, 6, 6, 7, 9, 10, 12, 14, 16],
-    },
-    {
-      name: 'Bridge',
-      tagline: 'Sub-ms multi-modal vector search',
-      version: 'v1.4',
-      status: 'released',
-      link: 'https://bridgeproductpage.netlify.app/',
-      spark: [6, 7, 9, 11, 12, 14, 17, 18, 21, 24],
-    },
-    {
-      name: 'Mesh',
-      tagline: 'Distributed compute orchestration',
-      version: 'v0.2',
-      status: 'wip',
-      spark: [1, 1, 2, 2, 2, 3, 3, 4, 4, 5],
-    },
-  ]
-
-  return (
-    <section id="tools" className="mt-32 sm:mt-40 lg:mt-52">
-      <Container>
-        <SectionHead
-          kicker="Internal R&D"
-          title="What came out of the work."
-          dek="Tools and libraries we built to support the consulting practice. Each one started as something a client needed."
-          rightMeta={`${tools.length} entries · 18-mo trend`}
-          size="lg"
-        />
-
-        <FadeInStagger faster>
-          <table className="mt-12 w-full border-collapse text-sm">
-            <thead>
-              <tr className="border-neutral-950/15 border-y">
-                <th className="eyebrow wdth-narrow py-3 pr-4 text-left text-neutral-500">
-                  Name
-                </th>
-                <th className="eyebrow wdth-narrow py-3 pr-4 text-left text-neutral-500">
-                  What it does
-                </th>
-                <th className="eyebrow wdth-narrow hidden py-3 pr-4 text-left text-neutral-500 md:table-cell">
-                  18-mo trend
-                </th>
-                <th className="eyebrow wdth-narrow py-3 pr-4 text-left text-neutral-500">
-                  Ver
-                </th>
-                <th className="eyebrow wdth-narrow py-3 text-right text-neutral-500">
-                  Status
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {tools.map((t) => (
-                <tr
-                  key={t.name}
-                  className="group border-b border-neutral-950/10 transition-colors hover:bg-neutral-950/[0.025]"
-                >
-                  <td className="py-4 pr-4 align-baseline">
-                    <span className="font-mono text-base font-semibold text-neutral-950 transition-colors group-hover:text-orange-600">
-                      {t.name}
-                    </span>
-                    {t.link && (
-                      <a
-                        href={t.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ml-2 inline-block font-mono text-[10px] uppercase tracking-[0.18em] text-orange-600 hover:underline"
-                      >
-                        ↗
-                      </a>
-                    )}
-                  </td>
-                  <td className="py-4 pr-4 align-baseline text-sm text-neutral-700">
-                    {t.tagline}
-                  </td>
-                  <td className="hidden py-4 pr-4 align-baseline md:table-cell">
-                    <SparkLine
-                      data={t.spark}
-                      width={88}
-                      height={22}
-                      accent={t.status === 'released' || t.status === 'beta'}
-                      className="opacity-80 transition-opacity group-hover:opacity-100"
-                    />
-                  </td>
-                  <td className="py-4 pr-4 align-baseline font-mono text-xs text-neutral-500">
-                    {t.version}
-                  </td>
-                  <td className="py-4 text-right align-baseline">
-                    <StatusPill status={t.status} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </FadeInStagger>
-      </Container>
-    </section>
-  )
-}
-
-function StatusPill({ status }) {
-  const map = {
-    released: { color: 'text-neutral-700', dot: 'bg-neutral-700' },
-    beta: { color: 'text-orange-600', dot: 'bg-orange-600' },
-    wip: { color: 'text-neutral-400', dot: 'bg-neutral-400' },
-  }
-  const s = map[status] ?? map.released
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] ${s.color}`}
-    >
-      <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
-      {status}
-    </span>
-  )
-}
-
-function TheStudio() {
-  return (
-    <section className="mt-32 sm:mt-40 lg:mt-52">
-      <Container>
-        <SectionHead
-          kicker="The studio"
-          title="Built like infrastructure. Operated like a research lab."
-          size="lg"
-        />
-
-        <div className="mt-16 grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-12">
-          <div className="space-y-6 text-lg leading-relaxed text-neutral-700 lg:col-span-7">
-            <p>
-              GroupLabs is an engineering studio, not an agency. We work
-              directly with founders, product leadership, and engineering
-              leadership — at most one degree of separation from the people
-              who&rsquo;ll live with what we ship.
-            </p>
-            <p>
-              We don&rsquo;t sell hours, decks, or strategy slides. We build
-              production systems and write the runbooks that come with them. The
-              work goes out under our name and we&rsquo;re available the day
-              after we ship.
-            </p>
-            <p className="text-neutral-500">
-              We staff small and senior. Engagements are scoped by phase, quoted
-              by phase, and end on a written deliverable. If the fit isn&rsquo;t
-              there, we say so on the first call.
-            </p>
-          </div>
-
-          <div className="space-y-6 lg:col-span-5">
-            {/* Studio mark — quiet identity element */}
-            <div className="border-neutral-950/15 flex flex-col items-center justify-center border bg-neutral-50 px-6 py-12">
-              <StudioMark size={200} className="text-neutral-950" />
-              <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500">
-                Studio mark · est. MMXX
-              </p>
-            </div>
-
-            <div className="border-neutral-950/15 border bg-neutral-50 p-6 sm:p-8">
-              <p className="eyebrow wdth-narrow text-neutral-500">
-                Team composition
-              </p>
-              <pre className="mt-4 whitespace-pre font-mono text-[12px] leading-relaxed text-neutral-700">
-                {`Engineers              06
-Researchers            02
-Founders               02
-─────────────────────────
-Sectors served         04
-Years operating        05
-Deploys per year      ~03
-
-Cities  Calgary, Alberta
-        Montreal, Quebec`}
-              </pre>
-            </div>
-            <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500">
-              More at{' '}
-              <Link
-                href="/about"
-                className="text-neutral-950 underline decoration-neutral-300 underline-offset-4 hover:decoration-orange-600"
-              >
-                /about
-              </Link>{' '}
-              ·{' '}
-              <Link
-                href="/process"
-                className="text-neutral-950 underline decoration-neutral-300 underline-offset-4 hover:decoration-orange-600"
-              >
-                /process
-              </Link>{' '}
-              ·{' '}
-              <Link
-                href="/blog"
-                className="text-neutral-950 underline decoration-neutral-300 underline-offset-4 hover:decoration-orange-600"
-              >
-                /blog
-              </Link>
-            </p>
-          </div>
-        </div>
-      </Container>
-    </section>
-  )
-}
-
-function Colophon() {
-  return (
-    <section className="mt-32 sm:mt-40 lg:mt-52">
-      <div className="relative isolate overflow-hidden bg-neutral-950">
-        <div
-          aria-hidden="true"
-          className="grid-paper-dark pointer-events-none absolute inset-0 -z-10 opacity-50 [mask-image:radial-gradient(ellipse_at_bottom,white,transparent_75%)]"
-        />
-
-        <Container className="py-24 sm:py-32 lg:py-40">
-          <FadeIn>
-            <div className="border-white/15 flex items-center gap-4 border-b pb-3">
-              <p className="eyebrow text-white/55 wdth-narrow">Address</p>
-              <span aria-hidden="true" className="bg-white/15 h-px flex-1" />
-              <p className="eyebrow text-white/55 wdth-narrow">
-                Calgary, AB · Montreal, QC
-              </p>
-            </div>
-          </FadeIn>
-
-          <div className="mt-12 grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-start">
-            <FadeIn className="lg:col-span-8">
-              <a href="mailto:noel@grouplabs.ca" className="group block">
-                <p
-                  className="tabular font-mono text-[clamp(1.75rem,7vw,5.25rem)] leading-[0.96] tracking-tight text-white
-                              transition-colors group-hover:text-orange-500"
-                >
-                  noel@grouplabs.ca
-                </p>
-              </a>
-            </FadeIn>
-
-            <FadeIn className="lg:col-span-4">
-              <ImagePlaceholder
-                id="SVG-01"
-                aspect="10/7"
-                invert
-                caption="Calgary · Montreal · Canada"
-                prompt="Minimalist line-art outline of Canada (country silhouette only, no province lines), drawn as a single 1px hairline stroke in currentColor so it can be styled. Two small filled dots inside: one at Calgary (~51°N, 114°W — upper-middle of the silhouette, slightly left of center) and one at Montreal (~45°N, 73°W — lower-right). Each dot 4px diameter, in #EA580C (orange-600). Optional thin connecting line between the two dots, dashed (3,3 stroke pattern), at 30% opacity. No labels, no text — the section already labels the cities."
-              />
-            </FadeIn>
-          </div>
-
-          <FadeIn>
-            <div className="border-white/15 mt-16 grid grid-cols-1 gap-y-8 border-t pt-8 sm:grid-cols-2 sm:gap-x-12">
-              <div>
-                <p className="eyebrow text-white/45 wdth-narrow">
-                  Calgary, Alberta
-                </p>
-                <p className="text-white/85 mt-2 font-mono text-sm">
-                  +1 (587) 700-9968
-                </p>
-              </div>
-              <div>
-                <p className="eyebrow text-white/45 wdth-narrow">
-                  Montreal, Quebec
-                </p>
-                <p className="text-white/85 mt-2 font-mono text-sm">
-                  +1 (825) 365-9891
-                </p>
-              </div>
-            </div>
-          </FadeIn>
-        </Container>
-      </div>
     </section>
   )
 }
@@ -795,12 +607,10 @@ export default async function Home() {
     <>
       <HeroSection />
       <DeployedAt />
+      <Products />
       <FeaturedWork />
-      <Practices />
-      <BuildLessSection />
-      <Tools />
-      <TheStudio />
-      <Colophon />
+      <WhatIsHappening />
+      <ContactCTA />
     </>
   )
 }

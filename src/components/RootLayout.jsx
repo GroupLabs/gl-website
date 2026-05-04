@@ -13,6 +13,7 @@ import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { motion, MotionConfig, useReducedMotion } from 'framer-motion'
 
+import { CalConnect } from '@/components/CalConnect'
 import { Container } from '@/components/Container'
 import { Footer } from '@/components/Footer'
 import { Logo, Logomark } from '@/components/Logo'
@@ -20,6 +21,11 @@ import { Offices } from '@/components/Offices'
 import { SocialMedia } from '@/components/SocialMedia'
 
 const RootLayoutContext = createContext(null)
+
+export function useConnect() {
+  let ctx = useContext(RootLayoutContext)
+  return ctx?.openConnect ?? (() => {})
+}
 
 function XIcon(props) {
   return (
@@ -45,6 +51,7 @@ function Header({
   onToggle,
   toggleRef,
   invert = false,
+  onConnectClick,
 }) {
   let { logoHovered, setLogoHovered } = useContext(RootLayoutContext)
 
@@ -69,15 +76,18 @@ function Header({
           />
         </Link>
         <div className="flex items-center gap-x-5 sm:gap-x-8">
-          <a
-            href="mailto:noel@grouplabs.ca"
+          <button
+            type="button"
+            onClick={onConnectClick}
             className={clsx(
-              'hidden font-mono text-xs tracking-tight transition-colors sm:inline',
-              invert ? 'text-white/70 hover:text-white' : 'text-neutral-500 hover:text-neutral-950',
+              'hidden text-sm underline underline-offset-4 transition-colors sm:inline',
+              invert
+                ? 'text-white hover:text-orange-500'
+                : 'text-neutral-950 hover:text-orange-600',
             )}
           >
-            noel@grouplabs.ca
-          </a>
+            Connect with us
+          </button>
           <button
             ref={toggleRef}
             type="button"
@@ -149,6 +159,7 @@ function Navigation() {
 function RootLayoutInner({ children }) {
   let panelId = useId()
   let [expanded, setExpanded] = useState(false)
+  let { calOpen, openConnect, closeConnect } = useContext(RootLayoutContext)
   let openRef = useRef(null)
   let closeRef = useRef(null)
   let navRef = useRef(null)
@@ -190,6 +201,7 @@ function RootLayoutInner({ children }) {
                 closeRef.current?.focus({ preventScroll: true }),
               )
             }}
+            onConnectClick={openConnect}
           />
         </div>
 
@@ -214,6 +226,10 @@ function RootLayoutInner({ children }) {
                   window.setTimeout(() =>
                     openRef.current?.focus({ preventScroll: true }),
                   )
+                }}
+                onConnectClick={() => {
+                  setExpanded(false)
+                  openConnect()
                 }}
               />
             </div>
@@ -257,6 +273,8 @@ function RootLayoutInner({ children }) {
           <Footer />
         </motion.div>
       </motion.div>
+
+      <CalConnect open={calOpen} onClose={closeConnect} />
     </MotionConfig>
   )
 }
@@ -264,9 +282,18 @@ function RootLayoutInner({ children }) {
 export function RootLayout({ children }) {
   let pathname = usePathname()
   let [logoHovered, setLogoHovered] = useState(false)
+  let [calOpen, setCalOpen] = useState(false)
 
   return (
-    <RootLayoutContext.Provider value={{ logoHovered, setLogoHovered }}>
+    <RootLayoutContext.Provider
+      value={{
+        logoHovered,
+        setLogoHovered,
+        calOpen,
+        openConnect: () => setCalOpen(true),
+        closeConnect: () => setCalOpen(false),
+      }}
+    >
       <RootLayoutInner key={pathname}>{children}</RootLayoutInner>
     </RootLayoutContext.Provider>
   )

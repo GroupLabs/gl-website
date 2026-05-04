@@ -58,7 +58,7 @@ const team = [
       {
         name: 'Sam Moses',
         role: 'Intern',
-        image: '/images/team/sam-moses.png',
+        image: '/images/team/sam-moses.jpg',
       },
     ],
   },

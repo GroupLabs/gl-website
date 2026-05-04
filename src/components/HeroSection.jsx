@@ -42,6 +42,7 @@ export function HeroSection() {
                 backgroundImage:
                   'linear-gradient(to right, rgba(234,88,12,0.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(234,88,12,0.10) 1px, transparent 1px)',
                 backgroundSize: '20px 20px',
+                backgroundPosition: '0 -2px',
               }}
             />
             <div
@@ -50,26 +51,20 @@ export function HeroSection() {
                 backgroundImage:
                   'linear-gradient(to right, rgba(234,88,12,0.20) 1px, transparent 1px), linear-gradient(to bottom, rgba(234,88,12,0.20) 1px, transparent 1px)',
                 backgroundSize: '100px 100px',
+                backgroundPosition: '0 -2px',
               }}
             />
           </motion.div>
 
-          <div className="flex w-fit flex-col items-start">
-            {/* Headline — one substantive sentence. A definition, not a slogan. */}
-            <motion.h1
-              className="wdth-wide font-display text-3xl font-medium leading-[1.1] tracking-tight text-neutral-950 sm:text-4xl"
-              {...fadeUp(0.5)}
-            >
-              We build systems that are provably correct, reliable, and&nbsp;fast.
-            </motion.h1>
-
-            <motion.p
-              className="mt-6 max-w-3xl text-base leading-relaxed text-neutral-600 sm:text-lg"
-              {...fadeUp(0.7)}
-            >
-              This comes from a deliberate, measured approach to how systems are built.
-            </motion.p>
-          </div>
+          {/* Headline — one substantive sentence. A definition, not a slogan. */}
+          <motion.h1
+            className="wdth-wide font-display text-3xl font-medium leading-[1.1] tracking-tight text-neutral-950 sm:text-4xl"
+            {...fadeUp(0.5)}
+          >
+            We build systems that are provably
+            <br />
+            correct, reliable, and&nbsp;fast.
+          </motion.h1>
         </div>
       </Container>
     </section>
