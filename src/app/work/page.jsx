@@ -1,148 +1,228 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Blockquote } from '@/components/Blockquote'
-import { Border } from '@/components/Border'
-import { Button } from '@/components/Button'
-import { ContactSection } from '@/components/ContactSection'
+import { ContactCTA } from '@/components/ContactCTA'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
-import { PageIntro } from '@/components/PageIntro'
-import { Testimonial } from '@/components/Testimonial'
+import { SectionHead } from '@/components/SectionHead'
 import { formatDate } from '@/lib/formatDate'
 import { loadCaseStudies } from '@/lib/mdx'
 
-function CaseStudies({ caseStudies }) {
+function WorkHero({ count }) {
   return (
-    <Container className="mt-40">
-      <FadeIn>
-        <h2 className="font-display text-2xl font-semibold text-neutral-950">
-          Case studies
-        </h2>
-      </FadeIn>
-      <div className="mt-10 space-y-20 sm:space-y-24 lg:space-y-32">
-        {caseStudies.map((caseStudy) => (
-          <FadeIn key={caseStudy.client}>
-            <article>
-              <Border className="grid grid-cols-3 gap-x-8 gap-y-8 pt-16">
-                <div className="col-span-full sm:flex sm:items-center sm:justify-between sm:gap-x-8 lg:col-span-1 lg:block">
-                  <div className="sm:flex sm:items-center sm:gap-x-6 lg:block">
-                    <Image
-                      src={caseStudy.logo}
-                      alt={caseStudy.client}
-                      className="h-16 w-16 flex-none object-contain"
-                      unoptimized
-                    />
-                    <h3 className="mt-6 text-sm font-semibold text-neutral-950 sm:mt-0 lg:mt-8">
-                      {caseStudy.client}
-                    </h3>
-                  </div>
-                  <div className="mt-1 flex gap-x-4 sm:mt-0 lg:block">
-                    <p className="text-sm tracking-tight text-neutral-950 after:ml-4 after:font-semibold after:text-neutral-300 after:content-['/'] lg:mt-2 lg:after:hidden">
-                      {caseStudy.service}
-                    </p>
-                    <p className="text-sm text-neutral-950 lg:mt-2">
-                      <time dateTime={caseStudy.date}>
-                        {formatDate(caseStudy.date)}
-                      </time>
-                    </p>
-                  </div>
-                </div>
-                <div className="col-span-full lg:col-span-2 lg:max-w-2xl">
-                  <p className="font-display text-4xl font-medium text-neutral-950">
-                    <Link href={caseStudy.href}>{caseStudy.title}</Link>
-                  </p>
-                  <div className="mt-6 space-y-6 text-base text-neutral-600">
-                    {caseStudy.summary.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
-                  </div>
-                  <div className="mt-8 flex">
-                    <Button
-                      href={caseStudy.href}
-                      aria-label={`Read case study: ${caseStudy.client}`}
-                    >
-                      Read case study
-                    </Button>
-                  </div>
-                  {caseStudy.testimonial && (
-                    <Blockquote
-                      author={caseStudy.testimonial.author}
-                      className="mt-12"
-                    >
-                      {caseStudy.testimonial.content}
-                    </Blockquote>
-                  )}
-                </div>
-              </Border>
-            </article>
+    <section className="relative isolate overflow-hidden bg-white text-neutral-950">
+      <Container className="relative pb-6 pt-10 sm:pb-8 sm:pt-14 lg:pb-10 lg:pt-16">
+        <div className="relative flex min-h-[50vh] flex-col items-center justify-center overflow-hidden rounded-[2rem] px-5 py-8 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10"
+            style={{
+              maskImage:
+                'radial-gradient(ellipse at center, black 0%, transparent 85%)',
+              WebkitMaskImage:
+                'radial-gradient(ellipse at center, black 0%, transparent 85%)',
+            }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right, rgba(234,88,12,0.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(234,88,12,0.10) 1px, transparent 1px)',
+                backgroundSize: '20px 20px',
+                backgroundPosition: '0 -2px',
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right, rgba(234,88,12,0.20) 1px, transparent 1px), linear-gradient(to bottom, rgba(234,88,12,0.20) 1px, transparent 1px)',
+                backgroundSize: '100px 100px',
+                backgroundPosition: '0 -2px',
+              }}
+            />
+          </div>
+
+          <FadeIn immediate>
+            <p className="eyebrow wdth-narrow text-center text-orange-600">
+              <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-orange-600 align-middle" />
+              §&nbsp;01 &nbsp;·&nbsp; Selected work
+            </p>
           </FadeIn>
-        ))}
-      </div>
-    </Container>
+
+          <FadeIn immediate delay={0.15}>
+            <h1 className="wdth-wide mt-5 max-w-3xl text-center font-display text-3xl font-medium leading-[1.08] tracking-tight text-neutral-950 sm:text-4xl lg:text-5xl">
+              Real systems,{' '}
+              <span className="italic text-neutral-700">on the record.</span>
+              <br />
+              Built and shipped.
+            </h1>
+          </FadeIn>
+
+          <FadeIn immediate delay={0.3}>
+            <p className="mt-6 max-w-xl text-center text-base leading-relaxed text-neutral-700 sm:text-lg">
+              What clients had before, what they have now, and how it got built.
+              Each engagement runs in production.
+            </p>
+          </FadeIn>
+
+          <FadeIn immediate delay={0.45}>
+            <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-500">
+              <span className="tabular text-neutral-950">
+                {String(count).padStart(2, '0')}
+              </span>{' '}
+              engagements documented
+            </p>
+          </FadeIn>
+        </div>
+      </Container>
+    </section>
   )
 }
 
-const clients = []
-
-function Clients() {
+function CaseStudies({ caseStudies }) {
   return (
-    <Container className="mt-24 sm:mt-32 lg:mt-40">
-      <FadeIn>
-        <h2 className="font-display text-2xl font-semibold text-neutral-950">
-          You’re in good company
-        </h2>
-      </FadeIn>
-      <FadeInStagger className="mt-10" faster>
-        <Border as={FadeIn} />
-        <ul
-          role="list"
-          className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4"
-        >
-          {clients.map(([client, logo]) => (
-            <li key={client} className="group">
-              <FadeIn className="overflow-hidden">
-                <Border className="pt-12 group-[&:nth-child(-n+2)]:-mt-px sm:group-[&:nth-child(3)]:-mt-px lg:group-[&:nth-child(4)]:-mt-px">
-                  <Image src={logo} alt={client} unoptimized />
-                </Border>
-              </FadeIn>
-            </li>
-          ))}
-        </ul>
-      </FadeInStagger>
-    </Container>
+    <section id="cases" className="mt-16 sm:mt-24 lg:mt-32">
+      <Container>
+        <SectionHead
+          kicker="§ 02 · Case studies"
+          title="Engagements, on the record."
+          dek="What we did, how we did it, and what shipped. Open any one for the full report."
+          rightMeta={`${String(caseStudies.length).padStart(2, '0')} entries`}
+          size="lg"
+        />
+
+        <FadeInStagger faster>
+          <ol className="mt-16 space-y-16 sm:space-y-24">
+            {caseStudies.map((cs, idx) => {
+              const n = String(idx + 1).padStart(2, '0')
+              const year = cs.date.split('-')[0]
+              return (
+                <FadeIn as="li" key={cs.client}>
+                  <article className="group">
+                    <div className="border-neutral-950/15 flex items-baseline gap-4 border-b pb-3">
+                      <span className="tabular font-mono text-2xl font-medium tracking-tight text-neutral-950">
+                        {n}
+                      </span>
+                      <span className="eyebrow wdth-narrow text-neutral-500">
+                        {year} · {cs.service}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="bg-neutral-950/15 h-px flex-1"
+                      />
+                      <Link
+                        href={cs.href}
+                        className="eyebrow wdth-narrow text-neutral-500 hover:text-orange-600"
+                      >
+                        Full report →
+                      </Link>
+                    </div>
+
+                    <div className="mt-8">
+                      <Link href={cs.href} aria-label={`Open ${cs.client} case study`}>
+                        <figure
+                          className="relative w-full overflow-hidden border border-neutral-950/10"
+                          style={{ aspectRatio: '16/9' }}
+                        >
+                          <Image
+                            src={cs.image}
+                            alt={cs.image.alt ?? cs.client}
+                            fill
+                            sizes="(min-width: 1024px) 1100px, 100vw"
+                            className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                            unoptimized
+                            placeholder="blur"
+                          />
+                          <figcaption className="text-white/85 absolute bottom-3 left-3 right-3 flex items-baseline justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.18em] mix-blend-difference">
+                            <span>{cs.client}</span>
+                            <span className="opacity-50">IMG-{n}</span>
+                          </figcaption>
+                        </figure>
+                      </Link>
+                    </div>
+
+                    <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-12">
+                      <h3 className="wdth-wide font-display text-[clamp(2rem,5vw,3.75rem)] font-medium leading-[1.04] tracking-tight text-neutral-950 lg:col-span-5">
+                        <Link href={cs.href} className="hover:text-orange-600">
+                          {cs.client}
+                        </Link>
+                      </h3>
+
+                      <div className="space-y-6 text-base leading-relaxed text-neutral-700 lg:col-span-7">
+                        <p>
+                          <span className="eyebrow wdth-narrow text-neutral-500">
+                            Engagement &nbsp;·&nbsp;
+                          </span>{' '}
+                          {cs.title}
+                        </p>
+                        {cs.summary.map((paragraph) => (
+                          <p key={paragraph}>
+                            <span className="eyebrow wdth-narrow text-neutral-500">
+                              Outcome &nbsp;·&nbsp;
+                            </span>{' '}
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-6 border-t border-neutral-950/10 pt-6 lg:grid-cols-12">
+                      <div className="lg:col-span-5">
+                        <p className="eyebrow wdth-narrow text-neutral-500">
+                          Engaged
+                        </p>
+                        <p className="tabular mt-2 font-mono text-3xl font-medium leading-none tracking-tight text-neutral-950 sm:text-4xl">
+                          {formatDate(cs.date)}
+                        </p>
+                        <p className="mt-2 font-mono text-xs text-neutral-500">
+                          {cs.service}
+                        </p>
+                      </div>
+                      <div className="lg:col-span-7">
+                        <p className="eyebrow wdth-narrow text-neutral-500">
+                          Read
+                        </p>
+                        <Link
+                          href={cs.href}
+                          className="tabular mt-2 inline-flex items-baseline gap-2 font-mono text-sm text-neutral-800 transition-colors hover:text-orange-600"
+                        >
+                          <span>{cs.href}</span>
+                          <span
+                            aria-hidden="true"
+                            className="transition-transform duration-300 group-hover:translate-x-0.5"
+                          >
+                            →
+                          </span>
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                </FadeIn>
+              )
+            })}
+          </ol>
+        </FadeInStagger>
+      </Container>
+    </section>
   )
 }
 
 export const metadata = {
   title: 'Our Work',
   description:
-    'Explore how our Calgary-based team applies machine learning and data science to solve real-world problems.',
+    'Production systems built by GroupLabs. Real engagements with operators in energy, healthcare, education, and humanitarian work.',
   alternates: { canonical: '/work' },
 }
 
 export default async function Work() {
-  let caseStudies = await loadCaseStudies()
+  const caseStudies = await loadCaseStudies()
 
   return (
     <>
-      <PageIntro eyebrow="Our work" title="Solutions for the real world.">
-        <p>
-          Our goal is to simplify the application of computational research to
-          tangible issues around the globe.
-        </p>
-      </PageIntro>
-
+      <WorkHero count={caseStudies.length} />
       <CaseStudies caseStudies={caseStudies} />
-
-      <Testimonial className="mt-24 sm:mt-32 lg:mt-40">
-        We approached GroupLabs because we loved their work. They delivered in
-        record time.
-      </Testimonial>
-
-      {/* <Clients /> */}
-
-      <ContactSection />
+      <ContactCTA />
     </>
   )
 }

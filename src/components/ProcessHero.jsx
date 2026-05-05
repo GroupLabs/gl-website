@@ -1,10 +1,11 @@
 'use client'
 
+import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 
 import { Container } from '@/components/Container'
 
-export function HeroSection() {
+export function ProcessHero() {
   const shouldReduceMotion = useReducedMotion()
 
   const fadeUp = (delay = 0) => ({
@@ -17,8 +18,6 @@ export function HeroSection() {
     <section className="relative isolate overflow-hidden bg-white text-neutral-950">
       <Container className="relative pb-6 pt-10 sm:pb-8 sm:pt-14 lg:pb-10 lg:pt-16">
         <div className="relative flex min-h-[50vh] flex-col items-center justify-center overflow-hidden rounded-[2rem] px-5 py-8 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
-          {/* Layered grid — minor 20px + major 100px lines, radially faded
-              from the center so the field softens toward the edges. */}
           <motion.div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10"
@@ -56,15 +55,39 @@ export function HeroSection() {
             />
           </motion.div>
 
-          {/* Headline — one substantive sentence. A definition, not a slogan. */}
+          <motion.p
+            className="eyebrow wdth-narrow text-orange-600"
+            {...fadeUp(0.2)}
+          >
+            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-orange-600 align-middle" />
+            §&nbsp;00 &nbsp;·&nbsp; Process
+          </motion.p>
+
           <motion.h1
-            className="wdth-wide font-display text-3xl font-medium leading-[1.1] tracking-tight text-neutral-950 sm:text-4xl"
+            className="wdth-wide mt-6 text-center font-display text-3xl font-medium leading-[1.1] tracking-tight text-neutral-950 sm:text-4xl"
             {...fadeUp(0.5)}
           >
-            We build systems that are <i>provably</i>
-            <br />
-            correct, reliable, and&nbsp;fast.
+            How we work.
+            <span className="block font-normal italic text-neutral-500">
+              Three phases, one written deliverable each.
+            </span>
           </motion.h1>
+
+          <motion.p
+            className="mx-auto mt-8 max-w-xl text-center text-base leading-relaxed text-neutral-700"
+            {...fadeUp(0.7)}
+          >
+            We deliver practical solutions that clients use to address
+            real-world, impactful problems. For pre-build validation sprints,
+            see{' '}
+            <Link
+              href="/buildless"
+              className="underline decoration-orange-600/50 underline-offset-4 hover:text-orange-600"
+            >
+              how BuildLess works
+            </Link>
+            .
+          </motion.p>
         </div>
       </Container>
     </section>

@@ -1,18 +1,53 @@
 import logo from '@/images/clients/smart/smart-logo.png'
-import imageHero from './hero.jpg'
+import imageHero from '@/images/work/smart.jpg'
 
 export const caseStudy = {
+  n: '03',
   client: 'SMART Technologies',
-  title: 'Boosting Classroom Engagement with Generative AI',
+  title: 'A generative pipeline that turns a teacher’s prompt into a classroom-ready interactive activity',
   description:
-    'Scalable RAG architecture serving 150+ concurrent schools with sub-second latency.',
-  summary: [
-    'Using large language models, a Rust backend and a React/Next.js frontend, Elevate generates editable HTML/CSS/JS teaching resources on‑demand. Piloted in 5 schools across North America, the system produced 30+ activities and engaged more than 150 students while slashing teachers’ prep time.',
-  ],
-  logo,
-  image: { ...imageHero, alt: 'SMART Technologies demo' },
+    'An end-to-end generation pipeline that turns a one-line teacher prompt into an editable, classroom-ready interactive activity, embedded in SMART Boards and LMSs.',
+  sector: 'K–12 education · teacher-facing AI tools',
+  service: 'Scalable GenAI infrastructure',
   date: '2025-05',
-  service: 'Scalable GenAI Infrastructure',
+  logo,
+  image: {
+    ...imageHero,
+    alt: 'A teacher at the front of a bright K–12 classroom using an interactive worksheet on a large SMART display, with students at their desks watching and engaged.',
+    caption: 'Generated interactive on a SMART board · classroom',
+    id: 'IMG-04',
+  },
+  summary: [
+    'We worked with SMART Technologies to build Elevate, a generative system that turns a teacher’s natural-language brief (for example, “make a counting game for kindergarten”) into a polished, ready-to-run interactive activity, with safety, latency, and provider redundancy treated as first-class concerns.',
+  ],
+  problem: [
+    'Teachers want interactive lessons. They do not have time to build them. Translating a casual brief into a clean, classroom-ready activity (with prompts, drag-and-drop interactions, sensible visuals) is days of work, not minutes, and it is happening in a normal prep window that is already full.',
+    'Anything that closed that gap also had to clear a higher bar than a consumer LLM toy: content safety, predictable latency under load, and graceful degradation when one provider was unavailable.',
+  ],
+  approach: [
+    'We shipped a generation pipeline. Claude 3 Sonnet decomposes the brief and drafts the activity. A Rust Actix-Web service moderates, spell-checks, and sanitises the output, with automated filters and a human-in-the-loop review path. A Next.js frontend streams the activity to the browser as it is generated, so teachers see and edit it live rather than waiting on a spinner.',
+    'The model layer was deliberately provider-agnostic, with fallbacks to OpenAI, Anthropic, Meta, and xAI. The system embeds directly into SMART Boards and LMSs, so the output lands in the surface teachers and students already use, instead of yet another tab.',
+  ],
+  outcome: [
+    'Across an eight-month pilot in five North American schools, the system generated more than 300 classroom activities, reaching 150+ students. Prep that used to be measured in hours collapsed to minutes, and the activities were good enough that teachers chose to use them.',
+  ],
+  metric: {
+    label: 'Activities generated',
+    value: '300+',
+    sub: 'across 5 schools, 150+ students, 8-month pilot',
+  },
+  stack: 'Rust Actix-Web · Claude 3 Sonnet · Next.js + React · Prometheus + Grafana',
+  tags: [
+    'LLM systems',
+    'Streaming UI',
+    'Content moderation',
+    'Provider failover',
+    'EdTech',
+  ],
+  quote: {
+    text: 'This is by far the most amazing activity yet. My students understood exactly what they were working on.',
+    attribution: 'Candace T. · Lubbock ISD',
+  },
 }
 
 export const metadata = {
@@ -20,42 +55,3 @@ export const metadata = {
   description: caseStudy.description,
   alternates: { canonical: '/work/smart-technologies' },
 }
-
-## Overview
-
-Teachers crave interactive lessons but have little time to create them. Our solution solves this by converting a teacher’s natural‑language request (e.g. “Make a counting game for kindergarten”) into a polished, ready‑to‑use activity.
-
-The pipeline:
-
-1. **Input** – Teacher enters topic and requirements.
-2. **LLM Reasoning** – Claude 3 Sonnet decomposes the request and drafts code.
-3. **Backend Cleanup** – A Rust Actix‑Web service moderates, spell‑checks and sanitises the output.
-4. **Realtime Frontend** – Next.js streams the activity to the browser for live preview and edits.
-
-By embedding activities in SMART Boards and LMSs, Elevate fits seamlessly into existing classrooms.
-
-### Key Technical Challenges
-
-- **Content Safety & Moderation** – Automated filters and human‑in‑the‑loop review.
-- **Latency** – Parallel streaming of LLM tokens and incremental DOM updates.
-- **Scalability** – Provider‑agnostic model layer with fallbacks to OpenAI, Anthropic, Meta and xAI.
-
-## What we did
-
-<TagList>
-  <TagListItem>Rust Actix‑Web</TagListItem>
-  <TagListItem>Claude 3 Sonnet</TagListItem>
-  <TagListItem>Next.js & React</TagListItem>
-  <TagListItem>Prometheus + Grafana</TagListItem>
-</TagList>
-
-<StatList>
-  <StatListItem value="5 Schools" label="Across North America" />
-  <StatListItem value="150+" label="Students Engaged" />
-  <StatListItem value="300+" label="Activities Generated" />
-  <StatListItem value="8 Months" label="Project Duration" />
-</StatList>
-
----
-
-> “This is by far the most AMAZING activity yet – my students understood exactly what they were working on.” — *Candace T., Lubbock ISD*

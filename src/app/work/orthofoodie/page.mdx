@@ -1,18 +1,48 @@
 import logo from '@/images/clients/orthofoodie/orthofoodie-logo.png'
-import imageHero from './hero.jpg'
+import imageHero from '@/images/work/orthofoodie.png'
 
 export const caseStudy = {
+  n: '04',
   client: 'OrthoFoodie',
-  title: 'Food Detection & Nutrition Prediction',
+  title: 'A monocular nutrition estimator that runs in real time inside a meal-tracking app',
   description:
-    'ML models for detecting foods and predicting calories and nutrients from images.',
-  summary: [
-    'We partnered with OrthoFoodie to build machine learning models that detect foods and predict nutritional content from single images.'
-  ],
-  logo,
-  image: { ...imageHero, alt: 'OrthoFoodie food detection' },
+    'A single-image food and nutrition estimator hitting 36% PMAE on nutrition5k, with sub-second inference on an A100, designed for in-app capture flows.',
+  sector: 'Computer vision · single-image nutrition estimation',
+  service: 'Machine learning',
   date: '2025-09',
-  service: 'Machine Learning',
+  logo,
+  image: {
+    ...imageHero,
+    alt: 'Overhead view of a varied home-cooked meal on a plain ceramic plate (grilled salmon, roasted carrots and broccoli, brown rice, lemon wedge) on a weathered wood table.',
+    caption: 'Single-frame reference plate · nutrition estimation',
+    id: 'IMG-05',
+  },
+  summary: [
+    'We are working with [OrthoFoodie](https://orthofoodie.app/) on a monocular food and nutrition estimator. Input is one phone photo of a meal. Output is a calorie and nutrient breakdown, fast enough to feel real-time inside an app.',
+  ],
+  problem: [
+    'A single phone photo carries no depth, no plate-scale reference, and no portion priors. Asking a model to recover calories and macronutrients from that signal is ill-posed by construction.',
+    'Make the per-image error too high and the day-level totals (which is what users actually act on) drift far enough to be misleading. Any approach has to be honest about that error and tight enough to be useful in spite of it.',
+  ],
+  approach: [
+    'We trained a single-image nutrition estimator on nutrition5k, with the loss surface shaped for monocular regression rather than borrowed from a classification setup. Architectural and training choices were optimised for the latency budget of an in-app capture flow, not the leaderboard.',
+    'Validation was structured to flag where the model degrades, by food category and by portion size, so the product layer above it can decide when to ask the user for a second photo or a manual confirmation, instead of pretending uniform confidence.',
+  ],
+  outcome: [
+    'The current model reaches 36% PMAE on nutrition5k, a strong result for monocular work in this space. Inference runs in around 0.5 seconds on a warm A100-40GB, light enough for a real-time photo-to-estimate interaction inside the app, with room to push further on quantisation and caching.',
+  ],
+  metric: {
+    label: 'PMAE',
+    value: '36%',
+    sub: 'on nutrition5k · ~0.5s inference on A100-40GB',
+  },
+  stack: 'PyTorch · monocular regression · A100',
+  tags: [
+    'Computer vision',
+    'Monocular regression',
+    'Mobile latency',
+    'Nutrition modelling',
+  ],
 }
 
 export const metadata = {
@@ -20,24 +50,3 @@ export const metadata = {
   description: caseStudy.description,
   alternates: { canonical: '/work/orthofoodie' },
 }
-
-## Overview
-
-We're helping [OrthoFoodie](https://orthofoodie.app/) build ML models that detect foods and predict calories, nutrients, and other nutritional information from single images.
-
-Our current model achieves **36% PMAE on nutrition5k** — a strong result for single image monocular estimation. On warm GPUs with just an A100-40GB, inference takes approximately **0.5 seconds**.
-
-More on how we're building this soon.
-
-## What we did
-
-<TagList>
-  <TagListItem>Computer Vision</TagListItem>
-  <TagListItem>Machine Learning</TagListItem>
-  <TagListItem>Nutrition Prediction</TagListItem>
-</TagList>
-
-<StatList>
-  <StatListItem value="36%" label="PMAE on nutrition5k" />
-  <StatListItem value="0.5s" label="Inference time (A100)" />
-</StatList>

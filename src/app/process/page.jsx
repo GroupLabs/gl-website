@@ -1,208 +1,270 @@
-import Link from 'next/link'
-
-import { Blockquote } from '@/components/Blockquote'
-import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
-import { FadeIn } from '@/components/FadeIn'
-import { GridList, GridListItem } from '@/components/GridList'
-import { GridPattern } from '@/components/GridPattern'
-import { List, ListItem } from '@/components/List'
-import { PageIntro } from '@/components/PageIntro'
-import { SectionIntro } from '@/components/SectionIntro'
-import { StylizedImage } from '@/components/StylizedImage'
-import { TagList, TagListItem } from '@/components/TagList'
-import imageLaptop from '@/images/laptop.jpg'
-import imageMeeting from '@/images/meeting.jpg'
-import imageWhiteboard from '@/images/whiteboard.jpg'
+import { ContactCTA } from '@/components/ContactCTA'
+import { FadeIn, FadeInStagger } from '@/components/FadeIn'
+import { ProcessHero } from '@/components/ProcessHero'
 
-function Section({ title, image, children }) {
+const PHASES = [
+  {
+    n: '01',
+    label: 'Discovery',
+    duration: '1–2 weeks',
+    title: 'Discover',
+    intent:
+      'We work closely with our clients to understand their needs and goals, embedding ourselves in everyday operations to understand what makes the business tick. Our team conducts in-depth consultations with stakeholders and performs thorough assessments of business processes.',
+    outcome:
+      'Once the audit is complete, we report back with a comprehensive plan on how to effectively implement the work. The plan is the deliverable, and it is written, not slideware.',
+    metric: ['Output', 'Build plan', 'written, scoped, costed'],
+    tags: 'Feasibility studies · Employee surveys · Proofs of concept',
+  },
+  {
+    n: '02',
+    label: 'Construction',
+    duration: 'Project length',
+    title: 'Build',
+    intent:
+      'Based on the discovery phase, we develop a comprehensive roadmap for each product and work toward delivery. The roadmap outlines clear technical steps and timelines, so progression is structured and efficient.',
+    outcome:
+      'Each client is assigned a dedicated key account manager to maintain open lines of communication and provide regular updates on progress. They serve as the liaison between the client and the development team, ensuring inquiries and feedback are addressed promptly.',
+    metric: ['Cadence', 'Weekly', 'demoed builds, written updates'],
+    tags: 'Roadmap · Account manager · Iteration reviews',
+  },
+  {
+    n: '03',
+    label: 'Delivery',
+    duration: 'Ongoing',
+    title: 'Deliver',
+    intent:
+      'During the build phase, we meticulously review and adapt to changes in requirements, ensuring the project timeline and budget are adjusted accordingly for optimal outcomes. Dedicated development time is utilized efficiently to ship high-quality, impactful features.',
+    outcome:
+      'We hand over a system that runs in production, instrumented and supported. Testing, infrastructure, and continued support are part of the deliverable, not a separate engagement.',
+    metric: ['Output', 'In production', 'tested, instrumented, supported'],
+    tags: 'Testing · Infrastructure · Support',
+  },
+]
+
+const VALUES = [
+  {
+    n: '01',
+    title: 'Meticulous',
+    body: 'Careful work begins with the details. We treat every artifact (code, schemas, diagrams, copy) as something a future engineer will read.',
+  },
+  {
+    n: '02',
+    title: 'Efficient',
+    body: 'We meet deadlines by leveraging extensive experience and pre-developed resources. We do not pad estimates with discovery work that has already happened.',
+  },
+  {
+    n: '03',
+    title: 'Adaptable',
+    body: 'Every business has unique needs. We tailor solutions to fit them, and we revise the plan when reality disagrees with it.',
+  },
+  {
+    n: '04',
+    title: 'Honest',
+    body: 'We maintain transparency in all our processes. If a path is not working, we say so before the budget is spent finding out.',
+  },
+  {
+    n: '05',
+    title: 'Loyal',
+    body: 'We foster long-term relationships with our clients, providing ongoing support and value beyond the initial delivery.',
+  },
+  {
+    n: '06',
+    title: 'Innovative',
+    body: 'We continuously evolve with the technological landscape, actively seeking new and proven solutions to incorporate into our work.',
+  },
+]
+
+function Phases() {
   return (
-    <Container className="group/section [counter-increment:section]">
-      <div className="lg:flex lg:items-center lg:justify-end lg:gap-x-8 lg:group-even/section:justify-start xl:gap-x-20">
-        <div className="flex justify-center">
-          <FadeIn className="w-[33.75rem] flex-none lg:w-[45rem]">
-            <StylizedImage
-              {...image}
-              sizes="(min-width: 1024px) 41rem, 31rem"
-              className="justify-center lg:justify-end lg:group-even/section:justify-start"
-            />
-          </FadeIn>
-        </div>
-        <div className="mt-12 lg:mt-0 lg:w-[37rem] lg:flex-none lg:group-even/section:order-first">
-          <FadeIn>
-            <div
-              className="font-display text-base font-semibold before:text-neutral-300 before:content-['/_'] after:text-neutral-950 after:content-[counter(section,decimal-leading-zero)]"
-              aria-hidden="true"
-            />
-            <h2 className="mt-2 font-display text-3xl font-medium tracking-tight text-neutral-950 sm:text-4xl">
-              {title}
-            </h2>
-            <div className="mt-6">{children}</div>
-          </FadeIn>
-        </div>
-      </div>
-    </Container>
+    <section id="phases" className="mt-32 sm:mt-40 lg:mt-52">
+      <Container>
+        <FadeIn>
+          <div className="border-neutral-950/15 flex items-center gap-4 border-b pb-3">
+            <p className="eyebrow wdth-narrow text-neutral-600">Phases</p>
+            <span aria-hidden="true" className="bg-neutral-950/15 h-px flex-1" />
+            <p className="eyebrow wdth-narrow text-neutral-500">§&nbsp;01</p>
+          </div>
+        </FadeIn>
+
+        <FadeIn>
+          <h2 className="wdth-wide mt-12 max-w-3xl font-display text-[clamp(2rem,5vw,3.75rem)] font-medium leading-[1.04] tracking-tight text-neutral-950 [text-wrap:balance]">
+            Three phases, on the record.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-neutral-700">
+            Each phase ends on a named, written deliverable. No phase ends on a
+            meeting.
+          </p>
+        </FadeIn>
+
+        <FadeInStagger faster>
+          <ol className="mt-16 space-y-16 sm:space-y-24">
+            {PHASES.map((p) => (
+              <FadeIn as="li" key={p.n}>
+                <article className="group">
+                  <div className="border-neutral-950/15 flex items-baseline gap-4 border-b pb-3">
+                    <span className="tabular font-mono text-2xl font-medium tracking-tight text-neutral-950">
+                      {p.n}
+                    </span>
+                    <span className="eyebrow wdth-narrow text-neutral-500">
+                      {p.label} · {p.duration}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="bg-neutral-950/15 h-px flex-1"
+                    />
+                    <span className="eyebrow wdth-narrow text-neutral-500">
+                      Phase {p.n}
+                    </span>
+                  </div>
+
+                  <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-12">
+                    <h3 className="wdth-wide font-display text-[clamp(2rem,5vw,3.75rem)] font-medium leading-[1.04] tracking-tight text-neutral-950 lg:col-span-5">
+                      {p.title}
+                    </h3>
+
+                    <div className="space-y-6 text-base leading-relaxed text-neutral-700 lg:col-span-7">
+                      <p>
+                        <span className="eyebrow wdth-narrow text-neutral-500">
+                          Intent &nbsp;·&nbsp;
+                        </span>{' '}
+                        {p.intent}
+                      </p>
+                      <p>
+                        <span className="eyebrow wdth-narrow text-neutral-500">
+                          Outcome &nbsp;·&nbsp;
+                        </span>{' '}
+                        {p.outcome}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-6 border-t border-neutral-950/10 pt-6 lg:grid-cols-12">
+                    <div className="lg:col-span-5">
+                      <p className="eyebrow wdth-narrow text-neutral-500">
+                        {p.metric[0]}
+                      </p>
+                      <p className="tabular mt-2 font-mono text-3xl font-medium leading-none tracking-tight text-neutral-950 sm:text-4xl">
+                        {p.metric[1]}
+                      </p>
+                      <p className="mt-2 font-mono text-xs text-neutral-500">
+                        {p.metric[2]}
+                      </p>
+                    </div>
+                    <div className="lg:col-span-7">
+                      <p className="eyebrow wdth-narrow text-neutral-500">
+                        Included
+                      </p>
+                      <p className="mt-2 font-mono text-sm leading-relaxed text-neutral-800">
+                        {p.tags}
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </FadeIn>
+            ))}
+          </ol>
+        </FadeInStagger>
+      </Container>
+    </section>
   )
-}
-
-function Discover() {
-  return (
-    <Section title="Discover" image={{ src: imageWhiteboard }}>
-      <div className="space-y-6 text-base text-neutral-600">
-        <p>
-          We work closely with our clients to understand their{' '}
-          <strong className="font-semibold text-neutral-950">needs and goals</strong>, embedding ourselves in their everyday operations to understand
-          what makes their business tick.
-
-          Our team conducts in-depth consultations with key stakeholders to identify use cases and performs thorough assessments of business processes.
-        </p>
-        <p>
-          Once the full audit is complete, we report back with a comprehensive{' '}
-          <strong className="font-semibold text-neutral-950">plan</strong> on how to effectively implement them.
-        </p>
-      </div>
-
-      <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
-        Included in this phase
-      </h3>
-      <TagList className="mt-4">
-        <TagListItem>Feasibility studies</TagListItem>
-        <TagListItem>Employee surveys</TagListItem>
-        <TagListItem>Proofs-of-concept</TagListItem>
-      </TagList>
-    </Section>
-  )
-}
-
-function Build() {
-  return (
-    <Section title="Build" image={{ src: imageLaptop, shape: 1 }}>
-      <div className="space-y-6 text-base text-neutral-600">
-        <p>
-          Based on the discovery phase, we develop a comprehensive roadmap for each product and work diligently towards delivery. The roadmap outlines clear technical steps and timelines to ensure a structured and efficient project progression.
-        </p>
-        <p>
-          Each client is assigned a dedicated key account manager to maintain open lines of communication and provide regular updates on the project&apos;s progress. They serve as a liaison between the client and the development team, ensuring all inquiries and feedback are addressed promptly.
-        </p>
-        <p>
-          Our account managers are committed to timely and responsive communication, ensuring clients are well-informed and involved throughout the project&apos;s lifecycle. This approach fosters transparency and builds confidence in our development process.
-        </p>
-      </div>
-    </Section>
-  );
-}
-
-function Deliver() {
-  return (
-    <Section title="Deliver" image={{ src: imageMeeting, shape: 2 }}>
-      <div className="space-y-6 text-base text-neutral-600">
-        <p>
-          During the Build phase, we meticulously review and adapt to any changes in{' '}
-          <strong className="font-semibold text-neutral-950">
-            requirements
-          </strong>
-          , ensuring that the project timeline and budget are adjusted accordingly for optimal outcomes. Our dedicated development time is utilized efficiently to create high-quality, impactful features.
-        </p>
-      </div>
-
-      <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
-        Included in this phase
-      </h3>
-      <List className="mt-8">
-        <ListItem title="Testing">
-          Our projects undergo rigorous testing to ensure high quality and reliability.
-        </ListItem>
-        <ListItem title="Infrastructure">
-          We utilize top-tier infrastructure to ensure optimal performance and reliability.
-        </ListItem>
-        <ListItem title="Support">
-          We provide comprehensive support, maintaining essential services and ensuring continuous operational efficiency.
-        </ListItem>
-      </List>
-    </Section>
-  );
 }
 
 function Values() {
   return (
-    <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
-      <div className="absolute inset-x-0 top-0 -z-10 h-[884px] overflow-hidden rounded-t-4xl bg-gradient-to-b from-neutral-50">
-        <GridPattern
-          className="absolute inset-0 h-full w-full fill-neutral-100 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
-          yOffset={-270}
+    <section className="relative isolate mt-32 overflow-hidden bg-neutral-950 sm:mt-40 lg:mt-52">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          maskImage:
+            'radial-gradient(ellipse 70% 60% at 50% 0%, black 20%, transparent 85%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse 70% 60% at 50% 0%, black 20%, transparent 85%)',
+        }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, rgba(255,255,255,0.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.10) 1px, transparent 1px)',
+            backgroundSize: '20px 20px',
+            backgroundPosition: '0 -2px',
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, rgba(255,255,255,0.20) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.20) 1px, transparent 1px)',
+            backgroundSize: '100px 100px',
+            backgroundPosition: '0 -2px',
+          }}
         />
       </div>
 
-      <SectionIntro
-        eyebrow="Our values"
-        title="Balancing reliability and innovation"
-      >
-      <p>
-        We aim to stay at the forefront of emerging trends and technologies, balancing innovation with the stability of proven solutions. Our commitment to core values guides us in selecting the best tools for each project, ensuring reliability and performance.
-      </p>
-      </SectionIntro>
+      <Container className="py-24 sm:py-32 lg:py-40">
+        <FadeIn>
+          <div className="border-white/15 flex items-center gap-4 border-b pb-3">
+            <p className="eyebrow wdth-narrow text-white/65">Values</p>
+            <span aria-hidden="true" className="bg-white/15 h-px flex-1" />
+            <p className="eyebrow wdth-narrow text-white/55">§&nbsp;02</p>
+          </div>
+        </FadeIn>
 
-      <Container className="mt-24">
-        <GridList>
-          <GridListItem title="Meticulous">
-            Our meticulous approach begins with customizing our templates to incorporate your logo and branding, ensuring a seamless fit with your identity.
-          </GridListItem>
-          <GridListItem title="Efficient">
-            We pride ourselves on consistently meeting deadlines, leveraging our extensive experience and pre-developed resources to deliver projects promptly.
-          </GridListItem>
-          <GridListItem title="Adaptable">
-            We understand that every business has unique needs, and we tailor our solutions to fit those requirements effectively.
-          </GridListItem>
-          <GridListItem title="Honest">
-            We maintain transparency in all our processes, ensuring our clients are well-informed at every step.
-          </GridListItem>
-          <GridListItem title="Loyal">
-            We foster long-term relationships with our clients, providing ongoing support and value beyond the initial delivery.
-          </GridListItem>
-          <GridListItem title="Innovative">
-            We continuously evolve with the technological landscape, actively seeking new and innovative solutions to incorporate into our projects.
-          </GridListItem>
-        </GridList>
+        <div className="mt-12 grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-12 lg:items-start">
+          <FadeIn className="lg:col-span-7">
+            <h2 className="wdth-wide font-display text-[clamp(2rem,5vw,3.75rem)] font-medium leading-[1.04] tracking-tight text-white [text-wrap:balance]">
+              Reliability and innovation, balanced.
+            </h2>
+          </FadeIn>
+
+          <FadeIn className="lg:col-span-5">
+            <p className="text-base leading-relaxed text-white/75 sm:text-lg">
+              We aim to stay at the forefront of emerging technologies, balancing
+              innovation with the stability of proven solutions. The values
+              below guide tooling choices on every project.
+            </p>
+          </FadeIn>
+        </div>
+
+        <FadeInStagger faster>
+          <ul className="mt-16 grid grid-cols-1 gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {VALUES.map((v) => (
+              <FadeIn as="li" key={v.n}>
+                <div className="border-white/15 flex items-baseline gap-3 border-b pb-3">
+                  <span className="tabular font-mono text-sm font-medium text-white">
+                    {v.n}
+                  </span>
+                  <p className="eyebrow wdth-narrow text-white/85">{v.title}</p>
+                  <span aria-hidden="true" className="bg-white/15 h-px flex-1" />
+                </div>
+                <p className="mt-5 text-base leading-relaxed text-white/70">
+                  {v.body}
+                </p>
+              </FadeIn>
+            ))}
+          </ul>
+        </FadeInStagger>
       </Container>
-    </div>
+    </section>
   )
 }
 
 export const metadata = {
   title: 'Our Process',
   description:
-    'How GroupLabs delivers software, ML, and product validation engagements — from discovery through build to delivery.',
+    'How GroupLabs delivers software, ML, and product validation engagements. From discovery through build to delivery.',
   alternates: { canonical: '/process' },
 }
 
 export default function Process() {
   return (
     <>
-      <PageIntro eyebrow="Our process" title="How we work">
-        <p>
-          We believe in delivering practical solutions that clients can use to address real-world, impactful issues.
-        </p>
-        <p className="mt-4 text-base text-neutral-500">
-          For pre-build validation sprints, see{' '}
-          <Link
-            href="/buildless"
-            className="underline hover:text-neutral-700"
-          >
-            how BuildLess works
-          </Link>
-          .
-        </p>
-      </PageIntro>
-
-      <div className="mt-24 space-y-24 [counter-reset:section] sm:mt-32 sm:space-y-32 lg:mt-40 lg:space-y-40">
-        <Discover />
-        <Build />
-        <Deliver />
-      </div>
-
+      <ProcessHero />
+      <Phases />
       <Values />
-
-      <ContactSection />
+      <ContactCTA />
     </>
   )
 }

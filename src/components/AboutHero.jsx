@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 
 import { Container } from '@/components/Container'
 
-export function HeroSection() {
+export function AboutHero() {
   const shouldReduceMotion = useReducedMotion()
 
   const fadeUp = (delay = 0) => ({
@@ -16,9 +16,7 @@ export function HeroSection() {
   return (
     <section className="relative isolate overflow-hidden bg-white text-neutral-950">
       <Container className="relative pb-6 pt-10 sm:pb-8 sm:pt-14 lg:pb-10 lg:pt-16">
-        <div className="relative flex min-h-[50vh] flex-col items-center justify-center overflow-hidden rounded-[2rem] px-5 py-8 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
-          {/* Layered grid — minor 20px + major 100px lines, radially faded
-              from the center so the field softens toward the edges. */}
+        <div className="relative flex min-h-[55vh] flex-col items-start justify-center overflow-hidden rounded-[2rem] px-5 py-12 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
           <motion.div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10"
@@ -56,15 +54,39 @@ export function HeroSection() {
             />
           </motion.div>
 
-          {/* Headline — one substantive sentence. A definition, not a slogan. */}
-          <motion.h1
-            className="wdth-wide font-display text-3xl font-medium leading-[1.1] tracking-tight text-neutral-950 sm:text-4xl"
-            {...fadeUp(0.5)}
+          <motion.p
+            className="eyebrow wdth-narrow text-orange-600"
+            {...fadeUp(0.2)}
           >
-            We build systems that are <i>provably</i>
-            <br />
-            correct, reliable, and&nbsp;fast.
+            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-orange-600 align-middle" />
+            §&nbsp;00 &nbsp;·&nbsp; About GroupLabs
+          </motion.p>
+
+          <motion.h1
+            className="wdth-wide mt-6 max-w-4xl font-display text-[clamp(2rem,5.5vw,4rem)] font-medium leading-[1.04] tracking-tight text-neutral-950 [text-wrap:balance]"
+            {...fadeUp(0.4)}
+          >
+            A small studio of engineers, building systems
+            <span className="italic text-neutral-500"> that hold up.</span>
           </motion.h1>
+
+          <motion.div
+            className="mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-neutral-700 sm:text-lg"
+            {...fadeUp(0.6)}
+          >
+            <p>
+              GroupLabs is a Calgary engineering studio. We lead with BuildLess,
+              our pre-build product validation practice that turns an idea into
+              a live test in days. We also run deeper engagements in ML
+              infrastructure, custom models, and production systems for teams
+              who already know what they need to ship.
+            </p>
+            <p className="text-neutral-500">
+              We started GroupLabs because we kept seeing teams overbuild.
+              Too much engineering committed to ideas that had not earned it
+              yet. The work below is our answer.
+            </p>
+          </motion.div>
         </div>
       </Container>
     </section>

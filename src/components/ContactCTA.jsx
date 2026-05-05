@@ -43,31 +43,17 @@ export function ContactCTA() {
     >
 
       <Container className="py-24 sm:py-32 lg:py-40">
-        {/* TOP STRIP — section number, sub-header, live status */}
+        {/* TOP STRIP — section number */}
         <FadeIn>
-          <div className="border-neutral-950/15 flex flex-wrap items-center gap-x-4 gap-y-2 border-b pb-3">
+          <div className="border-neutral-950/15 flex items-center gap-x-4 border-b pb-3">
             <p className="eyebrow wdth-narrow text-orange-600">
               <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-orange-600 align-middle" />
               §&nbsp;03 &nbsp;·&nbsp; Engagement intake
             </p>
             <span
               aria-hidden="true"
-              className="bg-neutral-950/15 hidden h-px flex-1 sm:block"
+              className="bg-neutral-950/15 h-px flex-1"
             />
-            <p className="eyebrow wdth-narrow text-neutral-500">
-              Direct line — no forms, no funnels
-            </p>
-            <span
-              aria-hidden="true"
-              className="bg-neutral-950/15 hidden h-px w-8 lg:block"
-            />
-            <p className="eyebrow wdth-narrow flex items-center gap-2 text-emerald-700">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-600" />
-              </span>
-              Accepting Q3 engagements
-            </p>
           </div>
         </FadeIn>
 
@@ -160,7 +146,7 @@ export function ContactCTA() {
           {/* MAP — transmission chart on light paper */}
           <FadeIn className="lg:col-span-5">
             <figure
-              className="relative w-full overflow-hidden border border-neutral-950/15 bg-white"
+              className="relative w-full overflow-hidden border border-orange-600/50 bg-white"
               style={{ aspectRatio: '10/9' }}
             >
               {/* Orange blueprint grid — minor 20px + major 100px lines.
@@ -218,7 +204,7 @@ export function ContactCTA() {
 
               {/* the map — slightly inset so corner marks read */}
               <div className="absolute inset-x-6 inset-y-10 sm:inset-x-8 sm:inset-y-12">
-                <CanadaMap className="text-neutral-700" />
+                <CanadaMap className="text-orange-600" />
               </div>
 
               {/* annotations */}
@@ -314,23 +300,6 @@ export function ContactCTA() {
           </div>
         </FadeIn>
 
-        {/* BOTTOM PRECISION STRIP */}
-        <FadeIn>
-          <div className="border-neutral-950/10 mt-16 flex flex-wrap items-center gap-x-6 gap-y-3 border-t pt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-500">
-            <span>
-              Response&nbsp;·&nbsp;
-              <span className="tabular text-neutral-950">&lt; 1</span>{' '}
-              business day
-            </span>
-            <span aria-hidden="true" className="bg-neutral-950/15 h-px flex-1" />
-            <span>Scoped &amp; quoted by phase</span>
-            <span aria-hidden="true" className="bg-neutral-950/15 h-px w-6" />
-            <span>
-              Doc&nbsp;·&nbsp;
-              <span className="tabular text-neutral-700">2026.05.03</span>
-            </span>
-          </div>
-        </FadeIn>
       </Container>
     </section>
   )

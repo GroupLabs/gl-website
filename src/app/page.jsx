@@ -6,7 +6,7 @@ import { ContactCTA } from '@/components/ContactCTA'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { HeroSection } from '@/components/HeroSection'
 import { ImagePlaceholder } from '@/components/ImagePlaceholder'
-import { MugModel } from '@/components/MugModel'
+import { CaliperModel } from '@/components/CaliperModel'
 import { productIcons } from '@/components/ProductIcons'
 import { ScrollableRow } from '@/components/ScrollableRow'
 import { SectionHead } from '@/components/SectionHead'
@@ -231,9 +231,9 @@ function FeaturedWork() {
     <section id="work" className="mt-32 sm:mt-40 lg:mt-52">
       <Container>
         <SectionHead
-          kicker="Selected work"
-          title="Three engagements, on the record."
-          dek="Real production deployments. What the system did before, what it does now, and the stack that took it there."
+          kicker="Work"
+          title="Engagements, on the record."
+          dek="Real systems in production. What they did before, what they do now, and how they got there."
           rightMeta={
             <Link href="/work" className="hover:text-orange-600">
               See all
@@ -374,7 +374,7 @@ function Products() {
       name: 'Nudge',
       tagline: 'In-app walkthrough overlay',
       desc: 'End users ask Nudge how to do something, and it highlights the right elements on the page and walks them through, step by step.',
-      href: '#',
+      href: '/nudge',
       meta: 'In development',
     },
     {
@@ -382,47 +382,47 @@ function Products() {
       name: 'Tell',
       tagline: 'High-throughput LLM gateway',
       desc: 'Caching, routing, and fallback for production-scale inference. Built for teams shipping LLM features at volume.',
-      href: '#',
+      href: '/tell',
       meta: 'v1.0 · released',
     },
     {
       n: '04',
       name: 'Atmos',
-      tagline: 'Multi-cloud ML orchestration',
-      desc: 'Reproducible pipelines and model deployment across cloud providers.',
-      href: '#',
+      tagline: 'Cross-cloud workload migration',
+      desc: 'Move services, data, and config from one cloud to another. Atmos maps the workload, mirrors it in the background, and shifts traffic on your signal.',
+      href: '/atmos',
       meta: 'v0.9 · beta',
     },
     {
       n: '05',
       name: 'Tessera',
-      tagline: 'Sandboxed code runtime',
-      desc: 'Safe execution environment for LLM-generated and user-submitted code.',
-      href: '#',
+      tagline: 'Unikernel manager',
+      desc: 'Each workload runs as its own single-purpose VM: one address space, no shared kernel, no context switches. Smaller surface, millisecond cold starts.',
+      href: '/tessera',
       meta: 'v0.8 · beta',
     },
     {
       n: '06',
       name: 'Norma',
       tagline: 'Automated feature engineering',
-      desc: 'Generate, evaluate, and select features for tabular ML at scale.',
-      href: 'https://norma.grouplabs.ca',
+      desc: 'Search the space of preprocessing pipelines. Score each with 5-fold XGBoost CV. Ship the winner as a model-ready dataset and a reproducible recipe.',
+      href: '/norma',
       meta: 'v1.0 · released',
     },
     {
       n: '07',
       name: 'Bridge',
-      tagline: 'Sub-ms multi-modal vector search',
-      desc: 'Unified retrieval across text, image, and audio embeddings.',
-      href: 'https://bridgeproductpage.netlify.app/',
+      tagline: 'Sub-ms hybrid search',
+      desc: 'Keyword and vector retrieval in one process. Written close to the metal, lightweight, multi-modal when you need it.',
+      href: '/bridge',
       meta: 'v1.4 · released',
     },
     {
       n: '08',
       name: 'Mesh',
-      tagline: 'Distributed compute orchestration',
-      desc: 'Job scheduling and resource management for ML workloads at scale.',
-      href: '#',
+      tagline: 'Self-arranging compute fabric',
+      desc: 'Nodes self-discover and form a topology on their own. The scheduler partitions jobs by device class. ML batch training today, batch-shaped workloads next.',
+      href: '/mesh',
       meta: 'v0.2 · wip',
     },
   ]
@@ -431,11 +431,11 @@ function Products() {
     <section id="products" className="mt-12 sm:mt-16 lg:mt-20">
       <Container>
         <FadeIn>
-          <div className="mb-6 flex items-center gap-4 border-b border-neutral-950/15 pb-3">
+          <div className="border-neutral-950/15 mb-6 flex items-center gap-4 border-b pb-3">
             <p className="eyebrow wdth-narrow text-neutral-600">Solutions</p>
             <span
               aria-hidden="true"
-              className="h-px flex-1 bg-neutral-950/15"
+              className="bg-neutral-950/15 h-px flex-1"
             />
             <p className="eyebrow wdth-narrow text-neutral-400">
               Scroll&nbsp;→
@@ -446,38 +446,40 @@ function Products() {
               {products.map((p) => {
                 const Icon = productIcons[p.name]
                 return (
-                <li key={p.name} className="flex-shrink-0">
-                  <Link
-                    href={p.href}
-                    className="group flex h-[24rem] w-[20rem] flex-col rounded-2xl border border-neutral-950/15 bg-neutral-50 p-8 transition-colors hover:border-neutral-950/30 hover:bg-white"
-                  >
-                    <div className="flex items-start justify-between">
-                      {Icon && <Icon className="h-20 w-auto text-neutral-800" />}
-                      <span className="tabular font-mono text-sm font-medium text-neutral-400">
-                        {p.n}
-                      </span>
-                    </div>
+                  <li key={p.name} className="flex-shrink-0">
+                    <Link
+                      href={p.href}
+                      className="border-neutral-950/15 group flex h-[24rem] w-[20rem] flex-col rounded-2xl border bg-neutral-50 p-8 transition-colors hover:border-neutral-950/30 hover:bg-white"
+                    >
+                      <div className="flex items-start justify-between">
+                        {Icon && (
+                          <Icon className="h-20 w-auto text-neutral-800" />
+                        )}
+                        <span className="tabular font-mono text-sm font-medium text-neutral-400">
+                          {p.n}
+                        </span>
+                      </div>
 
-                    <h3 className="mt-7 font-display text-3xl font-medium tracking-tight text-neutral-950">
-                      {p.name}
-                    </h3>
-                    <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500">
-                      {p.tagline}
-                    </p>
-                    <p className="mt-4 text-sm leading-relaxed text-neutral-700">
-                      {p.desc}
-                    </p>
+                      <h3 className="mt-7 font-display text-3xl font-medium tracking-tight text-neutral-950">
+                        {p.name}
+                      </h3>
+                      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500">
+                        {p.tagline}
+                      </p>
+                      <p className="mt-4 text-sm leading-relaxed text-neutral-700">
+                        {p.desc}
+                      </p>
 
-                    <div className="mt-auto flex items-baseline justify-between gap-3 border-t border-neutral-950/10 pt-5">
-                      <span className="eyebrow wdth-narrow text-neutral-500">
-                        {p.meta}
-                      </span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-orange-600 transition-transform group-hover:translate-x-0.5">
-                        Open →
-                      </span>
-                    </div>
-                  </Link>
-                </li>
+                      <div className="mt-auto flex items-baseline justify-between gap-3 border-t border-neutral-950/10 pt-5">
+                        <span className="eyebrow wdth-narrow text-neutral-500">
+                          {p.meta}
+                        </span>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-orange-600 transition-transform group-hover:translate-x-0.5">
+                          Open →
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
                 )
               })}
             </ul>
@@ -488,20 +490,15 @@ function Products() {
   )
 }
 
-
 function WhatIsHappening() {
   return (
     <section className="relative isolate mt-32 overflow-hidden bg-neutral-950 sm:mt-40 lg:mt-52">
       <Container className="py-24 sm:py-32 lg:py-40">
         <FadeIn>
           <div className="border-white/15 flex items-center gap-4 border-b pb-3">
-            <p className="eyebrow wdth-narrow text-white/65">
-              Working notes
-            </p>
+            <p className="eyebrow wdth-narrow text-white/65">Working notes</p>
             <span aria-hidden="true" className="bg-white/15 h-px flex-1" />
-            <p className="eyebrow wdth-narrow text-white/55">
-              §&nbsp;02
-            </p>
+            <p className="eyebrow wdth-narrow text-white/55">§&nbsp;02</p>
           </div>
         </FadeIn>
 
@@ -541,11 +538,11 @@ function WhatIsHappening() {
                     }}
                   />
                 </div>
-                <MugModel className="absolute inset-0" />
+                <CaliperModel className="absolute inset-0" />
               </div>
               <figcaption className="pointer-events-none absolute bottom-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-md border border-white/10 bg-white/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-white/80 opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
                 <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />
-                Coffee mug · zero downtime since 2020
+                Calipers · Every system measured
               </figcaption>
             </figure>
           </FadeIn>
@@ -575,9 +572,9 @@ function WhatIsHappening() {
                 only when necessary.
               </p>
               <p>
-                Much of what we do is shaped by repetition. Build something,
-                see how it behaves, improve it. The goal is not to produce
-                ideas, but to produce systems that work.
+                Much of what we do is shaped by repetition. Build something, see
+                how it behaves, improve it. The goal is not to produce ideas,
+                but to produce systems that work.
               </p>
               <p>
                 Over time, this has become a way of working. Careful,

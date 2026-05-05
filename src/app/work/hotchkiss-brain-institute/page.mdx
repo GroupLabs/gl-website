@@ -1,18 +1,49 @@
 import logo from '@/images/clients/hbi/hbi-secondary-black-icon.png'
-import imageHero from './hero.jpg'
+import imageHero from '@/images/work/hotchkiss.jpg'
 
 export const caseStudy = {
+  n: '02',
   client: 'Hotchkiss Brain Institute',
-  title: 'Presymptomatic Alzheimer’s Disease Detection',
+  title: 'Presymptomatic Alzheimer’s detection from hyperspectral blood-sample imaging',
   description:
-    'High-precision diagnostic model achieving >98% accuracy using optimized ensemble learning.',
-  summary: [
-    'The project aimed to detect Alzheimer’s disease using hyperspectral imaging on blood samples. Techniques include MiniRocket algorithm, feature extraction, Gaussian smoothing, and MinMax scaling. The resulting architectures achieved over 98% accuracy.',
-  ],
-  logo,
-  image: { ...imageHero, alt: 'Hotchkiss Brain Institute facility' },
+    'A high-precision diagnostic pipeline reaching over 98% accuracy on hyperspectral blood-sample data, with rigorous controls against leakage and outliers.',
+  sector: 'Hyperspectral imaging · Alzheimer’s detection',
+  service: 'Diagnostic AI optimisation',
   date: '2024-03',
-  service: 'Diagnostic AI Optimization',
+  logo,
+  image: {
+    ...imageHero,
+    alt: 'Neural decoding waveforms on a clinical research display, with a gloved researcher’s hand reaching toward the screen.',
+    caption: 'Neural decoding pipeline · clinical research',
+    id: 'IMG-03',
+  },
+  summary: [
+    'We worked with the Hotchkiss Brain Institute on presymptomatic detection of Alzheimer’s disease from hyperspectral imaging on blood samples. The engagement was equal parts signal processing, time-series modelling, and the careful methodology that keeps a clinical pipeline honest.',
+  ],
+  problem: [
+    'Hyperspectral imaging on blood samples produces a noisy, high-dimensional time-series. Two failure modes were always within reach. Data leakage between train and evaluation could produce a model that looked spectacular and meant nothing. Outliers could quietly drive whichever architecture happened to be sensitive to them, again producing accuracy that would not survive a real clinical setting.',
+    'Anything we shipped had to be defensible against both.',
+  ],
+  approach: [
+    'We built the pipeline with Gaussian smoothing to reduce sensor noise, MinMax scaling for normalisation, and MiniRocket-style feature extraction to lift the signal out of the time-series. Splits were constructed to make leakage structurally hard, not just unlikely. Outliers were inspected, not silently absorbed.',
+    'On the modelling side, we benchmarked GRU, RNN, LSTM, and HIVE-COTE 2.0 against XGBoost, LightGBM, and Random Forest, on the same splits. Random Forest came out on top, both on raw accuracy and on stability across folds. We picked it on the evidence.',
+  ],
+  outcome: [
+    'The Random Forest model exceeded 98% accuracy on hyperspectral blood-sample classification, with the leakage and outlier controls in place. Equally important, the pipeline is reproducible end-to-end, so future researchers can re-run, extend, and audit the result rather than taking it on trust.',
+  ],
+  metric: {
+    label: 'Accuracy',
+    value: '> 98%',
+    sub: 'Random Forest on hyperspectral blood samples, with leakage and outlier controls',
+  },
+  stack: 'Random Forest · LSTM · HIVE-COTE 2.0 · XGBoost · LightGBM · MiniRocket',
+  tags: [
+    'Hyperspectral imaging',
+    'Time-series ML',
+    'Feature extraction',
+    'Clinical research',
+    'Reproducibility',
+  ],
 }
 
 export const metadata = {
@@ -20,31 +51,3 @@ export const metadata = {
   description: caseStudy.description,
   alternates: { canonical: '/work/hotchkiss-brain-institute' },
 }
-
-## Overview
-
-The project aimed to detect Alzheimer's disease using hyperspectral imaging on blood samples. Various techniques were employed, including the MiniRocket algorithm for time series analysis, feature extraction to identify relevant data points, Gaussian smoothing to reduce noise, and MinMax scaling to normalize the data.
-
-Several challenges were encountered, such as preventing data leakage to ensure the validity of the model and identifying outliers that could skew the results.
-
-A range of deep learning models, including Gated Recurrent Units (GRU), Recurrent Neural Networks (RNN), Long Short-Term Memory networks (LSTM), and the HIVE-COTE 2.0, were tested. In addition, ensemble methods like XGBoost, LightGBM, and Random Forest were evaluated for their performance.
-
-Among these methods, the Random Forest model showed particularly promising results, achieving an accuracy of over 98%.
-
-## What we did
-
-<TagList>
-  <TagListItem>Gaussian Smoothing</TagListItem>
-  <TagListItem>GRU</TagListItem>
-  <TagListItem>RNN</TagListItem>
-  <TagListItem>LSTM</TagListItem>
-  <TagListItem>HIVE-COTE 2.0</TagListItem>
-  <TagListItem>XGBoost</TagListItem>
-  <TagListItem>LightGBM</TagListItem>
-  <TagListItem>Random Forest</TagListItem>
-</TagList>
-
-<StatList>
-  <StatListItem value="98%" label="Accuracy" />
-  <StatListItem value="3 Months" label="Duration" />
-</StatList>

@@ -1,18 +1,49 @@
 import logo from '@/images/clients/mhhc/mhhc-logo.png'
-import imageHero from './hero.jpg'
+import imageHero from '@/images/work/mhhc.png'
 
 export const caseStudy = {
+  n: '05',
   client: 'Migration Humanitarian Health Collective',
-  title: 'Low-Resource Language Translation',
+  title: 'A translation system for low-resource languages that adapts to each community over time',
   description:
-    'Translation systems for low-resource languages with community-driven quality improvements.',
-  summary: [
-    'We partnered with MHHC to build translation tools for low-resource languages, with an online tuning system that empowers communities to improve quality over time.'
-  ],
-  logo,
-  image: { ...imageHero, alt: 'MHHC translation project' },
+    'A machine-translation system for low-resource languages with an online tuning loop, so quality compounds per community as members feed back corrections.',
+  sector: 'NLP · low-resource translation · community tuning',
+  service: 'Machine learning',
   date: '2025-11',
-  service: 'Machine Learning',
+  logo,
+  image: {
+    ...imageHero,
+    alt: 'Close-up of an open notebook on a wooden desk with handwritten passages in two scripts, a hand at the right edge mid-annotation with a sharpened pencil.',
+    caption: 'Parallel text annotation · translation work',
+    id: 'IMG-06',
+  },
+  summary: [
+    'We are working with the Migration Humanitarian Health Collective on translation systems for low-resource languages. The interesting part is not the base model. It is the loop that lets the system get better for each community as they actually use it.',
+  ],
+  problem: [
+    'Translation systems for low-resource languages are usually trained once, deployed flat, and never adapt. That is exactly where the quality breaks down. Different communities use the same nominal language differently, with their own register, terminology, and edge cases. A single static model serves all of them equally badly.',
+    'For a humanitarian-health context, equally badly is not an acceptable floor.',
+  ],
+  approach: [
+    'We built a translation system paired with an online tuning loop. Community members can mark up edits and corrections on the translation surface itself, in place. Those corrections are not discarded after the session. They are routed back into community-specific tuning, so the model that serves a given community converges toward that community’s actual usage.',
+    'The tooling around the loop is explicit about what gets sent where, with the goal that a community using the system can reasonably understand how their feedback shapes their model.',
+  ],
+  outcome: [
+    'The result is translation quality that compounds with use, on a per-community basis. The longer a community uses the system and feeds back corrections, the better it performs for them, instead of regressing to a generic average. That is the property the project was set up to prove out, and it is the one that matters in the field.',
+  ],
+  metric: {
+    label: 'Quality loop',
+    value: 'Online tuning',
+    sub: 'community corrections improve translation per group, over time',
+  },
+  stack: 'Machine translation · online tuning · community-driven feedback',
+  tags: [
+    'Natural language processing',
+    'Machine translation',
+    'Low-resource languages',
+    'Human-in-the-loop',
+    'Community-driven ML',
+  ],
 }
 
 export const metadata = {
@@ -20,17 +51,3 @@ export const metadata = {
   description: caseStudy.description,
   alternates: { canonical: '/work/mhhc' },
 }
-
-## Overview
-
-We're working with the Migration Humanitarian Health Collective on translation systems for low-resource languages.
-
-The project includes an **online tuning system** that allows community members to make edits and corrections. This feedback loop improves translation quality for different groups over time, ensuring the system adapts to the specific needs of each community.
-
-## What we did
-
-<TagList>
-  <TagListItem>Natural Language Processing</TagListItem>
-  <TagListItem>Machine Translation</TagListItem>
-  <TagListItem>Community-Driven ML</TagListItem>
-</TagList>

@@ -1,18 +1,54 @@
 import logo from '@/images/clients/cenovus/cenovus-black.png'
-import imageHero from './hero.jpg'
+import imageHero from '@/images/work/cenovus.jpg'
 
 export const caseStudy = {
+  n: '01',
   client: 'Cenovus Energy',
-  title: 'Data Science Engagement',
+  title: 'Operational analytics, forecasting, and predictive maintenance for multi-facility field operations',
   description:
-    'Scaled predictive maintenance pipeline processing terabytes of sensor data daily for optimized field operations.',
-  summary: [
-    'We partnered with Cenovus Energy on a data-driven initiative to enhance decision making through data cleaning, modelling and training.'
-  ],
-  logo,
-  image: { ...imageHero, alt: 'Cenovus Energy office' },
+    'A secure end-to-end pipeline turning irregular sensor data into daily forecasts and predictive maintenance signals across multiple Cenovus facilities.',
+  sector: 'Operational analytics · forecasting & predictive maintenance',
+  service: 'Big data ML pipelines',
   date: '2024-01',
-  service: 'Big Data ML Pipelines',
+  logo,
+  image: {
+    ...imageHero,
+    alt: 'Aerial view of two drilling rigs on a prairie operational site in Alberta at golden hour, with service roads cutting through the landscape.',
+    caption: 'Cenovus operations · Alberta',
+    id: 'IMG-02',
+  },
+  summary: [
+    'We worked with Cenovus Energy on a data programme to lift the quality of operational decisions across multiple facilities. The work spanned data cleaning, feature engineering, model selection, training, deployment, and the daily reporting layer that engineers actually open in the morning.',
+  ],
+  problem: [
+    'Operational data was arriving from a mix of sensor systems, field readouts, and raw logs across several Cenovus facilities. The data was usable in principle and broken in practice. Sampling cadence drifted between sites. Units were inconsistent. Whole windows were missing.',
+    'Anything sitting on top of that layer (forecasting, predictive maintenance, anomaly detection) was going to inherit the noise. Before any modelling could be trusted, the data layer had to be made boring.',
+  ],
+  approach: [
+    'We built a secure, end-to-end pipeline covering ingestion, normalisation, feature engineering, training, evaluation, deployment, and reporting. Python ETL handled the unification of cadences, units, and missingness, and produced features tuned for the downstream forecasting and maintenance tasks.',
+    'For the modelling layer, we evaluated gradient-boosted trees and recurrent neural networks across cross-validation folds, on a per-task basis. Each task got the model class that earned it on validation, not the one we liked on paper. Final models were containerised and deployed to cloud.',
+  ],
+  outcome: [
+    'Daily dashboards now surface forecasts and predictive maintenance flags to facility engineers, replacing manual rollups that used to consume real headcount. The reporting layer runs on schedule, the model layer runs on demand, and the data layer is no longer the bottleneck.',
+    'The team that used to spend a week assembling a report is now reviewing one.',
+  ],
+  metric: {
+    label: 'Reporting cadence',
+    value: 'Daily',
+    sub: 'automated dashboards across facilities, replacing manual rollups',
+  },
+  stack: 'Python · gradient-boosted trees · RNNs · containerised cloud deploy',
+  tags: [
+    'Data engineering',
+    'Forecasting',
+    'Predictive maintenance',
+    'Cloud deployment',
+    'MLOps',
+  ],
+  quote: {
+    text: 'GroupLabs demonstrated the utmost professionalism, delivering results efficiently.',
+    attribution: 'Cenovus representative',
+  },
 }
 
 export const metadata = {
@@ -20,31 +56,3 @@ export const metadata = {
   description: caseStudy.description,
   alternates: { canonical: '/work/cenovus-energy' },
 }
-
-## Overview
-
-We completed a bespoke analytics project for Cenovus Energy. The engagement focused on cleaning large-scale operational data and training predictive models to guide strategic decisions.
-
-Our team built a secure pipeline for data ingestion, feature engineering, model training and reporting.
-
-We gathered operational metrics from multiple facilities, transforming raw logs and sensor readouts into structured datasets. This required handling irregular sampling, missing values and inconsistent units.
-
-Python-based ETL jobs produced new features for forecasting and predictive maintenance. We evaluated gradient-boosted trees and recurrent neural networks across cross-validation folds to find the best fit for each task.
-
-The final models were containerised and deployed to the cloud with dashboards that surfaced daily insights for engineers. Automated reports freed up the team to focus on high-value work.
-
-## What we did
-
-<TagList>
-  <TagListItem>Data Engineering</TagListItem>
-  <TagListItem>Machine Learning</TagListItem>
-  <TagListItem>Cloud Deployment</TagListItem>
-</TagList>
-
-<StatList>
-  <StatListItem value="4 Months" label="Duration" />
-</StatList>
-
----
-
-> “GroupLabs demonstrated the utmost professionalism, delivering results efficiently.” — *Cenovus Representative*
