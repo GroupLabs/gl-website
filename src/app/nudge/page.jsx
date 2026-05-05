@@ -1,5 +1,5 @@
 import { Button } from '@/components/Button'
-import { ContactSection } from '@/components/ContactSection'
+import { ContactCTA } from '@/components/ContactCTA'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Faqs } from '@/components/Faqs'
@@ -755,7 +755,7 @@ export default function NudgePage() {
       <FaqSection />
       <Pricing />
 
-      <ContactSection />
+      <ContactCTA />
     </>
   )
 }
