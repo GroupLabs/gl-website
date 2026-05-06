@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { BuildLessCard } from '@/components/BuildLessCard'
 import { Container } from '@/components/Container'
 import { ContactCTA } from '@/components/ContactCTA'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
@@ -363,14 +364,6 @@ function Products() {
   const products = [
     {
       n: '01',
-      name: 'BuildLess',
-      tagline: 'Pre-build product validation',
-      desc: 'A working idea taken to a live user test in under two weeks. Ends with a written build-or-kill recommendation, backed by behaviour data.',
-      href: '/buildless',
-      meta: 'Sprint · 1–2 wk',
-    },
-    {
-      n: '02',
       name: 'Nudge',
       tagline: 'In-app walkthrough overlay',
       desc: 'End users ask Nudge how to do something, and it highlights the right elements on the page and walks them through, step by step.',
@@ -378,7 +371,7 @@ function Products() {
       meta: 'In development',
     },
     {
-      n: '03',
+      n: '02',
       name: 'Tell',
       tagline: 'High-throughput LLM gateway',
       desc: 'Caching, routing, and fallback for production-scale inference. Built for teams shipping LLM features at volume.',
@@ -386,7 +379,7 @@ function Products() {
       meta: 'v1.0 · released',
     },
     {
-      n: '04',
+      n: '03',
       name: 'Atmos',
       tagline: 'Cross-cloud workload migration',
       desc: 'Move services, data, and config from one cloud to another. Atmos maps the workload, mirrors it in the background, and shifts traffic on your signal.',
@@ -394,7 +387,7 @@ function Products() {
       meta: 'v0.9 · beta',
     },
     {
-      n: '05',
+      n: '04',
       name: 'Tessera',
       tagline: 'Unikernel manager',
       desc: 'Each workload runs as its own single-purpose VM: one address space, no shared kernel, no context switches. Smaller surface, millisecond cold starts.',
@@ -402,7 +395,7 @@ function Products() {
       meta: 'v0.8 · beta',
     },
     {
-      n: '06',
+      n: '05',
       name: 'Norma',
       tagline: 'Automated feature engineering',
       desc: 'Search the space of preprocessing pipelines. Score each with 5-fold XGBoost CV. Ship the winner as a model-ready dataset and a reproducible recipe.',
@@ -410,7 +403,7 @@ function Products() {
       meta: 'v1.0 · released',
     },
     {
-      n: '07',
+      n: '06',
       name: 'Bridge',
       tagline: 'Sub-ms hybrid search',
       desc: 'Keyword and vector retrieval in one process. Written close to the metal, lightweight, multi-modal when you need it.',
@@ -418,7 +411,7 @@ function Products() {
       meta: 'v1.4 · released',
     },
     {
-      n: '08',
+      n: '07',
       name: 'Mesh',
       tagline: 'Self-arranging compute fabric',
       desc: 'Nodes self-discover and form a topology on their own. The scheduler partitions jobs by device class. ML batch training today, batch-shaped workloads next.',
@@ -595,7 +588,7 @@ function WhatIsHappening() {
 export const metadata = {
   title: 'GroupLabs | Engineering Firm',
   description:
-    'GroupLabs is a Calgary engineering studio. Production ML systems, custom models, and pre-build product validation for serious operators in energy, healthcare, robotics, and education.',
+    'GroupLabs is an engineering firm. Production ML systems, custom models, and Build Decision Sprints for serious operators in energy, healthcare, robotics, and education.',
   alternates: { canonical: '/' },
 }
 
@@ -604,6 +597,7 @@ export default async function Home() {
     <>
       <HeroSection />
       <DeployedAt />
+      <BuildLessCard />
       <Products />
       <FeaturedWork />
       <WhatIsHappening />

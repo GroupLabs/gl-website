@@ -78,7 +78,7 @@ export function ProcessHero() {
             {...fadeUp(0.7)}
           >
             We deliver practical solutions that clients use to address
-            real-world, impactful problems. For pre-build validation sprints,
+            real-world, impactful problems. For Build Decision Sprints,
             see{' '}
             <Link
               href="/buildless"

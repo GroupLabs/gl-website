@@ -307,7 +307,7 @@ function Manifesto() {
                 We kept seeing the same pattern in the teams around us. Weeks
                 of engineering committed to ideas that had not earned it yet.
                 Models trained on data nobody had checked. Systems shipped on
-                hope. BuildLess, our pre-build validation practice, is the
+                hope. BuildLess, our Build Decision Sprint practice, is the
                 direct response to that pattern.
               </p>
               <p>
@@ -362,7 +362,7 @@ function Manifesto() {
 export const metadata = {
   title: 'About Us',
   description:
-    'GroupLabs is a Calgary engineering studio. We lead with BuildLess for pre-build product validation, and run deeper engagements in ML infrastructure, custom models, and production systems.',
+    'GroupLabs is an engineering firm. We lead with BuildLess for Build Decision Sprints, and run deeper engagements in ML infrastructure, custom models, and production systems.',
   alternates: { canonical: '/about' },
 }
 

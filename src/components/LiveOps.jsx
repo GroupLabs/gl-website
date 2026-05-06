@@ -6,7 +6,7 @@ const ENTRIES = [
   { year: '2024', month: '10', client: 'Cenovus Energy',  kind: 'deploy',   tag: 'forecast pipeline' },
   { year: '2024', month: '08', client: 'Hotchkiss B.I.',  kind: 'hand-off', tag: 'neural decoding' },
   { year: '2024', month: '05', client: 'SMART Tech.',     kind: 'deploy',   tag: 'edge inference' },
-  { year: '2023', month: '12', client: 'OrthoFoodie',     kind: 'sprint',   tag: 'pre-build test' },
+  { year: '2023', month: '12', client: 'OrthoFoodie',     kind: 'sprint',   tag: 'build decision' },
   { year: '2023', month: '08', client: 'MHHC',            kind: 'deploy',   tag: 'habitat models' },
   { year: '2023', month: '03', client: 'Univ. of Calgary',kind: 'research', tag: 'evaluations' },
 ]

@@ -4,7 +4,7 @@ import { loadArticles } from '@/lib/mdx'
 export const metadata = {
   title: 'Blog',
   description:
-    'Stay up-to-date with machine learning, data science, and AI insights from our Calgary experts.',
+    'Stay up-to-date with machine learning, data science, and AI insights from our team.',
   alternates: { canonical: '/blog' },
 }
 

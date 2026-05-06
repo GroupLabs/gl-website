@@ -75,8 +75,8 @@ export function AboutHero() {
             {...fadeUp(0.6)}
           >
             <p>
-              GroupLabs is a Calgary engineering studio. We lead with BuildLess,
-              our pre-build product validation practice that turns an idea into
+              GroupLabs is an engineering firm. We lead with BuildLess,
+              our Build Decision Sprint practice that turns an idea into
               a live test in days. We also run deeper engagements in ML
               infrastructure, custom models, and production systems for teams
               who already know what they need to ship.

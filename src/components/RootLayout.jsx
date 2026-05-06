@@ -152,7 +152,7 @@ function Navigation() {
   )
 }
 
-function RootLayoutInner({ children }) {
+function RootLayoutInner({ children, dark = false }) {
   let panelId = useId()
   let [expanded, setExpanded] = useState(false)
   let { calOpen, openConnect, closeConnect } = useContext(RootLayoutContext)
@@ -187,6 +187,7 @@ function RootLayoutInner({ children }) {
           inert={expanded ? '' : undefined}
         >
           <Header
+            invert={dark}
             panelId={panelId}
             icon={MenuIcon}
             toggleRef={openRef}
@@ -275,10 +276,15 @@ function RootLayoutInner({ children }) {
   )
 }
 
+const DARK_ROUTES = ['/buildless']
+
 export function RootLayout({ children }) {
   let pathname = usePathname()
   let [logoHovered, setLogoHovered] = useState(false)
   let [calOpen, setCalOpen] = useState(false)
+  let dark = DARK_ROUTES.some(
+    (route) => pathname === route || pathname?.startsWith(`${route}/`),
+  )
 
   return (
     <RootLayoutContext.Provider
@@ -290,7 +296,9 @@ export function RootLayout({ children }) {
         closeConnect: () => setCalOpen(false),
       }}
     >
-      <RootLayoutInner key={pathname}>{children}</RootLayoutInner>
+      <RootLayoutInner key={pathname} dark={dark}>
+        {children}
+      </RootLayoutInner>
     </RootLayoutContext.Provider>
   )
 }

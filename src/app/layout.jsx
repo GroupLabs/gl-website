@@ -15,10 +15,10 @@ export const metadata = {
   metadataBase: new URL('https://grouplabs.ca'),
   title: {
     template: '%s - GroupLabs',
-    default: 'GroupLabs — A Calgary engineering studio',
+    default: 'GroupLabs — An engineering firm',
   },
   description:
-    'GroupLabs is a Calgary engineering studio. Production ML systems, custom model development, and pre-build product validation for serious teams in energy, healthcare, robotics, and education.',
+    'GroupLabs is an engineering firm. Production ML systems, custom model development, and Build Decision Sprints for serious teams in energy, healthcare, robotics, and education.',
   keywords: [
     'ML infrastructure',
     'MLOps',
@@ -26,14 +26,13 @@ export const metadata = {
     'custom model development',
     'engineering consultancy',
     'GroupLabs',
-    'Calgary',
     'BuildLess',
     'product validation',
   ],
   openGraph: {
-    title: 'GroupLabs — A Calgary engineering studio',
+    title: 'GroupLabs — An engineering firm',
     description:
-      'Production ML systems, custom model development, and pre-build product validation for serious teams.',
+      'Production ML systems, custom model development, and Build Decision Sprints for serious teams.',
     url: 'https://grouplabs.ca',
     siteName: 'GroupLabs',
     locale: 'en_CA',
@@ -42,9 +41,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GroupLabs — A Calgary engineering studio',
+    title: 'GroupLabs — An engineering firm',
     description:
-      'Production ML systems, custom model development, and pre-build product validation for serious teams.',
+      'Production ML systems, custom model development, and Build Decision Sprints for serious teams.',
     images: 'https://placehold.co/1200x630/png?text=GroupLabs',
   },
   alternates: {

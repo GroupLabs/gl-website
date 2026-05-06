@@ -89,87 +89,144 @@ function BlogHero({ count }) {
   )
 }
 
-function PostEntry({ article, index }) {
+function FeatureTile({ article, index }) {
   const n = String(index + 1).padStart(2, '0')
-  const year = article.date.split('-')[0]
-
   return (
-    <article className="group">
-      <div className="border-neutral-950/15 flex items-baseline gap-4 border-b pb-3">
-        <span className="tabular font-mono text-2xl font-medium tracking-tight text-neutral-950">
-          {n}
+    <Link
+      href={article.href}
+      className="group relative isolate flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-neutral-950/15 bg-neutral-950 p-7 text-white transition hover:border-neutral-950/40 sm:p-9"
+    >
+      {article.image && (
+        <Image
+          src={article.image}
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          className="absolute inset-0 -z-10 h-full w-full object-cover opacity-45 transition duration-700 group-hover:scale-[1.02] group-hover:opacity-55"
+        />
+      )}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/30"
+      />
+
+      <div className="flex items-baseline gap-3 font-mono text-[10px] uppercase tracking-[0.18em]">
+        <span className="flex items-center gap-2 text-white">
+          <span
+            aria-hidden="true"
+            className="block h-1.5 w-1.5 rounded-full bg-orange-500"
+          />
+          §&nbsp;{n} · Feature
         </span>
-        <span className="eyebrow wdth-narrow text-neutral-500">
-          {year} · {article.author.name}
+        <span aria-hidden="true" className="text-white/35">/</span>
+        <span className="tabular text-white/70">
+          {formatDate(article.date)}
         </span>
-        <span aria-hidden="true" className="bg-neutral-950/15 h-px flex-1" />
-        <Link
-          href={article.href}
-          className="eyebrow wdth-narrow text-neutral-500 hover:text-orange-600"
-        >
-          Read →
-        </Link>
       </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-12">
-        <h3 className="wdth-wide font-display text-[clamp(1.75rem,4vw,3rem)] font-medium leading-[1.05] tracking-tight text-neutral-950 lg:col-span-5">
-          <Link href={article.href} className="hover:text-orange-600">
-            {article.title}
-          </Link>
+      <div>
+        <h3 className="wdth-wide font-display text-2xl font-medium leading-[1.05] tracking-tight text-white sm:text-3xl lg:text-[2.5rem]">
+          {article.title}
         </h3>
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/80 sm:text-base">
+          {article.description}
+        </p>
 
-        <div className="space-y-6 text-base leading-relaxed text-neutral-700 lg:col-span-7">
-          <p>
-            <span className="eyebrow wdth-narrow text-neutral-500">
-              Summary &nbsp;·&nbsp;
-            </span>{' '}
-            {article.description}
-          </p>
-
-          {article.tags?.length > 0 && (
-            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500">
-              <span className="eyebrow wdth-narrow">Tags &nbsp;·&nbsp;</span>
-              {article.tags.map((tag, i) => (
-                <span key={tag} className="text-neutral-700">
-                  {tag}
-                  {i < article.tags.length - 1 && (
-                    <span className="ml-2 text-neutral-400">/</span>
-                  )}
-                </span>
-              ))}
-            </p>
-          )}
-        </div>
-      </div>
-
-      <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-6 border-t border-neutral-950/10 pt-6 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <p className="eyebrow wdth-narrow text-neutral-500">Published</p>
-          <p className="tabular mt-2 font-mono text-3xl font-medium leading-none tracking-tight text-neutral-950 sm:text-4xl">
-            {formatDate(article.date)}
-          </p>
-        </div>
-        <div className="lg:col-span-7">
-          <p className="eyebrow wdth-narrow text-neutral-500">Author</p>
-          <div className="mt-2 flex items-center gap-3">
-            <Image
-              alt={article.author.name}
-              src={article.author.image}
-              width={36}
-              height={36}
-              className="h-9 w-9 rounded-md object-cover"
-            />
-            <div className="font-mono text-sm leading-tight text-neutral-800">
-              <div className="text-neutral-950">{article.author.name}</div>
-              <div className="text-xs text-neutral-500">
-                {article.author.role}
-              </div>
+        <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/15 pt-5">
+          <div className="flex items-center gap-3">
+            {article.author?.image && (
+              <Image
+                alt={article.author.name}
+                src={article.author.image}
+                width={36}
+                height={36}
+                className="h-9 w-9 rounded-md object-cover"
+              />
+            )}
+            <div className="font-mono text-xs leading-tight text-white/85">
+              <div className="text-white">{article.author.name}</div>
+              <div className="text-white/55">{article.author.role}</div>
             </div>
           </div>
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-orange-400 transition-transform group-hover:translate-x-0.5">
+            Read →
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
   )
+}
+
+function MediumTile({ article, index }) {
+  const n = String(index + 1).padStart(2, '0')
+  return (
+    <Link
+      href={article.href}
+      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-neutral-950/15 bg-white p-6 transition hover:border-neutral-950/40 hover:bg-neutral-50 sm:p-7"
+    >
+      <div className="flex items-baseline gap-3 border-b border-neutral-950/10 pb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">
+        <span className="tabular text-neutral-950">§&nbsp;{n}</span>
+        <span aria-hidden="true" className="text-neutral-300">/</span>
+        <span className="tabular">{formatDate(article.date)}</span>
+        <span aria-hidden="true" className="ml-auto h-px flex-1 bg-neutral-200" />
+      </div>
+
+      <div className="mt-4 flex flex-1 flex-col">
+        <h3 className="wdth-wide font-display text-xl font-medium leading-[1.1] tracking-tight text-neutral-950 sm:text-2xl">
+          {article.title}
+        </h3>
+        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-neutral-700">
+          {article.description}
+        </p>
+      </div>
+
+      <div className="mt-5 flex items-center justify-between border-t border-neutral-950/10 pt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">
+        <span className="text-neutral-700">{article.author.name}</span>
+        <span className="text-orange-600 transition-transform group-hover:translate-x-0.5">
+          Read →
+        </span>
+      </div>
+    </Link>
+  )
+}
+
+function SmallTile({ article, index }) {
+  const n = String(index + 1).padStart(2, '0')
+  return (
+    <Link
+      href={article.href}
+      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-neutral-950/15 bg-white p-5 transition hover:border-neutral-950/40 hover:bg-neutral-50 sm:p-6"
+    >
+      <div className="flex items-baseline gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">
+        <span className="tabular text-neutral-950">§&nbsp;{n}</span>
+        <span aria-hidden="true" className="text-neutral-300">/</span>
+        <span className="tabular">{formatDate(article.date)}</span>
+      </div>
+
+      <h3 className="mt-4 font-display text-base font-medium leading-snug tracking-tight text-neutral-950 sm:text-lg">
+        {article.title}
+      </h3>
+
+      <div className="mt-4 flex items-center justify-between border-t border-neutral-950/10 pt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">
+        <span>{article.author.name}</span>
+        <span className="text-orange-600 transition-transform group-hover:translate-x-0.5">
+          →
+        </span>
+      </div>
+    </Link>
+  )
+}
+
+function BentoTile({ article, index }) {
+  if (index === 0) return <FeatureTile article={article} index={index} />
+  if (index < 3) return <MediumTile article={article} index={index} />
+  return <SmallTile article={article} index={index} />
+}
+
+function bentoSpan(index) {
+  if (index === 0) return 'lg:col-span-7 lg:row-span-2'
+  if (index < 3) return 'lg:col-span-5'
+  return 'lg:col-span-4'
 }
 
 export default function BlogClient({ articles }) {
@@ -233,14 +290,18 @@ export default function BlogClient({ articles }) {
               </p>
             </FadeIn>
           ) : (
-            <FadeInStagger faster>
-              <ol className="mt-16 space-y-16 sm:space-y-24">
-                {filteredArticles.map((article, idx) => (
-                  <FadeIn as="li" key={article.href}>
-                    <PostEntry article={article} index={idx} />
-                  </FadeIn>
-                ))}
-              </ol>
+            <FadeInStagger
+              faster
+              className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-6 sm:gap-5 lg:grid-cols-12 lg:auto-rows-[200px]"
+            >
+              {filteredArticles.map((article, idx) => (
+                <FadeIn
+                  key={article.href}
+                  className={`sm:col-span-3 ${bentoSpan(idx)}`}
+                >
+                  <BentoTile article={article} index={idx} />
+                </FadeIn>
+              ))}
             </FadeInStagger>
           )}
         </Container>

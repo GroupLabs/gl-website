@@ -35,7 +35,7 @@ export function HeroSnapshot({ invert = false }) {
     ? 'border-white/25 bg-neutral-900'
     : 'border-neutral-950/15 bg-white'
   const subtleBorder = invert ? 'border-white/15' : 'border-neutral-950/15'
-  const muted = invert ? 'text-white/55' : 'text-neutral-500'
+  const muted = invert ? 'text-white/70' : 'text-neutral-500'
   const ink = invert ? 'text-white' : 'text-neutral-950'
   const dim = invert ? 'text-white/65' : 'text-neutral-700'
 
@@ -145,7 +145,7 @@ function Metric({ label, value, delta, barValue, barAccent, barDelay, invert }) 
           <span
             className={clsx(
               'eyebrow',
-              invert ? 'text-white/45' : 'text-neutral-400',
+              invert ? 'text-white/60' : 'text-neutral-400',
             )}
           >
             {delta}

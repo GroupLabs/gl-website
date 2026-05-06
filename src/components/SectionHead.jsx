@@ -26,7 +26,7 @@ export function SectionHead({
               <p
                 className={clsx(
                   'eyebrow',
-                  invert ? 'text-white/65' : 'text-neutral-950/65',
+                  invert ? 'text-white' : 'text-neutral-950/65',
                 )}
               >
                 {kicker}
@@ -43,7 +43,7 @@ export function SectionHead({
               <p
                 className={clsx(
                   'eyebrow',
-                  invert ? 'text-white/55' : 'text-neutral-950/55',
+                  invert ? 'text-white/75' : 'text-neutral-950/55',
                 )}
               >
                 {rightMeta}

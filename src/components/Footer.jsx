@@ -74,7 +74,7 @@ export function Footer() {
               <p className="mt-6 max-w-sm font-mono text-xs leading-relaxed text-neutral-500">
                 A small engineering studio in Calgary &amp; Montreal.
                 <br />
-                Production ML, custom models, pre-build product validation.
+                Production ML, custom models, Build Decision Sprints.
               </p>
             </div>
             <div className="lg:col-span-7">
