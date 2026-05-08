@@ -381,7 +381,7 @@ function Products() {
     {
       n: '03',
       name: 'Atmos',
-      tagline: 'Cross-cloud workload migration',
+      tagline: 'Cross cloud migration',
       desc: 'Move services, data, and config from one cloud to another. Atmos maps the workload, mirrors it in the background, and shifts traffic on your signal.',
       href: '/atmos',
       meta: 'v0.9 · beta',

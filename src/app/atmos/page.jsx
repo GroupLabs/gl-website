@@ -89,7 +89,7 @@ function Intro() {
               <span className="opacity-50">/</span>
               <span>A product from GroupLabs</span>
             </span>
-            <span>Cross-cloud workload migration</span>
+            <span>Cross cloud migration</span>
           </div>
         </FadeIn>
 
