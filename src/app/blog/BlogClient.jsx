@@ -17,6 +17,25 @@ import {
   SelectItem,
 } from '@/components/ui/select'
 
+function statusOf(article) {
+  const status = article.status
+  if (!status) return null
+  return typeof status === 'string' ? { label: status } : status
+}
+
+function StatusMark({ article, tone = 'dark' }) {
+  const status = statusOf(article)
+  if (!status) return null
+  return (
+    <>
+      <span aria-hidden="true" className={tone === 'light' ? 'text-white/35' : 'text-neutral-300'}>/</span>
+      <span className={tone === 'light' ? 'text-orange-400' : 'text-orange-600'}>
+        {status.label}
+      </span>
+    </>
+  )
+}
+
 function BlogHero({ count }) {
   return (
     <section className="relative isolate overflow-hidden bg-white text-neutral-950">
@@ -122,6 +141,7 @@ function FeatureTile({ article, index }) {
         <span className="tabular text-white/70">
           {formatDate(article.date)}
         </span>
+        <StatusMark article={article} tone="light" />
       </div>
 
       <div>
@@ -168,6 +188,7 @@ function MediumTile({ article, index }) {
         <span className="tabular text-neutral-950">§&nbsp;{n}</span>
         <span aria-hidden="true" className="text-neutral-300">/</span>
         <span className="tabular">{formatDate(article.date)}</span>
+        <StatusMark article={article} />
         <span aria-hidden="true" className="ml-auto h-px flex-1 bg-neutral-200" />
       </div>
 
@@ -201,6 +222,7 @@ function SmallTile({ article, index }) {
         <span className="tabular text-neutral-950">§&nbsp;{n}</span>
         <span aria-hidden="true" className="text-neutral-300">/</span>
         <span className="tabular">{formatDate(article.date)}</span>
+        <StatusMark article={article} />
       </div>
 
       <h3 className="mt-4 font-display text-base font-medium leading-snug tracking-tight text-neutral-950 sm:text-lg">

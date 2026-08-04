@@ -1,0 +1,165 @@
+import imageLaptop from '@/images/laptop.jpg'
+
+export const article = {
+  date: '2026-07-30',
+  title: 'Code that runs in the post',
+  description:
+    'A fenced block tagged artifact stops being a listing and starts being a program — including a transformer that runs entirely in your browser.',
+  author: {
+    name: 'Noel Thomas',
+    role: 'Founder',
+    image: '/images/team/noel-thomas.jpg',
+    color: '#2563eb',
+  },
+  image: imageLaptop,
+  tags: ['engineering'],
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+  alternates: { canonical: '/blog/live-code-in-posts' },
+}
+
+Writing about a system and demonstrating it are usually two different jobs, done
+in two different places: the post explains, and a link sends you somewhere else
+to watch it work. That gap is where most technical writing loses people.
+
+So a fenced code block can now be marked `artifact`, and the renderer treats it
+as a program rather than a listing. Nothing else about authoring changes — it is
+still a fence in a markdown file.[^fence]
+
+## The short version
+
+Tag the fence and it runs:
+
+````md
+```js artifact title="Whitespace tokenizer" height=240
+// ...
+```
+````
+
+Here is that block, live. Edit the input and the chips follow it.
+
+```js artifact title="Whitespace tokenizer" height=240 autorun
+root.innerHTML = `
+  <label for="src">Input</label>
+  <input id="src" value="Attention is all you need" />
+  <div id="out"></div>
+`
+
+const src = root.querySelector('#src')
+const out = root.querySelector('#out')
+
+function render() {
+  const tokens = src.value.split(/\s+/).filter(Boolean)
+
+  out.innerHTML = ''
+  out.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:14px'
+
+  for (const token of tokens) {
+    const chip = document.createElement('span')
+    chip.textContent = token
+    chip.style.cssText =
+      'padding:4px 10px;border:1px solid rgba(10,10,10,.12);' +
+      'border-radius:999px;font:13px/1.4 ui-monospace,monospace'
+    out.appendChild(chip)
+  }
+
+  status(`${tokens.length} tokens`)
+}
+
+src.addEventListener('input', render)
+render()
+```
+
+Press **Source** on the bar above to read the code, **Restart** to reset it.
+
+## What the code gets
+
+Each artifact runs as an ES module in its own sandboxed frame, so `import` and
+top-level `await` both work and a bad loop only takes down that one widget. Four
+things are defined before your code runs:[^errors]
+
+| | |
+| --- | --- |
+| `root` | an element to render into |
+| `print(...)` | append a line of output |
+| `status(text)` | set the progress line above the output |
+| `clear()` | empty both |
+
+Anything that throws — including a rejected promise — is reported in the frame
+rather than swallowed.
+
+## A real model, in the page
+
+The reason this exists. Nothing below runs on a server: the weights are fetched
+once, cached by the browser, and the inference happens on your machine.[^sandbox]
+
+```js artifact title="Sentiment, running locally" height=380 note="Fetches a ~70 MB model on first run, then caches it."
+import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.5'
+
+status('Downloading model')
+
+const classify = await pipeline(
+  'sentiment-analysis',
+  'Xenova/distilbert-base-uncased-finetuned-sst-2-english',
+)
+
+status('Ready')
+
+root.innerHTML = `
+  <label for="text">Say something</label>
+  <textarea id="text" rows="2">The rail on the right is genuinely nice.</textarea>
+  <button id="go" style="margin-top:12px">Classify</button>
+`
+
+const text = root.querySelector('#text')
+const go = root.querySelector('#go')
+
+async function run() {
+  go.disabled = true
+  status('Thinking')
+
+  const [result] = await classify(text.value)
+  print(`${result.label.padEnd(9)}${(result.score * 100).toFixed(1)}%`)
+
+  status('Ready')
+  go.disabled = false
+}
+
+go.addEventListener('click', run)
+await run()
+```
+
+That one is gated behind a button on purpose. An artifact that pulls tens of
+megabytes should never start on page load, so the default is to wait for a
+click; cheap examples opt in with `autorun`.
+
+## Options
+
+| Option | Effect |
+| --- | --- |
+| `title="…"` | Label on the bar |
+| `height=320` | Frame height in pixels |
+| `note="…"` | Line shown under the run button |
+| `autorun` | Start on load — for examples that cost nothing |
+
+Ordinary fences are untouched. Leave the meta off and you get a listing, same as
+before:
+
+```js
+export const article = { title: 'Code that runs in the post' }
+```
+
+[^fence]: The options live in the fence's info string, which every other
+    markdown tool is required to ignore. The file still opens cleanly anywhere
+    else.
+
+[^errors]: A module body cannot be wrapped in `try`/`catch` without breaking its
+    imports, so failures are collected off the window instead.
+
+[^sandbox]: The frame is same-origin, which is what gives it the Cache API —
+    under a strict sandbox the origin is opaque and
+    [transformers.js](https://huggingface.co/docs/transformers.js) would refetch
+    its weights on every visit.
