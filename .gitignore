@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated social cards (rebuilt by prebuild)
+src/app/**/opengraph-image.png

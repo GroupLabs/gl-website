@@ -1,199 +1,511 @@
+/*
+ * Long-form article styles. Selectors are written flat rather than nested —
+ * an earlier nested version compiled to `.typography :where(.typography > *)`,
+ * which matched nothing and left prose with no vertical rhythm at all.
+ */
+
 .typography {
+  /* Notation reads as its own register, so it gets its own ink: a blueprint
+     petrol that sits opposite the orange accent instead of competing with it.
+     One value — change it here and every equation follows. */
+  --math-ink: #15607a;
+
+  color: theme(colors.neutral.800);
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+@screen sm {
+  .typography {
+    font-size: 1.1875rem;
+  }
+}
+
+.typography > * {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.typography > :first-child {
+  margin-top: 0;
+}
+
+.typography > :last-child {
+  margin-bottom: 0;
+}
+
+/* Headings — every article is normalised so its top section is an <h2>. */
+.typography :is(h2, h3, h4, h5) {
+  position: relative;
+  scroll-margin-top: 6rem;
   color: theme(colors.neutral.950);
-  font-size: theme(fontSize.xl);
-  line-height: theme(fontSize.xl[1].lineHeight);
+  text-wrap: balance;
+}
 
-  :where(.typography > *) {
-    margin-top: theme(spacing.6);
-    margin-bottom: theme(spacing.6);
+.typography h2 {
+  font-family: theme(fontFamily.display);
+  font-variation-settings: 'wdth' 125;
+  font-size: clamp(1.625rem, 3.4vw, 2.125rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-top: 4.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.typography h3 {
+  font-family: theme(fontFamily.sans);
+  font-size: 1.3125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+/* The fourth level is a label, not a title — set as a spec-sheet eyebrow so it
+   never competes with the section headings above it. */
+.typography :is(h4, h5) {
+  font-family: theme(fontFamily.mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: theme(colors.neutral.500);
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.typography :is(h2 + h3, h3 + h4, h4 + h5) {
+  margin-top: 1rem;
+}
+
+.typography .heading-anchor {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  padding-right: 0.35em;
+  font-weight: 400;
+  color: theme(colors.orange.600);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.typography :is(h2, h3, h4, h5):hover .heading-anchor,
+.typography .heading-anchor:focus-visible {
+  opacity: 1;
+}
+
+@media (max-width: 1279px), (prefers-reduced-motion: reduce) {
+  .typography .heading-anchor {
+    transition: none;
   }
+}
 
-  /* Headings */
-  :where(h2) {
-    font-weight: theme(fontWeight.semibold);
-    font-family: theme(fontFamily.display);
-    font-variation-settings: theme(fontFamily.display[1].fontVariationSettings);
-    font-size: theme(fontSize.2xl);
-    line-height: theme(fontSize.2xl[1].lineHeight);
-    margin-top: theme(spacing.16);
+@media (max-width: 1279px) {
+  .typography .heading-anchor {
+    display: none;
   }
+}
 
-  :where(h3) {
-    font-weight: theme(fontWeight.semibold);
-    font-family: theme(fontFamily.display);
-    font-variation-settings: theme(fontFamily.display[1].fontVariationSettings);
-    font-size: theme(fontSize.xl);
-    line-height: theme(fontSize.xl[1].lineHeight);
-    margin-top: theme(spacing.10);
+/* Lists */
+.typography :is(ul, ol) {
+  padding-left: 1.375rem;
+}
+
+.typography ul {
+  list-style-type: disc;
+}
+
+.typography ol {
+  list-style-type: decimal;
+}
+
+.typography li {
+  padding-left: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.typography li::marker {
+  color: theme(colors.neutral.400);
+}
+
+.typography li > *,
+.typography li li {
+  margin-top: 0.5rem;
+}
+
+.typography ol > li::marker {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: theme(colors.neutral.500);
+}
+
+/* Tables */
+.typography table {
+  width: 100%;
+  text-align: left;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.typography th {
+  font-weight: 600;
+  color: theme(colors.neutral.950);
+}
+
+.typography thead th {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid theme(colors.neutral.950 / 0.25);
+}
+
+.typography td {
+  vertical-align: top;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid theme(colors.neutral.950 / 0.08);
+}
+
+.typography :is(th, td):not(:last-child) {
+  padding-right: 1.5rem;
+}
+
+/* Code — the block chrome lives in CodeBlock.jsx, the surface here. */
+.typography .code-block {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+  border: 1px solid theme(colors.neutral.950 / 0.08);
+  border-radius: 0.875rem;
+  background-color: theme(colors.neutral.50);
+}
+
+@screen lg {
+  /* Code is read in lines, not in a measure — let it out past the text column. */
+  .typography .code-block {
+    margin-left: -3rem;
+    margin-right: -3rem;
   }
+}
 
-  :where(h2 + h3) {
-    margin-top: 0;
+.code-block__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.375rem 0.5rem 0.375rem 1.125rem;
+  border-bottom: 1px solid theme(colors.neutral.950 / 0.07);
+  background-color: theme(colors.white);
+}
+
+.typography .code-block pre {
+  display: block;
+  margin: 0;
+  overflow-x: auto;
+  background-color: transparent;
+}
+
+.typography .code-block pre:focus-visible {
+  outline: 2px solid theme(colors.orange.600 / 0.4);
+  outline-offset: -2px;
+}
+
+.typography .code-block code {
+  display: block;
+  min-width: max-content;
+  padding: 1.25rem 1.125rem;
+  font-family: theme(fontFamily.mono);
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  color: theme(colors.neutral.800);
+  background-color: transparent;
+}
+
+@screen sm {
+  .typography .code-block code {
+    padding: 1.5rem;
+    font-size: 0.875rem;
   }
+}
 
-  /* Lists */
-  :where(ul, ol) {
-    padding-left: 1.5rem;
+/* Artifacts — a code block that runs. Shares the code chrome so a listing and
+   a live example read as the same object. */
+.typography .artifact {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+  border: 1px solid theme(colors.neutral.950 / 0.08);
+  border-radius: 0.875rem;
+  background-color: theme(colors.white);
+}
+
+@screen lg {
+  .typography .artifact {
+    margin-left: -3rem;
+    margin-right: -3rem;
   }
+}
 
-  :where(ul) {
-    list-style-type: disc;
-  }
+.artifact__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.375rem 0.5rem 0.375rem 1.125rem;
+  border-bottom: 1px solid theme(colors.neutral.950 / 0.07);
+}
 
-  :where(ol) {
-    list-style-type: decimal;
-  }
+.artifact__stage {
+  background-color: theme(colors.white);
+}
 
-  :where(li) {
-    padding-left: theme(spacing.3);
-    margin-top: theme(spacing.6);
-  }
+.artifact__source {
+  border-top: 1px solid theme(colors.neutral.950 / 0.07);
+  background-color: theme(colors.neutral.50);
+}
 
-  :where(li)::marker {
-    color: theme(colors.neutral.500);
-  }
+.typography .artifact__source pre {
+  display: block;
+  margin: 0;
+  max-height: 24rem;
+  overflow: auto;
+  background-color: transparent;
+}
 
-  :where(li > *),
-  :where(li li) {
-    margin-top: theme(spacing.4);
-  }
+.typography .artifact__source code {
+  display: block;
+  min-width: max-content;
+  padding: 1.25rem 1.125rem;
+  font-family: theme(fontFamily.mono);
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  color: theme(colors.neutral.800);
+  background-color: transparent;
+}
 
-  :where(ol > li)::marker {
-    font-size: theme(fontSize.base);
-    font-weight: theme(fontWeight.semibold);
-  }
+/* <hr> */
+.typography hr {
+  border: 0;
+  border-top: 1px solid theme(colors.neutral.950 / 0.12);
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
 
-  /* Tables */
-  :where(table) {
-    width: 100%;
-    text-align: left;
-    font-size: theme(fontSize.base);
-    line-height: theme(fontSize.base[1].lineHeight);
-  }
+/* Inline text */
+.typography a {
+  color: theme(colors.neutral.950);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: theme(colors.orange.600 / 0.45);
+  text-underline-offset: 0.18em;
+  text-decoration-skip-ink: none;
+  transition: text-decoration-color 150ms ease;
+}
 
-  :where(th) {
-    font-weight: theme(fontWeight.semibold);
-  }
+.typography a:hover {
+  text-decoration-color: theme(colors.orange.600);
+}
 
-  :where(thead th) {
-    padding-bottom: theme(spacing.6);
-    border-bottom: 1px solid theme(colors.neutral.950);
-  }
+.typography strong {
+  font-weight: 600;
+  color: theme(colors.neutral.950);
+}
 
-  :where(td) {
-    vertical-align: top;
-    padding-top: theme(spacing.6);
-    padding-bottom: theme(spacing.6);
-    border-bottom: 1px solid theme(colors.neutral.950 / 0.1);
-  }
+.typography code:not(.shiki-code) {
+  font-size: calc(15 / 19 * 1em);
+  font-weight: 500;
+  background-color: theme(colors.neutral.100);
+  color: theme(colors.neutral.900);
+  padding: 0.125rem 0.375rem;
+  border-radius: theme(borderRadius.md);
+  font-family: theme(fontFamily.mono);
+}
 
-  :where(:is(th, td):not(:last-child)) {
-    padding-right: theme(spacing.6);
-  }
+.typography code:not(.shiki-code)::before,
+.typography code:not(.shiki-code)::after {
+  content: '';
+}
 
-  /* Code blocks */
-  :where(pre) {
-    display: block;
-    background-color: theme(colors.neutral.50);
-    border: 1px solid theme(colors.neutral.200);
-    border-radius: theme(borderRadius.lg);
-    overflow-x: auto;
-    margin-top: theme(spacing.10);
-    margin-bottom: theme(spacing.10);
-  }
+.typography :is(h2, h3) code {
+  font-weight: 600;
+  font-size: 0.9em;
+}
 
-  :where(pre code) {
-    display: block;
-    min-width: max-content;
-    background-color: theme(colors.neutral.50);
-    padding: theme(padding.6);
-    font-size: theme(fontSize.sm);
-    line-height: theme(lineHeight.6);
-    color: theme(colors.neutral.900);
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+/* Figures */
+.typography figure {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
 
-    @screen sm {
-      padding: theme(spacing.8);
-    }
-  }
+.typography figcaption {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: theme(colors.neutral.500);
+  text-align: center;
+}
 
-  /* <hr> */
-  :where(hr) {
-    border-color: theme(colors.neutral.950 / 0.1);
-    margin-top: theme(spacing.24);
-    margin-bottom: theme(spacing.24);
-  }
+/* Math */
+.typography .katex {
+  font-size: 1.05em;
+  color: var(--math-ink);
+}
 
-  /* Inline text */
-  :where(a) {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.15em;
-    text-decoration-skip-ink: none;
-    font-weight: theme(fontWeight.semibold);
-  }
+/* Inside a heading the equation is part of the title, not an aside. */
+.typography :is(h2, h3, h4, h5) .katex {
+  color: inherit;
+}
 
-  :where(strong) {
-    font-weight: theme(fontWeight.semibold);
-  }
+.typography .katex-display {
+  display: block;
+  width: 100%;
+  margin: 2.25rem 0;
+  padding: 0.25rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
+}
 
-  :where(code:not(pre code)) {
-    font-size: calc(16 / 20 * 1em);
-    font-weight: theme(fontWeight.medium);
-    background-color: theme(colors.neutral.100);
-    color: theme(colors.neutral.900);
-    padding: theme(spacing.1) theme(spacing.2);
-    border-radius: theme(borderRadius.md);
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+.typography .katex-display > .katex {
+  display: inline-block;
+  font-size: 1.15em;
+  text-align: left;
+}
 
-    &::before,
-    &::after {
-      content: '';
-    }
-  }
+/* Footnotes — GFM hides the section label; bring it back as a spec heading. */
+.typography .footnotes {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid theme(colors.neutral.950 / 0.1);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: theme(colors.neutral.600);
+}
 
-  :where(h2 code, h3 code) {
-    font-weight: theme(fontWeight.bold);
-  }
+.typography .footnotes h2 {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+  border-width: 0;
+  font-family: theme(fontFamily.mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: theme(colors.neutral.500);
+}
 
-  /* Figures */
-  :where(figure) {
-    margin-top: theme(spacing.32);
-    margin-bottom: theme(spacing.32);
-  }
+.typography .footnotes li {
+  margin-top: 0.625rem;
+}
 
-  /* Math */
-  :where(.katex-display) {
-    display: block;
-    width: 100%;
-    margin: theme(spacing.8) 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    text-align: center;
-  }
+.typography .footnotes p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
 
-  :where(.katex-display > .katex) {
-    display: inline-block;
-    text-align: left;
-  }
+/* Margin notes — footnotes lifted into the left gutter at wide viewports. The
+   list at the foot of the article stays as the fallback and the print copy.
+   Measured off the text column rather than the container edge, so the note
+   column keeps a fixed relationship to the prose it annotates. */
+[data-article-body] {
+  --measure: 44rem;
+  --note-width: 11rem;
+  --note-gap: 2.75rem;
+}
 
-  :where(.katex) {
-    font-size: 1.1em;
-    color: theme(colors.blue.600);
-  }
+.margin-note {
+  position: absolute;
+  right: calc(50% + (var(--measure) / 2) + var(--note-gap));
+  width: var(--note-width);
+  padding-left: 1.125rem;
+  color: theme(colors.neutral.500);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  transition: color 200ms ease;
+}
 
-  :where(.katex-display .katex) {
-    font-size: 1.2em;
-  }
+.margin-note.is-active {
+  color: theme(colors.neutral.800);
+}
 
-  /* Spacing overrides */
-  :where(.typography:first-child > :first-child),
-  :where(li > :first-child) {
-    margin-top: 0 !important;
-  }
+/* Hung in the note's own margin, so the body text keeps a clean left edge and
+   the number pairs with the orange reference it belongs to. */
+.margin-note__index {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: theme(fontFamily.mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.9;
+  color: theme(colors.orange.600);
+}
 
-  :where(.typography:last-child > :last-child),
-  :where(li > :last-child) {
-    margin-bottom: 0 !important;
-  }
+/* The left gutter belongs to the notes when there are notes — code gives up
+   its bleed on that side and takes the room on the right instead. */
+.has-margin-notes :is(.code-block, .artifact) {
+  margin-left: 0;
+}
+
+.margin-note__body p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.margin-note__body p + p {
+  margin-top: 0.5rem;
+}
+
+.margin-note__body a {
+  color: inherit;
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-color: theme(colors.neutral.950 / 0.25);
+  text-underline-offset: 0.15em;
+}
+
+.has-margin-notes .footnotes {
+  display: none;
+}
+
+.typography sup {
+  font-size: 0.72em;
+  vertical-align: super;
+  line-height: 1;
+}
+
+.typography sup a {
+  font-weight: 600;
+  color: theme(colors.orange.600);
+  text-decoration: none;
+  padding: 0 0.1em;
+}
+
+.typography .data-footnote-backref {
+  text-decoration: none;
+  color: theme(colors.neutral.400);
+}
+
+.typography .data-footnote-backref:hover {
+  color: theme(colors.orange.600);
+}
+
+/* Spacing overrides */
+.typography li > :first-child {
+  margin-top: 0 !important;
+}
+
+.typography li > :last-child {
+  margin-bottom: 0 !important;
 }

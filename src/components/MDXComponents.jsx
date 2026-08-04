@@ -1,10 +1,33 @@
 import clsx from 'clsx'
 
+import { Artifact } from '@/components/Artifact'
 import { Blockquote } from '@/components/Blockquote'
 import { Border } from '@/components/Border'
+import { CodeBlock } from '@/components/CodeBlock'
 import { GrayscaleTransitionImage } from '@/components/GrayscaleTransitionImage'
 import { StatList, StatListItem } from '@/components/StatList'
 import { TagList, TagListItem } from '@/components/TagList'
+
+// Every heading carries a quiet anchor in the left margin, so any section of
+// an article can be linked to directly.
+function heading(Tag) {
+  return function Heading({ id, children, ...props }) {
+    return (
+      <Tag id={id} {...props}>
+        {id && (
+          <a
+            href={`#${id}`}
+            className="heading-anchor"
+            aria-label="Link to this section"
+          >
+            #
+          </a>
+        )}
+        {children}
+      </Tag>
+    )
+  }
+}
 
 export const MDXComponents = {
   Blockquote({ className, ...props }) {
@@ -67,7 +90,7 @@ export const MDXComponents = {
     return (
       <div
         className={clsx(
-          '[&>*]:mx-auto [&>*]:max-w-3xl [&>:first-child]:!mt-0 [&>:last-child]:!mb-0',
+          '[&>*]:mx-auto [&>*]:max-w-[44rem] [&>:first-child]:!mt-0 [&>:last-child]:!mb-0',
           '[&>.katex-display]:!max-w-none',
           className,
         )}
@@ -75,40 +98,45 @@ export const MDXComponents = {
       />
     )
   },
+  h2: heading('h2'),
+  h3: heading('h3'),
+  h4: heading('h4'),
   blockquote({ className, author, image, ...props }) {
     if (author) {
       return <Blockquote className={clsx('my-32', className)} author={author} image={image} {...props} />
     }
-    
+
     return (
       <Border position="left" className={clsx('my-10 pl-8', className)}>
-        <blockquote 
-          className="text-xl/7 text-neutral-600 [&>*]:relative"
+        <blockquote
+          className="text-lg/8 text-neutral-600 [&>*]:relative"
           {...props}
         />
       </Border>
     )
   },
-  pre({ className, ...props }) {
-    return (
-      <pre 
-        className={clsx('w-full overflow-x-auto', className)} 
-        {...props}
-      />
-    )
+  pre: function Pre(props) {
+    if (props['data-artifact']) {
+      return <Artifact {...props} />
+    }
+    return <CodeBlock {...props} />
   },
   code({ className, ...props }) {
-    const isInline = !className || !className.includes('language-')
-    
+    // Block-level code arrives from the Shiki pass as `shiki-code`; anything
+    // unclassed is an inline span in a sentence.
+    const isInline =
+      !className ||
+      !(className.includes('shiki-code') || className.includes('language-'))
+
     if (isInline) {
       return (
-        <code 
+        <code
           className="rounded-md bg-neutral-100 px-2 py-1 text-sm font-medium text-neutral-900 before:content-[''] after:content-['']"
           {...props}
         />
       )
     }
-    
+
     return <code className={className} {...props} />
   },
 }
